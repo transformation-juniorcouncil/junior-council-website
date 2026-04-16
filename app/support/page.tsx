@@ -102,7 +102,7 @@ export default function SupportPage() {
               </p>
               {/* Donation Amount Suggestions */}
               <div className="grid grid-cols-3 gap-3 mb-8">
-                {['$500', '$1,000', '$2,347', '$5,000', '$10,058', 'Custom'].map((amount, i) => (
+                {['$50', '$100', '$500', '$1,000', 'Custom'].map((amount, i) => (
                   <button
                     key={i}
                     className="border-2 border-jc-gray-mid hover:border-jc-red py-3 font-bold text-sm transition-colors focus:outline-none focus:border-jc-red"
