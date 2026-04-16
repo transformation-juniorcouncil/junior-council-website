@@ -326,13 +326,26 @@ export default function SupportPage() {
           </div>
 
           <div className="text-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-10 py-4 transition-colors"
-            >
-              Become a Sponsor
-            </Link>
-            <p className="text-jc-gray-dark text-sm mt-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+              <Link
+                href="/contact"
+                className="inline-flex items-center bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-10 py-4 transition-colors"
+              >
+                Become a Sponsor
+              </Link>
+              <a
+                href="/JC-Corporate-Packet.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border-2 border-jc-gray-mid hover:border-jc-red text-jc-black hover:text-jc-red font-black text-sm tracking-widest uppercase px-10 py-4 transition-colors"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Download Corporate Packet
+              </a>
+            </div>
+            <p className="text-jc-gray-dark text-sm">
               For further information, contact Charlie Nash at{' '}
               <a href="mailto:corporate@juniorcouncil.org" className="text-jc-red font-bold hover:underline">
                 corporate@juniorcouncil.org
