@@ -88,22 +88,6 @@ export default function MembersPage() {
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Committee filter — rendered as static links for now; can be made interactive */}
-          <div className="flex flex-wrap gap-2 mb-10">
-            {committees.map((c, i) => (
-              <span
-                key={i}
-                className={`px-4 py-2 text-xs font-bold uppercase tracking-widest border transition-colors cursor-default ${
-                  i === 0
-                    ? 'bg-jc-red border-jc-red text-white'
-                    : 'border-jc-gray-mid text-jc-gray-dark'
-                }`}
-              >
-                {c}
-              </span>
-            ))}
-          </div>
-
           {/* Member grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {members.map((member, i) => (
