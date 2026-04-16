@@ -21,17 +21,17 @@ const committees = [
 // oncause: paste each member's OneCause fundraiser URL here when available, or set to null to hide the button
 const members = [
   { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Events', year: '2024', oncause: 'https://www.onecause.com/juniorcouncil' },
-  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Fundraising', year: '2024', oncause: null },
-  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Marketing & Communications', year: '2023', oncause: null },
-  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'DEI', year: '2024', oncause: null },
-  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Sponsorship', year: '2022', oncause: null },
-  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Membership', year: '2024', oncause: null },
-  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Events', year: '2023', oncause: null },
-  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Fundraising', year: '2023', oncause: null },
-  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'DEI', year: '2022', oncause: null },
-  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Marketing & Communications', year: '2024', oncause: null },
-  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Events', year: '2022', oncause: null },
-  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Sponsorship', year: '2023', oncause: null },
+  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Fundraising', year: '2024', oncause: 'https://www.onecause.com/juniorcouncil' },
+  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Marketing & Communications', year: '2023', oncause: 'https://www.onecause.com/juniorcouncil' },
+  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'DEI', year: '2024', oncause: 'https://www.onecause.com/juniorcouncil' },
+  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Sponsorship', year: '2022', oncause: 'https://www.onecause.com/juniorcouncil' },
+  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Membership', year: '2024', oncause: 'https://www.onecause.com/juniorcouncil' },
+  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Events', year: '2023', oncause: 'https://www.onecause.com/juniorcouncil' },
+  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Fundraising', year: '2023', oncause: 'https://www.onecause.com/juniorcouncil' },
+  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'DEI', year: '2022', oncause: 'https://www.onecause.com/juniorcouncil' },
+  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Marketing & Communications', year: '2024', oncause: 'https://www.onecause.com/juniorcouncil' },
+  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Events', year: '2022', oncause: 'https://www.onecause.com/juniorcouncil' },
+  { name: 'Member Name', title: 'Job Title', company: 'Company', committee: 'Sponsorship', year: '2023', oncause: 'https://www.onecause.com/juniorcouncil' },
 ]
 
 export default function MembersPage() {
@@ -131,11 +131,7 @@ export default function MembersPage() {
                     {member.company}
                   </div>
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-jc-red text-xs font-bold uppercase tracking-wide">
-                      {member.committee}
-                    </span>
-                    <span className="text-jc-gray-mid text-xs" aria-hidden="true">·</span>
-                    <span className="text-jc-gray-dark text-xs">Since {member.year}</span>
+                    <span className="text-jc-gray-dark text-xs">Member since {member.year}</span>
                   </div>
                   {member.oncause && (
                     <a
