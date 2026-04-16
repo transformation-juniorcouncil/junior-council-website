@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import NewsletterSignup from '@/components/NewsletterSignup'
 
 export const metadata: Metadata = {
   title: 'Blog & News | Junior Council',
@@ -126,6 +127,8 @@ export default function BlogPage() {
           </p>
         </div>
       </section>
+
+      <NewsletterSignup />
     </div>
   )
 }
