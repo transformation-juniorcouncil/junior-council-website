@@ -9,41 +9,95 @@ export const metadata: Metadata = {
 
 const sponsorTiers = [
   {
-    name: 'Presenting Sponsor',
-    amount: '$XX,XXX+',
+    name: 'Presenting',
+    amount: '$20,000',
+    tickets: 12,
+    highlight: true,
     benefits: [
-      'Premier logo placement on all event materials',
-      'Reserved VIP table for 10',
-      'Dedicated social media feature',
-      'Recognition from the stage',
-      'Year-round logo placement on JC website',
+      'Official Presenting Sponsor of Snowball & Kick-Off Party',
+      'Stage speaking opportunity at Snowball',
+      'Official Sponsor of Thermometer Raise',
+      'Logo on wristbands for all attendees',
+      'Exclusive Sponsor of the Silent Auction',
+      'Distribute giveaways to all attendees',
+      'Featured in 2 JC e-newsletters',
+      'Logo on JC website & Snowball ticketing page',
     ],
   },
   {
-    name: 'Gold Sponsor',
-    amount: '$X,XXX+',
+    name: 'Diamond',
+    amount: '$15,000',
+    tickets: 10,
+    highlight: false,
     benefits: [
-      'Logo on event signage and program',
-      'Reserved table for 8',
-      'Social media recognition',
-      'Recognition from the stage',
+      'Official Sponsor of Thermometer Raise',
+      'Stage speaking opportunity at Snowball',
+      'Acknowledgement at media appearances',
+      'Logo on wristbands for all attendees',
+      'Featured in 2 JC e-newsletters',
+      'Logo on JC website & Snowball ticketing page',
     ],
   },
   {
-    name: 'Silver Sponsor',
-    amount: '$X,XXX+',
+    name: 'Platinum',
+    amount: '$10,000',
+    tickets: 8,
+    highlight: false,
     benefits: [
-      'Logo on event program',
-      'Reserved seats for 4',
-      'Social media recognition',
+      'Logo on wristbands for all attendees',
+      'Speaking opportunity at a JC Member Meeting',
+      'Distribute giveaways to Snowball attendees',
+      'Live mention & photo op on stage',
+      'Featured in 2 JC e-newsletters',
+      'Logo on JC website & Snowball ticketing page',
     ],
   },
   {
-    name: 'Bronze Sponsor',
-    amount: '$XXX+',
+    name: 'Gold',
+    amount: '$7,500',
+    tickets: 6,
+    highlight: false,
     benefits: [
-      'Name in event program',
-      'Two event tickets',
+      'Distribute giveaways to Snowball attendees',
+      'Recognized at JC Specialty Events',
+      'Live mention & photo op on stage',
+      'Social media promotion',
+      'Featured in 2 JC e-newsletters',
+      'Logo on JC website & Snowball ticketing page',
+    ],
+  },
+  {
+    name: 'Silver',
+    amount: '$5,000',
+    tickets: 4,
+    highlight: false,
+    benefits: [
+      'Social media promotion',
+      'Featured in 2 JC e-newsletters',
+      'Logo on JC website & Snowball ticketing page',
+      'Logo on rotating slides at Snowball',
+    ],
+  },
+  {
+    name: 'Bronze',
+    amount: '$2,500',
+    tickets: 2,
+    highlight: false,
+    benefits: [
+      'Featured in 1 JC e-newsletter & promo emails',
+      'Logo on JC website & Snowball ticketing page',
+      'Logo on rotating slides at Snowball',
+    ],
+  },
+  {
+    name: 'Black',
+    amount: '$1,500',
+    tickets: 2,
+    highlight: false,
+    benefits: [
+      'Featured in 1 JC e-newsletter & promo emails',
+      'Logo on JC website & Snowball ticketing page',
+      'Logo on rotating slides at Snowball',
     ],
   },
 ]
@@ -230,49 +284,57 @@ export default function GalaPage() {
             meaningful cause while gaining visibility among Chicago&apos;s most
             engaged professional community.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {sponsorTiers.map((tier, i) => (
-              <div
-                key={i}
-                className={`border-2 p-6 ${
-                  i === 0
-                    ? 'border-jc-red bg-jc-black text-white'
-                    : 'border-jc-gray-mid'
-                }`}
-              >
-                <div
-                  className={`font-black text-3xl mb-1 ${
-                    i === 0 ? 'text-jc-red' : 'text-jc-red'
-                  }`}
-                >
-                  {tier.amount}
+          {/* Presenting — featured full-width */}
+          {(() => {
+            const presenting = sponsorTiers[0]
+            return (
+              <div className="bg-jc-black border-2 border-jc-red p-8 mb-6 flex flex-col sm:flex-row sm:items-start gap-8">
+                <div className="sm:w-44 flex-shrink-0">
+                  <div className="bg-jc-red text-white text-xs font-bold tracking-widest uppercase px-3 py-1 inline-block mb-4">
+                    Top Tier
+                  </div>
+                  <div className="text-jc-red font-black text-4xl mb-1">{presenting.amount}</div>
+                  <div className="text-white font-black text-2xl mb-2">{presenting.name}</div>
+                  <div className="w-8 h-0.5 bg-jc-red mb-3" aria-hidden="true" />
+                  <div className="text-white/50 text-sm">{presenting.tickets} Snowball Tickets</div>
                 </div>
-                <div
-                  className={`font-black text-xl mb-4 ${
-                    i === 0 ? 'text-white' : 'text-jc-black'
-                  }`}
-                >
-                  {tier.name}
-                </div>
-                <div className="w-8 h-0.5 bg-jc-red mb-4" aria-hidden="true" />
-                <ul className="space-y-2">
-                  {tier.benefits.map((benefit, j) => (
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2.5 flex-grow">
+                  {presenting.benefits.map((benefit, j) => (
                     <li key={j} className="flex items-start gap-2">
-                      <div
-                        className="w-4 h-4 bg-jc-red flex-shrink-0 flex items-center justify-center mt-0.5"
-                        aria-hidden="true"
-                      >
+                      <div className="w-4 h-4 bg-jc-red flex-shrink-0 flex items-center justify-center mt-0.5" aria-hidden="true">
                         <svg className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <span
-                        className={`text-xs leading-relaxed ${
-                          i === 0 ? 'text-white/70' : 'text-jc-gray-dark'
-                        }`}
-                      >
-                        {benefit}
-                      </span>
+                      <span className="text-white/70 text-xs leading-relaxed">{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          })()}
+
+          {/* Remaining 6 tiers — 3-col grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {sponsorTiers.slice(1).map((tier, i) => (
+              <div key={i} className="border-2 border-jc-gray-mid hover:border-jc-red transition-colors p-6 flex flex-col">
+                <div className="flex items-start justify-between mb-1">
+                  <div className="text-jc-red font-black text-2xl">{tier.amount}</div>
+                  <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-wide mt-1">
+                    {tier.tickets} Tickets
+                  </div>
+                </div>
+                <div className="text-jc-black font-black text-xl mb-3">{tier.name}</div>
+                <div className="w-8 h-0.5 bg-jc-red mb-4" aria-hidden="true" />
+                <ul className="space-y-2 flex-grow">
+                  {tier.benefits.map((benefit, j) => (
+                    <li key={j} className="flex items-start gap-2">
+                      <div className="w-4 h-4 bg-jc-red flex-shrink-0 flex items-center justify-center mt-0.5" aria-hidden="true">
+                        <svg className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-xs leading-relaxed text-jc-gray-dark">{benefit}</span>
                     </li>
                   ))}
                 </ul>
