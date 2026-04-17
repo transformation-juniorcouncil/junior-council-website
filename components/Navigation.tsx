@@ -18,21 +18,9 @@ const navLinks: NavLink[] = [
     href: '/membership',
     label: 'Membership',
     dropdown: [
-      {
-        href: '/membership',
-        label: 'Join Junior Council',
-        description: 'Why join, life in JC, committees & dues',
-      },
-      {
-        href: '/board',
-        label: 'Board of Directors',
-        description: 'Meet the leadership team',
-      },
-      {
-        href: '/members',
-        label: 'Member Directory',
-        description: 'Browse our active members',
-      },
+      { href: '/membership', label: 'Join Junior Council' },
+      { href: '/board', label: 'Board of Directors' },
+      { href: '/members', label: 'Member Directory' },
     ],
   },
   { href: '/gala', label: 'Annual Gala' },
