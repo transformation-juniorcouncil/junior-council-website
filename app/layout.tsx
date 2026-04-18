@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
@@ -46,6 +47,14 @@ export default function RootLayout({
         <Navigation />
         <main id="main-content">{children}</main>
         <Footer />
+        {/* UserWay Accessibility Widget
+            To activate: sign up free at userway.org, get your account ID,
+            and replace REPLACE_WITH_YOUR_ACCOUNT_ID below */}
+        <Script
+          src="https://cdn.userway.org/widget.js"
+          data-account="REPLACE_WITH_YOUR_ACCOUNT_ID"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   )
