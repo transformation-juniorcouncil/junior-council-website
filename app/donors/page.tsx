@@ -21,10 +21,11 @@ const donors = {
     { name: 'American Medical Association', tier: 'Corporate Sponsor' },
     { name: 'Old Republic International', tier: 'Corporate Sponsor' },
     { name: 'CST Academy Therapeutic Preschool', tier: 'Corporate Sponsor' },
-    { name: 'GoGlow', tier: 'Corporate Sponsor' },
-    { name: "Men's Wearhouse & Jos. A. Bank", tier: 'Corporate Sponsor' },
-    { name: 'Blacklane', tier: 'Corporate Sponsor' },
-    { name: 'Janet Mandell', tier: 'Corporate Sponsor' },
+    { name: 'GoGlow', tier: 'Corporate Sponsor', perk: '25% off custom airbrush spray tans' },
+    { name: "Men's Wearhouse & Jos. A. Bank", tier: 'Corporate Sponsor', perk: '$70 off suit/tux rentals & 25% off purchases' },
+    { name: 'Blacklane', tier: 'Corporate Sponsor', perk: '$40 off your chauffeured ride to/from Snowball' },
+    { name: 'Janet Mandell', tier: 'Corporate Sponsor', perk: '15% of your rental fee goes back to JC — mention Snowball' },
+    { name: 'Pin Me Up Chicago', tier: 'Corporate Sponsor', perk: '20% off hair & makeup services and haircuts' },
   ],
   hospitality: [
     { name: "Men's Wearhouse & Jos. A. Bank", category: 'Formal Wear' },
@@ -109,10 +110,10 @@ export default function DonorsPage() {
             {donors.corporate.map((donor, i) => (
               <div
                 key={i}
-                className="border border-jc-gray-mid hover:border-jc-red transition-colors p-6 flex flex-col items-center justify-center text-center min-h-[120px] group"
+                className="border border-jc-gray-mid hover:border-jc-red transition-colors p-5 flex flex-col items-center text-center group"
               >
                 {/* Logo placeholder */}
-                <div className="w-12 h-12 bg-jc-gray rounded-sm mb-3 flex items-center justify-center group-hover:bg-jc-red/10 transition-colors" aria-hidden="true">
+                <div className="w-12 h-12 bg-jc-gray rounded-sm mb-3 flex items-center justify-center group-hover:bg-jc-red/10 transition-colors flex-shrink-0" aria-hidden="true">
                   <svg className="w-6 h-6 text-jc-gray-mid group-hover:text-jc-red transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                   </svg>
@@ -120,9 +121,21 @@ export default function DonorsPage() {
                 <div className="text-jc-black font-black text-sm leading-tight mb-1">
                   {donor.name}
                 </div>
-                <div className="text-jc-red text-xs font-semibold uppercase tracking-wide">
+                <div className="text-jc-red text-xs font-semibold uppercase tracking-wide mb-2">
                   {donor.tier}
                 </div>
+                {'perk' in donor && donor.perk && (
+                  <div className="w-full bg-jc-red/8 border border-jc-red/20 px-2 py-1.5 mt-auto">
+                    <div className="flex items-start gap-1.5">
+                      <svg className="w-3 h-3 text-jc-red flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                      </svg>
+                      <span className="text-jc-red text-xs leading-snug font-medium">
+                        {donor.perk}
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
