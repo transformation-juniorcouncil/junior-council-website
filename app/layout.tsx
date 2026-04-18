@@ -2,8 +2,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
-import Navigation from '@/components/Navigation'
-import Footer from '@/components/Footer'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -33,20 +31,14 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans">
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        <Navigation />
-        <main id="main-content">{children}</main>
-        <Footer />
+        {children}
         {/* UserWay Accessibility Widget
             To activate: sign up free at userway.org, get your account ID,
             and replace REPLACE_WITH_YOUR_ACCOUNT_ID below */}
