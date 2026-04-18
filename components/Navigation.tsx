@@ -199,7 +199,7 @@ export default function Navigation() {
           {/* Donate Button + Mobile Toggle */}
           <div className="flex items-center gap-3">
             <Link
-              href="/support#donate"
+              href="/donate"
               className="bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-5 py-2.5 transition-colors focus:outline-none focus:ring-2 focus:ring-jc-red focus:ring-offset-2 focus:ring-offset-jc-black"
             >
               Donate
@@ -296,7 +296,7 @@ export default function Navigation() {
           )}
           <div className="pt-3">
             <Link
-              href="/support#donate"
+              href="/donate"
               className="block bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-3 py-3 text-center transition-colors"
             >
               Make a Donation

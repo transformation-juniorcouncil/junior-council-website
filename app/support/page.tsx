@@ -126,46 +126,40 @@ export default function SupportPage() {
         </div>
       </section>
 
-      {/* Personal Donations */}
-      <section id="donate" className="bg-white py-20 scroll-mt-16">
+      {/* Fundraising tracker + Your Gift in Action */}
+      <section className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+            {/* Tracker */}
             <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
+                <span className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase">Help Us Meet Our Goal</span>
+              </div>
               <h2 className="text-jc-black font-black text-3xl sm:text-4xl mb-6 tracking-tight">
-                Personal <span className="text-jc-red">Donations</span>
+                2026 Fundraising <span className="text-jc-red">Progress</span>
               </h2>
-              <p className="text-jc-gray-dark text-lg leading-relaxed mb-5">
-                Your personal donation — no matter the size — makes a direct
-                impact on adolescents living with HIV and AIDS at Lurie
-                Children&apos;s Hospital. 100% of your gift goes to supporting their
-                care.
-              </p>
-              <p className="text-jc-gray-dark leading-relaxed mb-8">
-                Junior Council is a registered 501(c)(3) nonprofit. All
-                donations are tax-deductible to the extent permitted by law. You
-                will receive a tax receipt for your records.
-              </p>
-              {/* Fundraising Progress — compact */}
               {(() => {
                 const raised = 142500
                 const goal   = 250000
                 const pct    = Math.min(Math.round((raised / goal) * 100), 100)
                 const fmt    = (n: number) => '$' + n.toLocaleString()
                 return (
-                  <div className="bg-jc-gray p-6 mb-8 border-l-4 border-jc-red">
+                  <div className="bg-jc-gray p-8 border-l-4 border-jc-red">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-jc-red font-black text-xs uppercase tracking-widest">
                         2026 Fundraising Goal
                       </span>
                       <span className="text-jc-gray-dark text-xs">{pct}% reached</span>
                     </div>
-                    <div className="flex items-baseline justify-between mb-3">
-                      <span className="text-jc-black font-black text-2xl">{fmt(raised)}</span>
+                    <div className="flex items-baseline justify-between mb-4">
+                      <span className="text-jc-black font-black text-3xl">{fmt(raised)}</span>
                       <span className="text-jc-gray-dark text-sm">of {fmt(goal)}</span>
                     </div>
-                    <div className="w-full bg-jc-gray-mid h-3 overflow-hidden">
+                    <div className="w-full bg-jc-gray-mid h-4 overflow-hidden mb-4">
                       <div
-                        className="h-full bg-jc-red"
+                        className="h-full bg-jc-red transition-all"
                         style={{ width: `${pct}%` }}
                         role="progressbar"
                         aria-valuenow={pct}
@@ -173,69 +167,45 @@ export default function SupportPage() {
                         aria-valuemax={100}
                       />
                     </div>
-                    <p className="text-jc-gray-dark text-xs mt-2">
+                    <p className="text-jc-gray-dark text-sm">
                       Every donation goes directly to adolescent HIV care at Lurie Children&apos;s Hospital.
                     </p>
                   </div>
                 )
               })()}
-
-              {/* Donation Amount Suggestions */}
-              <div className="grid grid-cols-3 gap-3 mb-8">
-                {['$25', '$50', '$100', '$500', '$1,000', 'Custom'].map((amount, i) => (
-                  <button
-                    key={i}
-                    className="border-2 border-jc-gray-mid hover:border-jc-red py-3 font-bold text-sm transition-colors focus:outline-none focus:border-jc-red"
-                  >
-                    {amount}
-                  </button>
-                ))}
+              <div className="mt-6">
+                <Link
+                  href="/donate"
+                  className="inline-flex items-center bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-8 py-4 transition-colors"
+                >
+                  Make a Donation
+                </Link>
               </div>
-              <button className="w-full bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-8 py-4 transition-colors">
-                Donate Now
-              </button>
-              <p className="text-jc-gray-dark text-xs mt-3 text-center">
-                Secure donation processing via [Payment Processor]
-              </p>
             </div>
+
+            {/* Your Gift in Action */}
             <div className="bg-jc-black p-10">
               <h3 className="text-white font-black text-2xl mb-6">
                 Your Gift in Action
               </h3>
               <div className="space-y-0">
                 {[
-                  {
-                    amount: '$40,000',
-                    impact: 'The Junior Council Scholarship Fund, which helps support past and present patients in their education.',
-                  },
-                  {
-                    amount: '$20,000',
-                    impact: 'The purchase of vehicles (lasting 20 years) to help transport patients to necessary check-ups.',
-                  },
-                  {
-                    amount: '$10,058',
-                    impact: '30 days of HIV medication for a single patient during financial hardship.',
-                  },
-                  {
-                    amount: '$2,347',
-                    impact: 'One week of standard HIV medication for a single patient.',
-                  },
-                  {
-                    amount: '$500',
-                    impact: 'Genotype testing used to identify effective medications for newly diagnosed patients.',
-                  },
+                  { amount: '$40,000', impact: 'The Junior Council Scholarship Fund, which helps support past and present patients in their education.' },
+                  { amount: '$20,000', impact: 'The purchase of vehicles (lasting 20 years) to help transport patients to necessary check-ups.' },
+                  { amount: '$10,058', impact: '30 days of HIV medication for a single patient during financial hardship.' },
+                  { amount: '$2,347',  impact: 'One week of standard HIV medication for a single patient.' },
+                  { amount: '$500',    impact: 'Genotype testing used to identify effective medications for newly diagnosed patients.' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4 border-b border-white/10 py-4 last:border-0">
                     <div className="text-jc-red font-black text-base w-24 flex-shrink-0 pt-0.5">
                       {item.amount}
                     </div>
-                    <p className="text-white/70 text-sm leading-relaxed">
-                      {item.impact}
-                    </p>
+                    <p className="text-white/70 text-sm leading-relaxed">{item.impact}</p>
                   </div>
                 ))}
               </div>
             </div>
+
           </div>
         </div>
       </section>
