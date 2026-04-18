@@ -13,7 +13,16 @@ type NavLink = {
 }
 
 const navLinks: NavLink[] = [
-  { href: '/about', label: 'About' },
+  {
+    href: '/about',
+    label: 'About',
+    dropdown: [
+      { href: '/about', label: 'Our Cause' },
+      { href: '/about/dei', label: 'Diversity, Equity & Inclusion' },
+      { href: '/blog', label: 'Blog' },
+      { href: '/about/faq', label: 'FAQ' },
+    ],
+  },
   {
     href: '/membership',
     label: 'Membership',
@@ -27,7 +36,6 @@ const navLinks: NavLink[] = [
   { href: '/donors', label: 'Donors' },
   { href: '/support', label: 'Support' },
   { href: '/gallery', label: 'Gallery' },
-  { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ]
 
