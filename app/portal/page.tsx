@@ -134,6 +134,7 @@ export default function PortalPage() {
   const [activeTab, setActiveTab] = useState<Tab>('dashboard')
   const [rsvps, setRsvps]         = useState<Record<number,'yes'|'no'>>({})
   const [duesModalOpen, setDuesModalOpen] = useState(false)
+  const [navMenuOpen, setNavMenuOpen] = useState(false)
 
   // Goals
   const [checked, setChecked] = useState<Record<string,boolean>>({})
@@ -245,7 +246,6 @@ export default function PortalPage() {
     { key:'impact'    as Tab, label:'Impact Tracker', icon:'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' },
     { key:'resources' as Tab, label:'Resources',      icon:'M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z' },
     { key:'feed'      as Tab, label:'Community',      icon:'M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z' },
-    { key:'profile'   as Tab, label:'My Profile',     icon:'M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
   ]
 
   return (
@@ -258,16 +258,60 @@ export default function PortalPage() {
             <Image src="/jc-logo.png" alt="Junior Council" width={120} height={30} className="h-6 w-auto" priority />
           </div>
         </Link>
-        <div className="flex items-center gap-4 pr-14">
-          <span className="text-white/50 text-sm hidden sm:block">
-            Welcome back, <span className="text-white font-bold">Member</span>
-          </span>
-          <Link href="/" className="flex items-center gap-1.5 text-white/50 hover:text-white text-xs uppercase tracking-widest font-bold transition-colors border border-white/20 hover:border-white/50 px-3 py-1.5">
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+        {/* Avatar dropdown */}
+        <div className="relative pr-14">
+          <button
+            onClick={() => setNavMenuOpen(o => !o)}
+            className="flex items-center gap-2.5 group"
+            aria-haspopup="true"
+            aria-expanded={navMenuOpen}
+          >
+            {/* Avatar */}
+            {profile.avatar ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={profile.avatar} alt="Profile" className="w-9 h-9 object-cover border-2 border-white/20 group-hover:border-jc-red transition-colors"/>
+            ) : (
+              <div className="w-9 h-9 bg-jc-red flex items-center justify-center text-white text-xs font-black border-2 border-jc-red group-hover:border-white/40 transition-colors">
+                {profileInitials}
+              </div>
+            )}
+            <span className="text-white/70 group-hover:text-white text-xs font-bold hidden sm:block transition-colors">
+              {profile.name === 'Member Name' ? 'Member' : profile.name.split(' ')[0]}
+            </span>
+            <svg className={`w-3 h-3 text-white/50 group-hover:text-white transition-all ${navMenuOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7"/>
             </svg>
-            Log Out
-          </Link>
+          </button>
+
+          {/* Dropdown */}
+          {navMenuOpen && (
+            <div className="absolute top-full right-0 mt-3 w-48 bg-jc-black border border-white/10 shadow-2xl shadow-black/50 z-50">
+              <div className="h-0.5 w-full bg-jc-red"/>
+              {/* Profile info header */}
+              <div className="px-4 py-3 border-b border-white/5">
+                <p className="text-white font-black text-sm truncate">{profile.name === 'Member Name' ? 'Member' : profile.name}</p>
+                <p className="text-white/40 text-xs truncate">{profile.jobTitle || 'JC Member 2026'}</p>
+              </div>
+              <button
+                onClick={() => { setActiveTab('profile'); setNavMenuOpen(false) }}
+                className="w-full flex items-center gap-2.5 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 text-xs font-bold uppercase tracking-wide transition-colors border-b border-white/5"
+              >
+                <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                My Profile
+              </button>
+              <Link
+                href="/"
+                className="flex items-center gap-2.5 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 text-xs font-bold uppercase tracking-wide transition-colors"
+              >
+                <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                </svg>
+                Log Out
+              </Link>
+            </div>
+          )}
         </div>
       </nav>
 
