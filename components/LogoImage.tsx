@@ -15,9 +15,9 @@ export default function LogoImage({ domain, name }: { domain?: string; name: str
 
   return (
     <img
-      src={`https://logo.clearbit.com/${domain}`}
+      src={`https://www.google.com/s2/favicons?domain=${domain}&sz=128`}
       alt={`${name} logo`}
-      className="w-full h-full object-contain p-1"
+      className="w-10 h-10 object-contain"
       onError={() => setError(true)}
     />
   )
