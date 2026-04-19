@@ -26,10 +26,17 @@ export default function LoginPage() {
       if (result.status === 'complete') {
         await setActive({ session: result.createdSessionId })
         router.push('/portal')
+      } else {
+        // Surface anything that isn't an outright success so we never get silent failures
+        // Common statuses here: needs_first_factor, needs_second_factor, needs_identifier, needs_new_password
+        console.warn('Clerk sign-in returned non-complete status:', result)
+        setError(`Sign-in needs another step (status: ${result.status}). Check your email for a verification code, or contact info@juniorcouncil.org.`)
       }
     } catch (err: unknown) {
-      const clerkErr = err as { errors?: { message: string }[] }
-      setError(clerkErr.errors?.[0]?.message || 'Invalid email or password.')
+      const clerkErr = err as { errors?: { message: string; code?: string }[] }
+      const first = clerkErr.errors?.[0]
+      console.warn('Clerk sign-in error:', clerkErr)
+      setError(first?.message || 'Invalid email or password.')
     } finally {
       setLoading(false)
     }
