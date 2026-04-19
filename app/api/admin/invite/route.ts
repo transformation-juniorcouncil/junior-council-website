@@ -6,10 +6,13 @@ const ADMIN_EMAILS = [
   'dianawolfchicago@gmail.com',
 ]
 
-const SIGN_UP_URL =
+// After accepting the invitation and setting a password on Clerk's hosted
+// page, send the user straight to our portal — otherwise Clerk falls back
+// to its own "Start Building" Account Portal dashboard.
+const REDIRECT_URL =
   process.env.NEXT_PUBLIC_SITE_URL
-    ? `${process.env.NEXT_PUBLIC_SITE_URL}/sign-up`
-    : 'https://junior-council-website.vercel.app/sign-up'
+    ? `${process.env.NEXT_PUBLIC_SITE_URL}/portal`
+    : 'https://junior-council-website.vercel.app/portal'
 
 export async function POST(req: Request) {
   const { userId } = auth()
@@ -39,7 +42,7 @@ export async function POST(req: Request) {
   try {
     const invitation = await clerkClient().invitations.createInvitation({
       emailAddress: email,
-      redirectUrl: SIGN_UP_URL,
+      redirectUrl: REDIRECT_URL,
       publicMetadata: {
         invitedBy: callerEmail,
         firstName: body.firstName || undefined,
