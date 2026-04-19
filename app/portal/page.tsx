@@ -376,11 +376,11 @@ export default function PortalPage() {
                   <p className="text-jc-red text-xs font-bold tracking-[0.3em] uppercase mb-5">{greeting}</p>
                   <h1 className="text-white font-black text-7xl sm:text-9xl tracking-tight leading-none mb-6">{firstName}</h1>
                   <div className="flex items-center gap-3 flex-wrap">
-                    <span className="text-white/20 text-xs tracking-[0.2em] uppercase">Junior Council</span>
-                    <div className="w-1 h-1 bg-white/15 rounded-full"/>
-                    <span className="text-white/20 text-xs tracking-[0.2em] uppercase">2026 / 2027 Season</span>
-                    <div className="w-1 h-1 bg-white/15 rounded-full"/>
-                    <span className="text-white/20 text-xs tracking-[0.2em] uppercase">
+                    <span className="text-white/60 text-xs tracking-[0.2em] uppercase">Junior Council</span>
+                    <div className="w-1 h-1 bg-white/40 rounded-full"/>
+                    <span className="text-white/60 text-xs tracking-[0.2em] uppercase">2026 / 2027 Season</span>
+                    <div className="w-1 h-1 bg-white/40 rounded-full"/>
+                    <span className="text-white/60 text-xs tracking-[0.2em] uppercase">
                       {today.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})}
                     </span>
                   </div>
@@ -388,19 +388,19 @@ export default function PortalPage() {
                 {/* Fundraising strip */}
                 <div className="border-t border-white/10 px-8 sm:px-12 py-5 flex items-center gap-6 flex-wrap">
                   <div>
-                    <p className="text-white/30 text-xs uppercase tracking-widest mb-0.5">2026 Fundraising Goal</p>
+                    <p className="text-white/60 text-xs uppercase tracking-widest mb-0.5">2026 Fundraising Goal</p>
                     <div className="flex items-baseline gap-3">
                       <span className="text-white font-black text-2xl">${raisedAmt.toLocaleString()}</span>
-                      <span className="text-white/30 text-xs">of ${goalAmt.toLocaleString()}</span>
+                      <span className="text-white/60 text-xs">of ${goalAmt.toLocaleString()}</span>
                     </div>
                   </div>
                   <div className="flex-grow flex items-center gap-4 min-w-[160px]">
-                    <div className="flex-grow h-px bg-white/10 relative overflow-hidden">
+                    <div className="flex-grow h-px bg-white/20 relative overflow-hidden">
                       <div className="absolute inset-y-0 left-0 bg-jc-red transition-all" style={{width:`${raisedPct}%`}}/>
                     </div>
                     <span className="text-jc-red font-black text-sm flex-shrink-0">{raisedPct}%</span>
                   </div>
-                  <span className="text-white/20 text-xs">${(goalAmt-raisedAmt).toLocaleString()} to go</span>
+                  <span className="text-white/60 text-xs">${(goalAmt-raisedAmt).toLocaleString()} to go</span>
                 </div>
               </div>
 
@@ -420,10 +420,10 @@ export default function PortalPage() {
                       <p className="text-white font-black leading-none mb-3" style={{fontSize:'5.5rem'}}>
                         {parseInt(nextEvent.dateKey.slice(8,10))}
                       </p>
-                      <p className="text-white/30 text-xs tracking-widest uppercase mb-4">{nextEvent.date.split(',')[1]?.trim()}</p>
+                      <p className="text-white/70 text-xs tracking-widest uppercase mb-4">{nextEvent.date.split(',')[1]?.trim()}</p>
                       {daysUntil !== null && (
-                        <div className="px-3 py-1.5 bg-white/5 border border-white/10">
-                          <span className="text-white/50 text-xs font-bold tracking-wide">
+                        <div className="px-3 py-1.5 bg-white/5 border border-white/20">
+                          <span className="text-white/80 text-xs font-bold tracking-wide">
                             {daysUntil === 0 ? 'Today' : `${daysUntil} day${daysUntil !== 1 ? 's' : ''} away`}
                           </span>
                         </div>
@@ -509,9 +509,9 @@ export default function PortalPage() {
                 {/* Dues */}
                 <div className="bg-jc-black p-7 flex flex-col justify-between">
                   <div>
-                    <p className="text-white/30 text-xs uppercase tracking-widest mb-2">2026–2027 Dues</p>
+                    <p className="text-white/60 text-xs uppercase tracking-widest mb-2">2026–2027 Dues</p>
                     <p className="text-jc-red font-black text-4xl leading-none mb-3">Unpaid</p>
-                    <p className="text-white/30 text-xs leading-relaxed">Annual dues keep your membership active.</p>
+                    <p className="text-white/70 text-xs leading-relaxed">Annual dues keep your membership active.</p>
                   </div>
                   <button onClick={()=>setDuesModalOpen(true)} className="mt-8 w-full bg-jc-red hover:bg-jc-red-dark text-white font-black text-xs tracking-widest uppercase py-3.5 transition-colors">
                     Pay Dues Now
@@ -1510,7 +1510,7 @@ export default function PortalPage() {
                     ) : profile.funFact ? (
                       <p className="text-white/80 text-sm leading-relaxed">{profile.funFact}</p>
                     ) : (
-                      <p className="text-white/30 text-sm italic">Not set</p>
+                      <p className="text-white/60 text-sm italic">Not set</p>
                     )}
                   </div>
                 </div>
