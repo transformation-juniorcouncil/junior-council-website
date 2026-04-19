@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useUser, useClerk } from '@clerk/nextjs'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -187,6 +187,15 @@ export default function PortalPage() {
   const [profileDraft, setProfileDraft] = useState<Profile>({...defaultProfile, name: clerkName || defaultProfile.name})
   const [editingProfile, setEditingProfile] = useState(false)
   const avatarInputRef = useRef<HTMLInputElement>(null)
+
+  // Sync Clerk name into profile once user loads (handles async load)
+  useEffect(() => {
+    if (!user) return
+    const name = [user.firstName, user.lastName].filter(Boolean).join(' ')
+    if (!name) return
+    setProfile(p => p.name === defaultProfile.name ? {...p, name} : p)
+    setProfileDraft(p => p.name === defaultProfile.name ? {...p, name} : p)
+  }, [user])
 
   const handleAvatarSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]; if(!file) return
