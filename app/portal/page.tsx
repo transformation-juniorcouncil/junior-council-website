@@ -1,9 +1,11 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { useUser, useClerk } from '@clerk/nextjs'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import { createClient } from '@/lib/supabase/client'
+import type { User } from '@supabase/supabase-js'
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -139,8 +141,23 @@ const defaultProfile: Profile = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function PortalPage() {
-  const { user } = useUser()
-  const { signOut, openUserProfile } = useClerk()
+  const router = useRouter()
+  const [user, setUser] = useState<User | null>(null)
+
+  useEffect(() => {
+    const supabase = createClient()
+    supabase.auth.getUser().then(({ data: { user } }) => setUser(user))
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
+    return () => subscription.unsubscribe()
+  }, [])
+
+  const handleSignOut = async () => {
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    router.push('/login')
+  }
 
   const [activeTab, setActiveTab] = useState<Tab>('dashboard')
   const [rsvps, setRsvps]         = useState<Record<number,'yes'|'no'>>({})
@@ -149,7 +166,7 @@ export default function PortalPage() {
 
   // Admin invite modal
   const ADMIN_EMAILS = ['dianawolfchicago@gmail.com']
-  const userEmail = user?.primaryEmailAddress?.emailAddress?.toLowerCase() || ''
+  const userEmail = user?.email?.toLowerCase() || ''
   const isAdmin = ADMIN_EMAILS.includes(userEmail)
   const [inviteModalOpen, setInviteModalOpen] = useState(false)
   const [inviteForm, setInviteForm] = useState({ email:'', firstName:'', lastName:'' })
@@ -212,17 +229,16 @@ export default function PortalPage() {
   const eventsOnDay = (day:number) => { const k=`${calYear}-${pad(calMonth+1)}-${pad(day)}`; return allEvents.filter(e=>e.dateKey===k) }
   const selectedEvents = selectedDay ? allEvents.filter(e=>e.dateKey===selectedDay) : []
 
-  // Profile — seed name from Clerk if available
-  const clerkName = user ? [user.firstName, user.lastName].filter(Boolean).join(' ') : ''
-  const [profile, setProfile]           = useState<Profile>({...defaultProfile, name: clerkName || defaultProfile.name})
-  const [profileDraft, setProfileDraft] = useState<Profile>({...defaultProfile, name: clerkName || defaultProfile.name})
+  // Profile — seed name from Supabase user metadata if available
+  const [profile, setProfile]           = useState<Profile>({...defaultProfile})
+  const [profileDraft, setProfileDraft] = useState<Profile>({...defaultProfile})
   const [editingProfile, setEditingProfile] = useState(false)
   const avatarInputRef = useRef<HTMLInputElement>(null)
 
-  // Sync Clerk name into profile once user loads (handles async load)
+  // Sync name from Supabase user metadata once user loads
   useEffect(() => {
     if (!user) return
-    const name = [user.firstName, user.lastName].filter(Boolean).join(' ')
+    const name = (user.user_metadata?.full_name as string | undefined) || ''
     if (!name) return
     setProfile(p => p.name === defaultProfile.name ? {...p, name} : p)
     setProfileDraft(p => p.name === defaultProfile.name ? {...p, name} : p)
@@ -365,7 +381,7 @@ export default function PortalPage() {
                 My Profile
               </button>
               <button
-                onClick={() => { openUserProfile(); setNavMenuOpen(false) }}
+                onClick={() => { setActiveTab('profile'); setNavMenuOpen(false) }}
                 className="w-full flex items-center gap-2.5 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 text-xs font-bold uppercase tracking-wide transition-colors border-b border-white/5"
               >
                 <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -385,7 +401,7 @@ export default function PortalPage() {
                 </button>
               )}
               <button
-                onClick={() => signOut({ redirectUrl: '/login' })}
+                onClick={handleSignOut}
                 className="w-full flex items-center gap-2.5 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 text-xs font-bold uppercase tracking-wide transition-colors"
               >
                 <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

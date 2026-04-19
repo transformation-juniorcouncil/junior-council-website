@@ -1,14 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import { useSignIn } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import { createClient } from '@/lib/supabase/client'
 
 export default function LoginPage() {
-  const { isLoaded, signIn, setActive } = useSignIn()
   const router = useRouter()
+  const supabase = createClient()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -16,79 +16,35 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  // Email-code second factor
-  const [needs2fa, setNeeds2fa] = useState(false)
-  const [code, setCode] = useState('')
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!isLoaded) return
     setLoading(true)
     setError('')
     try {
-      const result = await signIn.create({ identifier: email, password })
-      if (result.status === 'complete') {
-        await setActive({ session: result.createdSessionId })
-        router.push('/portal')
-      } else if (result.status === 'needs_second_factor') {
-        // Clerk wants a second factor. Prefer email_code — send it automatically
-        const secondFactors = (result as unknown as { supportedSecondFactors?: { strategy: string; emailAddressId?: string }[] }).supportedSecondFactors || []
-        const emailFactor = secondFactors.find(f => f.strategy === 'email_code')
-        if (emailFactor && emailFactor.emailAddressId) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          await (signIn as any).prepareSecondFactor({ strategy: 'email_code', emailAddressId: emailFactor.emailAddressId })
-          setNeeds2fa(true)
-        } else {
-          setError('Second factor required but no supported method available. Contact info@juniorcouncil.org.')
-        }
-      } else {
-        console.warn('Clerk sign-in returned non-complete status:', result)
-        setError(`Sign-in needs another step (status: ${result.status}). Contact info@juniorcouncil.org.`)
-      }
+      const { error } = await supabase.auth.signInWithPassword({ email, password })
+      if (error) throw error
+      router.push('/portal')
     } catch (err: unknown) {
-      const clerkErr = err as { errors?: { message: string; code?: string }[] }
-      const first = clerkErr.errors?.[0]
-      console.warn('Clerk sign-in error:', clerkErr)
-      setError(first?.message || 'Invalid email or password.')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleVerifyCode = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!isLoaded) return
-    setLoading(true)
-    setError('')
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const result = await (signIn as any).attemptSecondFactor({ strategy: 'email_code', code })
-      if (result.status === 'complete') {
-        await setActive({ session: result.createdSessionId })
-        router.push('/portal')
-      } else {
-        setError(`Verification failed (status: ${result.status}).`)
-      }
-    } catch (err: unknown) {
-      const clerkErr = err as { errors?: { message: string }[] }
-      setError(clerkErr.errors?.[0]?.message || 'Invalid code.')
+      const msg = err instanceof Error ? err.message : 'Invalid email or password.'
+      setError(msg)
     } finally {
       setLoading(false)
     }
   }
 
   const handleGoogle = async () => {
-    if (!isLoaded) return
     setError('')
     try {
-      await signIn.authenticateWithRedirect({
-        strategy: 'oauth_google',
-        redirectUrl: '/sso-callback',
-        redirectUrlComplete: '/portal',
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
       })
+      if (error) throw error
     } catch (err: unknown) {
-      const clerkErr = err as { errors?: { message: string }[] }
-      setError(clerkErr.errors?.[0]?.message || 'Could not start Google sign-in.')
+      const msg = err instanceof Error ? err.message : 'Could not start Google sign-in.'
+      setError(msg)
     }
   }
 
@@ -137,58 +93,6 @@ export default function LoginPage() {
             </p>
           </div>
 
-          {/* 2FA code form */}
-          {needs2fa ? (
-            <form onSubmit={handleVerifyCode}>
-              <div className="bg-jc-charcoal border border-white/10 p-8">
-                <div className="space-y-5">
-                  <div>
-                    <p className="text-white text-sm font-bold mb-2">Check your email</p>
-                    <p className="text-white/50 text-xs">We sent a 6-digit verification code to <span className="text-white">{email}</span>. Enter it below to finish signing in.</p>
-                  </div>
-
-                  {error && (
-                    <div className="bg-red-900/30 border border-red-500/40 px-4 py-3">
-                      <p className="text-red-400 text-xs font-bold">{error}</p>
-                    </div>
-                  )}
-
-                  <div>
-                    <label htmlFor="code" className="block text-white/70 text-xs font-bold uppercase tracking-widest mb-2">
-                      Verification Code
-                    </label>
-                    <input
-                      id="code"
-                      type="text"
-                      inputMode="numeric"
-                      autoComplete="one-time-code"
-                      value={code}
-                      onChange={(e) => setCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                      placeholder="000000"
-                      required
-                      className="w-full bg-jc-black border border-white/20 focus:border-jc-red px-4 py-3 text-white text-xl tracking-[0.5em] text-center outline-none transition-colors placeholder:text-white/20"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={loading || code.length !== 6}
-                    className="block w-full bg-jc-red hover:bg-jc-red-dark disabled:opacity-50 disabled:cursor-not-allowed text-white font-black text-sm tracking-widest uppercase py-4 text-center transition-colors"
-                  >
-                    {loading ? 'Verifying…' : 'Verify & Sign In'}
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => { setNeeds2fa(false); setCode(''); setError('') }}
-                    className="block w-full text-white/50 hover:text-white text-xs font-bold uppercase tracking-widest py-2 text-center transition-colors"
-                  >
-                    ← Back
-                  </button>
-                </div>
-              </div>
-            </form>
-          ) : (
           <form onSubmit={handleSubmit}>
             <div className="bg-jc-charcoal border border-white/10 p-8">
               <div className="space-y-5">
@@ -197,8 +101,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={handleGoogle}
-                  disabled={!isLoaded}
-                  className="w-full bg-white hover:bg-white/90 disabled:opacity-50 text-jc-black font-bold text-sm py-3 flex items-center justify-center gap-3 transition-colors"
+                  className="w-full bg-white hover:bg-white/90 text-jc-black font-bold text-sm py-3 flex items-center justify-center gap-3 transition-colors"
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -272,7 +175,7 @@ export default function LoginPage() {
                 {/* Submit */}
                 <button
                   type="submit"
-                  disabled={loading || !isLoaded}
+                  disabled={loading}
                   className="block w-full bg-jc-red hover:bg-jc-red-dark disabled:opacity-50 disabled:cursor-not-allowed text-white font-black text-sm tracking-widest uppercase py-4 text-center transition-colors mt-2"
                 >
                   {loading ? 'Signing in…' : 'Sign In'}
@@ -283,13 +186,12 @@ export default function LoginPage() {
                 <p className="text-white/40 text-xs">
                   New member?{' '}
                   <Link href="/join" className="text-jc-red hover:underline font-bold">
-                    Enter your access code
+                    Request an invite
                   </Link>
                 </p>
               </div>
             </div>
           </form>
-          )}
 
           <p className="text-white/20 text-xs text-center mt-6">
             Having trouble signing in? Contact{' '}

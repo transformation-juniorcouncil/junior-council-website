@@ -1,24 +1,42 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { createServerClient } from '@supabase/ssr'
+import { NextResponse, type NextRequest } from 'next/server'
 
-const isPortalRoute = createRouteMatcher(['/portal(.*)'])
-const isSignUpRoute = createRouteMatcher(['/sign-up(.*)'])
+export async function middleware(request: NextRequest) {
+  let supabaseResponse = NextResponse.next({ request })
 
-export default clerkMiddleware((auth, req: NextRequest) => {
-  // Protect the portal — must be signed in
-  if (isPortalRoute(req)) {
-    auth().protect()
-  }
-
-  // Protect sign-up — must have the invite cookie set by /join
-  if (isSignUpRoute(req)) {
-    const invite = req.cookies.get('jc_invite')
-    if (!invite || invite.value !== '1') {
-      return NextResponse.redirect(new URL('/join', req.url))
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll()
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value)
+          )
+          supabaseResponse = NextResponse.next({ request })
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options)
+          )
+        },
+      },
     }
+  )
+
+  // Refresh session — must call getUser() (not getSession()) per Supabase docs
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  // Protect /portal — redirect to /login if not authenticated
+  if (!user && request.nextUrl.pathname.startsWith('/portal')) {
+    return NextResponse.redirect(new URL('/login', request.url))
   }
-})
+
+  return supabaseResponse
+}
 
 export const config = {
   matcher: [

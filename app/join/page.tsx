@@ -1,26 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 
-async function checkCode(formData: FormData) {
-  'use server'
-  const code = formData.get('code') as string
-  if (code?.trim() === process.env.INVITE_CODE) {
-    cookies().set('jc_invite', '1', {
-      httpOnly: true,
-      path: '/',
-      maxAge: 60 * 60, // 1 hour — enough time to complete signup
-    })
-    redirect('/sign-up')
-  } else {
-    redirect('/join?error=1')
-  }
-}
-
-export default function JoinPage({ searchParams }: { searchParams: { error?: string } }) {
-  const hasError = searchParams.error === '1'
-
+export default function JoinPage() {
   return (
     <div className="min-h-screen bg-jc-black flex flex-col">
       {/* Top bar */}
@@ -62,59 +43,44 @@ export default function JoinPage({ searchParams }: { searchParams: { error?: str
               Member <span className="text-jc-red">Access</span>
             </h1>
             <p className="text-white/50 text-sm mt-2">
-              Enter the access code shared at onboarding to create your account.
+              Membership is by invitation only.
             </p>
           </div>
 
-          <form action={checkCode}>
-            <div className="bg-jc-charcoal border border-white/10 p-8">
-              <div className="space-y-5">
-
-                {hasError && (
-                  <div className="bg-red-900/30 border border-red-500/40 px-4 py-3">
-                    <p className="text-red-400 text-xs font-bold">
-                      Incorrect access code. Please double-check and try again, or contact{' '}
-                      <a href="mailto:info@juniorcouncil.org" className="underline">info@juniorcouncil.org</a>.
-                    </p>
-                  </div>
-                )}
-
-                <div>
-                  <label htmlFor="code" className="block text-white/70 text-xs font-bold uppercase tracking-widest mb-2">
-                    Access Code
-                  </label>
-                  <input
-                    id="code"
-                    name="code"
-                    type="text"
-                    placeholder="Enter your access code"
-                    required
-                    autoComplete="off"
-                    className="w-full bg-jc-black border border-white/20 focus:border-jc-red px-4 py-3 text-white text-sm outline-none transition-colors placeholder:text-white/20 tracking-widest"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="block w-full bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase py-4 text-center transition-colors"
-                >
-                  Continue
-                </button>
+          <div className="bg-jc-charcoal border border-white/10 p-8">
+            <div className="space-y-5 text-center">
+              <div className="w-14 h-14 bg-jc-red/10 border border-jc-red/30 flex items-center justify-center mx-auto">
+                <svg className="w-7 h-7 text-jc-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
               </div>
 
-              <div className="border-t border-white/10 mt-8 pt-6 text-center">
-                <p className="text-white/40 text-xs">
-                  Already have an account?{' '}
-                  <Link href="/login" className="text-jc-red hover:underline font-bold">
-                    Sign in
-                  </Link>
+              <div>
+                <p className="text-white font-bold text-sm mb-2">You need an invite to join</p>
+                <p className="text-white/50 text-sm leading-relaxed">
+                  Junior Council membership is by invitation from a JC admin. If you believe you should have access, reach out and we&apos;ll get you set up.
                 </p>
               </div>
+
+              <a
+                href="mailto:info@juniorcouncil.org"
+                className="block w-full bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase py-4 text-center transition-colors"
+              >
+                Contact Us
+              </a>
             </div>
-          </form>
+
+            <div className="border-t border-white/10 mt-8 pt-6 text-center">
+              <p className="text-white/40 text-xs">
+                Already have an account?{' '}
+                <Link href="/login" className="text-jc-red hover:underline font-bold">
+                  Sign in
+                </Link>
+              </p>
+            </div>
+          </div>
 
           <p className="text-white/20 text-xs text-center mt-6">
-            Don&apos;t have an access code? Contact{' '}
             <a href="mailto:info@juniorcouncil.org" className="text-white/40 hover:text-white transition-colors">
               info@juniorcouncil.org
             </a>
