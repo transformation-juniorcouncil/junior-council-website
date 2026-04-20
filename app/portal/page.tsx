@@ -58,7 +58,7 @@ const seedPosts: Post[] = [
 
 // ─── Events ───────────────────────────────────────────────────────────────────
 
-type CalEvent = { id: number; title: string; dateKey: string; date: string; time: string; location: string; type: string }
+type CalEvent = { id: number | string; title: string; dateKey: string; date: string; time: string; location: string; type: string; personal?: boolean }
 
 const allEvents: CalEvent[] = [
   { id:1,  title:'Monthly Member Meeting',      dateKey:'2026-01-14', date:'January 14, 2026',   time:'6:30 PM – 8:00 PM',  location:'The Drake Hotel, Chicago',     type:'Meeting'    },
@@ -85,9 +85,11 @@ const upcomingEvents = [...allEvents].sort((a, b) => a.dateKey.localeCompare(b.d
 const eventTypeColors: Record<string,string> = {
   Meeting:'bg-blue-100 text-blue-700', Event:'bg-purple-100 text-purple-700',
   Fundraiser:'bg-green-100 text-green-700', Social:'bg-yellow-100 text-yellow-700',
+  Personal:'bg-pink-100 text-pink-700',
 }
 const eventTypeDots: Record<string,string> = {
   Meeting:'bg-blue-500', Event:'bg-purple-500', Fundraiser:'bg-green-500', Social:'bg-yellow-500',
+  Personal:'bg-pink-500',
 }
 
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
@@ -227,8 +229,81 @@ export default function PortalPage() {
   const nextMonth = () => { if (calMonth===11){setCalMonth(0);setCalYear(y=>y+1)}else setCalMonth(m=>m+1); setSelectedDay(null) }
   const daysInMonth    = new Date(calYear, calMonth+1, 0).getDate()
   const firstDayOfWeek = new Date(calYear, calMonth, 1).getDay()
-  const eventsOnDay = (day:number) => { const k=`${calYear}-${pad(calMonth+1)}-${pad(day)}`; return allEvents.filter(e=>e.dateKey===k) }
-  const selectedEvents = selectedDay ? allEvents.filter(e=>e.dateKey===selectedDay) : []
+
+  // Personal events (per-user, stored in Supabase `personal_events` table)
+  const [personalEvents, setPersonalEvents] = useState<CalEvent[]>([])
+  useEffect(() => {
+    if (!user) { setPersonalEvents([]); return }
+    const supabase = createClient()
+    supabase
+      .from('personal_events')
+      .select('id, title, date_key, time, location')
+      .order('date_key', { ascending: true })
+      .then(({ data }) => {
+        if (!data) return
+        setPersonalEvents(
+          data.map((r: { id: string; title: string; date_key: string; time: string | null; location: string | null }) => ({
+            id: r.id,
+            title: r.title,
+            dateKey: r.date_key,
+            date: new Date(r.date_key + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+            time: r.time || '',
+            location: r.location || '',
+            type: 'Personal',
+            personal: true,
+          }))
+        )
+      })
+  }, [user])
+
+  // Add Personal Event form
+  const [personalForm, setPersonalForm] = useState({ title:'', dateKey:'', time:'', location:'' })
+  const [personalFormOpen, setPersonalFormOpen] = useState(false)
+  const [personalSaving, setPersonalSaving] = useState(false)
+  const openPersonalForm = () => {
+    setPersonalForm({ title:'', dateKey: selectedDay || todayKey, time:'', location:'' })
+    setPersonalFormOpen(true)
+  }
+  const savePersonalEvent = async () => {
+    if (!user || !personalForm.title.trim() || !personalForm.dateKey) return
+    setPersonalSaving(true)
+    const supabase = createClient()
+    const { data, error } = await supabase
+      .from('personal_events')
+      .insert({
+        user_id: user.id,
+        title: personalForm.title.trim(),
+        date_key: personalForm.dateKey,
+        time: personalForm.time.trim() || null,
+        location: personalForm.location.trim() || null,
+      })
+      .select('id, title, date_key, time, location')
+      .single()
+    setPersonalSaving(false)
+    if (error || !data) return
+    const newEvent: CalEvent = {
+      id: data.id,
+      title: data.title,
+      dateKey: data.date_key,
+      date: new Date(data.date_key + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+      time: data.time || '',
+      location: data.location || '',
+      type: 'Personal',
+      personal: true,
+    }
+    setPersonalEvents(p => [...p, newEvent])
+    setSelectedDay(data.date_key)
+    setPersonalFormOpen(false)
+  }
+  const deletePersonalEvent = async (id: string) => {
+    const supabase = createClient()
+    await supabase.from('personal_events').delete().eq('id', id)
+    setPersonalEvents(p => p.filter(e => e.id !== id))
+  }
+
+  const combinedEvents = [...allEvents, ...personalEvents]
+  const eventsOnDay = (day:number) => { const k=`${calYear}-${pad(calMonth+1)}-${pad(day)}`; return combinedEvents.filter(e=>e.dateKey===k) }
+  const selectedEvents = selectedDay ? combinedEvents.filter(e=>e.dateKey===selectedDay) : []
 
   // Profile — seed name from Supabase user metadata if available
   const [profile, setProfile]           = useState<Profile>({...defaultProfile})
@@ -655,10 +730,17 @@ export default function PortalPage() {
               </div>
               {selectedDay&&(
                 <div className="bg-white border border-jc-red">
-                  <div className="px-5 py-3 border-b border-jc-red bg-jc-red/5">
+                  <div className="px-5 py-3 border-b border-jc-red bg-jc-red/5 flex items-center justify-between">
                     <p className="text-jc-red text-xs font-bold uppercase tracking-widest">
                       {new Date(selectedDay+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})}
                     </p>
+                    <button
+                      onClick={openPersonalForm}
+                      className="text-jc-red text-xs font-bold uppercase tracking-widest hover:underline"
+                      aria-label="Add personal event"
+                    >
+                      + Add
+                    </button>
                   </div>
                   {selectedEvents.length===0
                     ? <div className="px-5 py-6 text-center"><p className="text-jc-gray-dark text-sm">No events on this day.</p></div>
@@ -667,22 +749,30 @@ export default function PortalPage() {
                           <div key={ev.id} className="px-5 py-4">
                             <div className="flex items-center gap-2 mb-1">
                               <span className={`text-xs font-bold px-2 py-0.5 ${eventTypeColors[ev.type]}`}>{ev.type}</span>
+                              {ev.personal && <span className="text-jc-gray-dark text-xs">(only visible to you)</span>}
                             </div>
                             <h4 className="text-jc-black font-black text-sm mb-1">{ev.title}</h4>
-                            <p className="text-jc-gray-dark text-xs">{ev.time}</p>
-                            <p className="text-jc-gray-dark text-xs">{ev.location}</p>
+                            {ev.time && <p className="text-jc-gray-dark text-xs">{ev.time}</p>}
+                            {ev.location && <p className="text-jc-gray-dark text-xs">{ev.location}</p>}
                             <div className="flex gap-2 mt-3">
-                              {rsvps[ev.id]?(
+                              {ev.personal ? (
+                                <button
+                                  onClick={()=>deletePersonalEvent(ev.id as string)}
+                                  className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark hover:text-jc-red text-xs font-bold uppercase px-3 py-1 transition-colors"
+                                >
+                                  Delete
+                                </button>
+                              ) : rsvps[ev.id as number] ? (
                                 <div className="flex items-center gap-2">
-                                  <span className={`text-xs font-bold px-2 py-1 ${rsvps[ev.id]==='yes'?'bg-green-100 text-green-700':'bg-jc-gray text-jc-gray-dark'}`}>
-                                    {rsvps[ev.id]==='yes'?'Attending':'Not Attending'}
+                                  <span className={`text-xs font-bold px-2 py-1 ${rsvps[ev.id as number]==='yes'?'bg-green-100 text-green-700':'bg-jc-gray text-jc-gray-dark'}`}>
+                                    {rsvps[ev.id as number]==='yes'?'Attending':'Not Attending'}
                                   </span>
-                                  <button onClick={()=>setRsvps(p=>{const n={...p};delete n[ev.id];return n})} className="text-jc-gray-dark text-xs hover:text-jc-red">Change</button>
+                                  <button onClick={()=>setRsvps(p=>{const n={...p};delete n[ev.id as number];return n})} className="text-jc-gray-dark text-xs hover:text-jc-red">Change</button>
                                 </div>
                               ):(
                                 <>
-                                  <button onClick={()=>setRsvps(p=>({...p,[ev.id]:'yes'}))} className="bg-jc-red hover:bg-jc-red-dark text-white text-xs font-bold uppercase px-3 py-1 transition-colors">RSVP Yes</button>
-                                  <button onClick={()=>setRsvps(p=>({...p,[ev.id]:'no'}))}  className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark text-xs font-bold uppercase px-3 py-1 transition-colors">Can&apos;t Go</button>
+                                  <button onClick={()=>setRsvps(p=>({...p,[ev.id as number]:'yes'}))} className="bg-jc-red hover:bg-jc-red-dark text-white text-xs font-bold uppercase px-3 py-1 transition-colors">RSVP Yes</button>
+                                  <button onClick={()=>setRsvps(p=>({...p,[ev.id as number]:'no'}))}  className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark text-xs font-bold uppercase px-3 py-1 transition-colors">Can&apos;t Go</button>
                                 </>
                               )}
                             </div>
@@ -694,10 +784,10 @@ export default function PortalPage() {
               )}
               <div className="bg-white border border-jc-gray-mid">
                 <div className="px-5 py-3 border-b border-jc-gray-mid"><h3 className="text-jc-black font-black text-sm">Events This Month</h3></div>
-                {allEvents.filter(e=>e.dateKey.startsWith(`${calYear}-${pad(calMonth+1)}`)).length===0
+                {combinedEvents.filter(e=>e.dateKey.startsWith(`${calYear}-${pad(calMonth+1)}`)).length===0
                   ? <div className="px-5 py-6 text-center"><p className="text-jc-gray-dark text-sm">No events this month.</p></div>
                   : <div className="divide-y divide-jc-gray-mid">
-                      {allEvents.filter(e=>e.dateKey.startsWith(`${calYear}-${pad(calMonth+1)}`))
+                      {combinedEvents.filter(e=>e.dateKey.startsWith(`${calYear}-${pad(calMonth+1)}`))
                         .sort((a,b)=>a.dateKey.localeCompare(b.dateKey))
                         .map(ev=>(
                           <button key={ev.id} onClick={()=>setSelectedDay(ev.dateKey)} className="w-full text-left px-5 py-3 hover:bg-jc-gray transition-colors group">
@@ -705,12 +795,78 @@ export default function PortalPage() {
                               <div className={`w-2 h-2 rounded-full flex-shrink-0 ${eventTypeDots[ev.type]}`}/>
                               <span className="text-jc-black text-sm font-bold group-hover:text-jc-red transition-colors truncate">{ev.title}</span>
                             </div>
-                            <p className="text-jc-gray-dark text-xs pl-4">{ev.date} · {ev.time}</p>
+                            <p className="text-jc-gray-dark text-xs pl-4">{ev.date}{ev.time?` · ${ev.time}`:''}</p>
                           </button>
                         ))}
                     </div>
                 }
               </div>
+
+              {/* Add Personal Event modal */}
+              {personalFormOpen && (
+                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4" onClick={()=>setPersonalFormOpen(false)}>
+                  <div className="bg-white w-full max-w-md border border-jc-gray-mid" onClick={e=>e.stopPropagation()}>
+                    <div className="px-6 py-4 border-b border-jc-gray-mid flex items-center justify-between">
+                      <h3 className="text-jc-black font-black text-lg">Add Personal Event</h3>
+                      <button onClick={()=>setPersonalFormOpen(false)} className="text-jc-gray-dark hover:text-jc-black" aria-label="Close">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
+                      </button>
+                    </div>
+                    <div className="p-6 space-y-4">
+                      <p className="text-jc-gray-dark text-xs">Only you can see events you create here.</p>
+                      <div>
+                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Title</label>
+                        <input
+                          type="text"
+                          value={personalForm.title}
+                          onChange={e=>setPersonalForm(f=>({...f,title:e.target.value}))}
+                          placeholder="e.g. Coffee with board member"
+                          className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Date</label>
+                        <input
+                          type="date"
+                          value={personalForm.dateKey}
+                          onChange={e=>setPersonalForm(f=>({...f,dateKey:e.target.value}))}
+                          className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Time (optional)</label>
+                        <input
+                          type="text"
+                          value={personalForm.time}
+                          onChange={e=>setPersonalForm(f=>({...f,time:e.target.value}))}
+                          placeholder="e.g. 3:00 PM"
+                          className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Location (optional)</label>
+                        <input
+                          type="text"
+                          value={personalForm.location}
+                          onChange={e=>setPersonalForm(f=>({...f,location:e.target.value}))}
+                          placeholder="e.g. Sawada Coffee"
+                          className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"
+                        />
+                      </div>
+                    </div>
+                    <div className="px-6 py-4 border-t border-jc-gray-mid flex gap-2 justify-end">
+                      <button onClick={()=>setPersonalFormOpen(false)} className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark text-xs font-bold uppercase px-4 py-2 transition-colors">Cancel</button>
+                      <button
+                        onClick={savePersonalEvent}
+                        disabled={personalSaving || !personalForm.title.trim() || !personalForm.dateKey}
+                        className="bg-jc-red hover:bg-jc-red-dark disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold uppercase px-4 py-2 transition-colors"
+                      >
+                        {personalSaving?'Saving…':'Save Event'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
