@@ -884,7 +884,7 @@ export default function PortalPage() {
                           className="text-jc-red text-xs font-bold uppercase tracking-widest hover:underline"
                           aria-label="Add org event"
                         >
-                          + Add Event
+                          + Org Event
                         </button>
                         <button
                           onClick={openPersonalForm}
@@ -900,7 +900,7 @@ export default function PortalPage() {
                         className="text-jc-red text-xs font-bold uppercase tracking-widest hover:underline"
                         aria-label="Add personal event"
                       >
-                        + Add
+                        + Personal Event
                       </button>
                     )}
                   </div>
@@ -986,6 +986,7 @@ export default function PortalPage() {
                       </button>
                     </div>
                     <div className="p-6 space-y-4">
+                      <p className="text-jc-gray-dark text-xs">This event will appear on the org calendar and be visible to all members.</p>
                       <div>
                         <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Title</label>
                         <input type="text" value={eventForm.title} onChange={e=>setEventForm(f=>({...f,title:e.target.value}))} placeholder="e.g. Board Happy Hour" className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"/>
@@ -1030,7 +1031,7 @@ export default function PortalPage() {
                       </button>
                     </div>
                     <div className="p-6 space-y-4">
-                      <p className="text-jc-gray-dark text-xs">Only you can see events you create here.</p>
+                      <p className="text-jc-gray-dark text-xs">Only you can see this event — it won&apos;t appear on the org calendar.</p>
                       <div>
                         <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Title</label>
                         <input
