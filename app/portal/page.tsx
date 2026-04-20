@@ -58,29 +58,8 @@ const seedPosts: Post[] = [
 
 // ─── Events ───────────────────────────────────────────────────────────────────
 
-type CalEvent = { id: number | string; title: string; dateKey: string; date: string; time: string; location: string; type: string; personal?: boolean }
-
-const allEvents: CalEvent[] = [
-  { id:1,  title:'Monthly Member Meeting',      dateKey:'2026-01-14', date:'January 14, 2026',   time:'6:30 PM – 8:00 PM',  location:'The Drake Hotel, Chicago',     type:'Meeting'    },
-  { id:2,  title:'Snowball Kick-Off Party',      dateKey:'2026-01-17', date:'January 17, 2026',   time:'7:00 PM – 10:00 PM', location:'TBD, Chicago',                 type:'Event'      },
-  { id:3,  title:'Monthly Member Meeting',       dateKey:'2026-02-11', date:'February 11, 2026',  time:'6:30 PM – 8:00 PM',  location:'The Drake Hotel, Chicago',     type:'Meeting'    },
-  { id:4,  title:'Monthly Member Meeting',       dateKey:'2026-03-11', date:'March 11, 2026',     time:'6:30 PM – 8:00 PM',  location:'The Drake Hotel, Chicago',     type:'Meeting'    },
-  { id:5,  title:'Derby Party',                  dateKey:'2026-04-25', date:'April 25, 2026',     time:'4:00 PM – 8:00 PM',  location:'TBD, Chicago',                 type:'Fundraiser' },
-  { id:6,  title:'Monthly Member Meeting',       dateKey:'2026-04-08', date:'April 8, 2026',      time:'6:30 PM – 8:00 PM',  location:'The Drake Hotel, Chicago',     type:'Meeting'    },
-  { id:7,  title:'Monthly Member Meeting',       dateKey:'2026-05-13', date:'May 13, 2026',       time:'6:30 PM – 8:00 PM',  location:'The Drake Hotel, Chicago',     type:'Meeting'    },
-  { id:8,  title:'Monthly Member Meeting',       dateKey:'2026-06-10', date:'June 10, 2026',      time:'6:30 PM – 8:00 PM',  location:'The Drake Hotel, Chicago',     type:'Meeting'    },
-  { id:9,  title:'Happy Hour',                   dateKey:'2026-06-18', date:'June 18, 2026',      time:'6:00 PM – 9:00 PM',  location:'TBD, Chicago',                 type:'Social'     },
-  { id:10, title:'Cruising for a Cause',         dateKey:'2026-07-12', date:'July 12, 2026',      time:'5:00 PM – 9:00 PM',  location:'Navy Pier, Chicago',           type:'Fundraiser' },
-  { id:11, title:'Happy Hour — Summer Edition',  dateKey:'2026-08-06', date:'August 6, 2026',     time:'6:00 PM – 9:00 PM',  location:'Venteux, Chicago',             type:'Social'     },
-  { id:12, title:'Monthly Member Meeting',       dateKey:'2026-09-09', date:'September 9, 2026',  time:'6:30 PM – 8:00 PM',  location:'The Drake Hotel, Chicago',     type:'Meeting'    },
-  { id:13, title:'Annual Golf Outing',           dateKey:'2026-09-19', date:'September 19, 2026', time:'8:00 AM – 4:00 PM',  location:'Cog Hill Golf & Country Club', type:'Fundraiser' },
-  { id:14, title:'Monthly Member Meeting',       dateKey:'2026-10-14', date:'October 14, 2026',   time:'6:30 PM – 8:00 PM',  location:'The Drake Hotel, Chicago',     type:'Meeting'    },
-  { id:15, title:'Monthly Member Meeting',       dateKey:'2026-11-04', date:'November 4, 2026',   time:'6:30 PM – 8:00 PM',  location:'The Drake Hotel, Chicago',     type:'Meeting'    },
-  { id:16, title:'Holiday Happy Hour',           dateKey:'2026-12-10', date:'December 10, 2026',  time:'6:00 PM – 9:00 PM',  location:'TBD, Chicago',                 type:'Social'     },
-  { id:17, title:'Monthly Member Meeting',       dateKey:'2026-12-09', date:'December 9, 2026',   time:'6:30 PM – 8:00 PM',  location:'The Drake Hotel, Chicago',     type:'Meeting'    },
-]
-
-const upcomingEvents = [...allEvents].sort((a, b) => a.dateKey.localeCompare(b.dateKey))
+type CalEvent = { id: string; title: string; dateKey: string; date: string; time: string; location: string; type: string; personal?: boolean; createdBy?: string }
+type RsvpRecord = { id: string; eventId: string; userId: string; status: 'yes' | 'no'; fullName: string }
 
 const eventTypeColors: Record<string,string> = {
   Meeting:'bg-blue-100 text-blue-700', Event:'bg-purple-100 text-purple-700',
@@ -162,14 +141,22 @@ export default function PortalPage() {
   }
 
   const [activeTab, setActiveTab] = useState<Tab>('dashboard')
-  const [rsvps, setRsvps]         = useState<Record<number,'yes'|'no'>>({})
   const [duesModalOpen, setDuesModalOpen] = useState(false)
   const [navMenuOpen, setNavMenuOpen] = useState(false)
 
+  // Role + org events + RSVPs
+  const [myRole, setMyRole] = useState<'member'|'board'|'admin'>('member')
+  const [orgEvents, setOrgEvents] = useState<CalEvent[]>([])
+  const [rsvpMap, setRsvpMap] = useState<Record<string,'yes'|'no'>>({})
+  const [allRsvps, setAllRsvps] = useState<RsvpRecord[]>([])
+  const [eventFormOpen, setEventFormOpen] = useState(false)
+  const [editingEventId, setEditingEventId] = useState<string|null>(null)
+  const [eventForm, setEventForm] = useState({ title:'', dateKey:'', time:'', location:'', type:'Meeting' })
+  const [eventSaving, setEventSaving] = useState(false)
+
   // Admin invite modal
-  const ADMIN_EMAILS = ['dianawolfchicago@gmail.com']
-  const userEmail = user?.email?.toLowerCase() || ''
-  const isAdmin = ADMIN_EMAILS.includes(userEmail)
+  const isAdmin = myRole === 'admin'
+  const isBoard = myRole === 'board' || myRole === 'admin'
   const [inviteModalOpen, setInviteModalOpen] = useState(false)
   const [inviteForm, setInviteForm] = useState({ email:'', firstName:'', lastName:'' })
   const [inviteStatus, setInviteStatus] = useState<{type:'idle'|'sending'|'ok'|'error', msg?:string}>({type:'idle'})
@@ -301,7 +288,150 @@ export default function PortalPage() {
     setPersonalEvents(p => p.filter(e => e.id !== id))
   }
 
-  const combinedEvents = [...allEvents, ...personalEvents]
+  // Fetch user role
+  useEffect(() => {
+    if (!user) return
+    const supabase = createClient()
+    supabase.rpc('get_my_role').then(({ data }) => {
+      if (data) setMyRole(data as 'member'|'board'|'admin')
+    })
+  }, [user])
+
+  // Fetch org events
+  useEffect(() => {
+    if (!user) return
+    const supabase = createClient()
+    supabase
+      .from('org_events')
+      .select('id, title, date_key, date_label, time, location, type, created_by')
+      .then(({ data }) => {
+        if (!data) return
+        setOrgEvents(data.map((r: { id: string; title: string; date_key: string; date_label: string; time: string; location: string; type: string; created_by: string | null }) => ({
+          id: r.id,
+          title: r.title,
+          dateKey: r.date_key,
+          date: r.date_label,
+          time: r.time || '',
+          location: r.location || '',
+          type: r.type,
+          createdBy: r.created_by ?? undefined,
+        })))
+      })
+  }, [user])
+
+  // Fetch RSVPs
+  useEffect(() => {
+    if (!user) return
+    const supabase = createClient()
+    supabase
+      .from('event_rsvps')
+      .select('id, event_id, user_id, status, profiles(full_name)')
+      .then(({ data }) => {
+        if (!data) return
+        type RsvpRow = { id: string; event_id: string; user_id: string; status: string; profiles: { full_name: string }[] | { full_name: string } | null }
+        const records: RsvpRecord[] = (data as RsvpRow[]).map(r => {
+          const prof = r.profiles
+          const fullName = Array.isArray(prof) ? (prof[0]?.full_name || 'Member') : (prof?.full_name || 'Member')
+          return { id: r.id, eventId: r.event_id, userId: r.user_id, status: r.status as 'yes' | 'no', fullName }
+        })
+        setAllRsvps(records)
+        const myMap: Record<string,'yes'|'no'> = {}
+        records.filter(r => r.userId === user.id).forEach(r => { myMap[r.eventId] = r.status })
+        setRsvpMap(myMap)
+      })
+  }, [user])
+
+  // RSVP handlers
+  const upsertRsvp = async (eventId: string, status: 'yes' | 'no') => {
+    if (!user) return
+    const supabase = createClient()
+    const { data } = await supabase
+      .from('event_rsvps')
+      .upsert({ event_id: eventId, user_id: user.id, status }, { onConflict: 'event_id,user_id' })
+      .select('id, event_id, user_id, status')
+      .single()
+    if (!data) return
+    // Get the user's display name from profile state or fallback
+    const fullName = profile.name !== 'Member Name' ? profile.name : (user.user_metadata?.full_name as string | undefined) || 'Member'
+    const record: RsvpRecord = { id: data.id, eventId: data.event_id, userId: data.user_id, status: data.status as 'yes' | 'no', fullName }
+    setRsvpMap(p => ({ ...p, [eventId]: status }))
+    setAllRsvps(p => [...p.filter(r => !(r.eventId === eventId && r.userId === user.id)), record])
+  }
+
+  const deleteRsvp = async (eventId: string) => {
+    if (!user) return
+    const supabase = createClient()
+    await supabase.from('event_rsvps').delete().eq('event_id', eventId).eq('user_id', user.id)
+    setRsvpMap(p => { const n = { ...p }; delete n[eventId]; return n })
+    setAllRsvps(p => p.filter(r => !(r.eventId === eventId && r.userId === user.id)))
+  }
+
+  // Org event form handlers
+  const openOrgEventForm = (ev?: CalEvent) => {
+    if (ev) {
+      setEditingEventId(ev.id)
+      setEventForm({ title: ev.title, dateKey: ev.dateKey, time: ev.time, location: ev.location, type: ev.type })
+    } else {
+      setEditingEventId(null)
+      setEventForm({ title: '', dateKey: selectedDay || todayKey, time: '', location: '', type: 'Meeting' })
+    }
+    setEventFormOpen(true)
+  }
+
+  const saveOrgEvent = async () => {
+    if (!user || !eventForm.title.trim() || !eventForm.dateKey) return
+    setEventSaving(true)
+    const supabase = createClient()
+    if (editingEventId) {
+      const { data, error } = await supabase
+        .from('org_events')
+        .update({
+          title: eventForm.title.trim(),
+          date_key: eventForm.dateKey,
+          date_label: new Date(eventForm.dateKey + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+          time: eventForm.time.trim() || '',
+          location: eventForm.location.trim() || '',
+          type: eventForm.type,
+        })
+        .eq('id', editingEventId)
+        .select('id, title, date_key, date_label, time, location, type, created_by')
+        .single()
+      setEventSaving(false)
+      if (error || !data) return
+      const updated: CalEvent = { id: data.id, title: data.title, dateKey: data.date_key, date: data.date_label, time: data.time, location: data.location, type: data.type, createdBy: data.created_by ?? undefined }
+      setOrgEvents(p => p.map(e => e.id === editingEventId ? updated : e))
+    } else {
+      const dateLabel = new Date(eventForm.dateKey + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+      const { data, error } = await supabase
+        .from('org_events')
+        .insert({
+          title: eventForm.title.trim(),
+          date_key: eventForm.dateKey,
+          date_label: dateLabel,
+          time: eventForm.time.trim() || '',
+          location: eventForm.location.trim() || '',
+          type: eventForm.type,
+          created_by: user.id,
+        })
+        .select('id, title, date_key, date_label, time, location, type, created_by')
+        .single()
+      setEventSaving(false)
+      if (error || !data) return
+      const newEv: CalEvent = { id: data.id, title: data.title, dateKey: data.date_key, date: data.date_label, time: data.time, location: data.location, type: data.type, createdBy: data.created_by ?? undefined }
+      setOrgEvents(p => [...p, newEv])
+      setSelectedDay(data.date_key)
+    }
+    setEventFormOpen(false)
+  }
+
+  const deleteOrgEvent = async (id: string) => {
+    const supabase = createClient()
+    await supabase.from('org_events').delete().eq('id', id)
+    setOrgEvents(p => p.filter(e => e.id !== id))
+  }
+
+  const upcomingEvents = [...orgEvents].sort((a, b) => a.dateKey.localeCompare(b.dateKey))
+  const combinedEvents = [...orgEvents, ...personalEvents]
   const eventsOnDay = (day:number) => { const k=`${calYear}-${pad(calMonth+1)}-${pad(day)}`; return combinedEvents.filter(e=>e.dateKey===k) }
   const selectedEvents = selectedDay ? combinedEvents.filter(e=>e.dateKey===selectedDay) : []
 
@@ -466,15 +596,27 @@ export default function PortalPage() {
                 Account & Password
               </button>
               {isAdmin && (
-                <button
-                  onClick={() => { setInviteModalOpen(true); setNavMenuOpen(false) }}
-                  className="w-full flex items-center gap-2.5 px-4 py-3 text-jc-red hover:text-white hover:bg-jc-red/20 text-xs font-bold uppercase tracking-wide transition-colors border-b border-white/5"
-                >
-                  <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
-                  </svg>
-                  Invite Member
-                </button>
+                <>
+                  <button
+                    onClick={() => { setInviteModalOpen(true); setNavMenuOpen(false) }}
+                    className="w-full flex items-center gap-2.5 px-4 py-3 text-jc-red hover:text-white hover:bg-jc-red/20 text-xs font-bold uppercase tracking-wide transition-colors border-b border-white/5"
+                  >
+                    <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                    </svg>
+                    Invite Member
+                  </button>
+                  <Link
+                    href="/portal/admin/roles"
+                    onClick={() => setNavMenuOpen(false)}
+                    className="w-full flex items-center gap-2.5 px-4 py-3 text-jc-red hover:text-white hover:bg-jc-red/20 text-xs font-bold uppercase tracking-wide transition-colors border-b border-white/5"
+                  >
+                    <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                    Manage Roles
+                  </Link>
+                </>
               )}
               <button
                 onClick={handleSignOut}
@@ -607,20 +749,21 @@ export default function PortalPage() {
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3 mt-5">
-                        {rsvps[nextEvent.id] ? (
+                      <div className="flex items-center gap-3 mt-5 flex-wrap">
+                        {rsvpMap[nextEvent.id] ? (
                           <>
-                            <span className={`text-xs font-bold px-4 py-2.5 ${rsvps[nextEvent.id]==='yes'?'bg-green-100 text-green-700':'bg-jc-gray text-jc-gray-dark'}`}>
-                              {rsvps[nextEvent.id]==='yes'?'You\'re Attending':'Not Attending'}
+                            <span className={`text-xs font-bold px-4 py-2.5 ${rsvpMap[nextEvent.id]==='yes'?'bg-green-100 text-green-700':'bg-jc-gray text-jc-gray-dark'}`}>
+                              {rsvpMap[nextEvent.id]==='yes'?'You\'re Attending':'Not Attending'}
                             </span>
-                            <button onClick={()=>setRsvps(p=>{const n={...p};delete n[nextEvent.id];return n})} className="text-jc-gray-dark text-xs hover:text-jc-red transition-colors">Change</button>
+                            <button onClick={()=>deleteRsvp(nextEvent.id)} className="text-jc-gray-dark text-xs hover:text-jc-red transition-colors">Change</button>
                           </>
                         ) : (
                           <>
-                            <button onClick={()=>setRsvps(p=>({...p,[nextEvent.id]:'yes'}))} className="bg-jc-red hover:bg-jc-red-dark text-white font-black text-xs uppercase tracking-widest px-6 py-3 transition-colors">RSVP Yes</button>
-                            <button onClick={()=>setRsvps(p=>({...p,[nextEvent.id]:'no'}))} className="border-2 border-jc-gray-mid hover:border-jc-red text-jc-gray-dark hover:text-jc-red font-bold text-xs uppercase px-4 py-3 transition-colors">Can&apos;t Go</button>
+                            <button onClick={()=>upsertRsvp(nextEvent.id,'yes')} className="bg-jc-red hover:bg-jc-red-dark text-white font-black text-xs uppercase tracking-widest px-6 py-3 transition-colors">RSVP Yes</button>
+                            <button onClick={()=>upsertRsvp(nextEvent.id,'no')} className="border-2 border-jc-gray-mid hover:border-jc-red text-jc-gray-dark hover:text-jc-red font-bold text-xs uppercase px-4 py-3 transition-colors">Can&apos;t Go</button>
                           </>
                         )}
+                        {(()=>{ const att=allRsvps.filter(r=>r.eventId===nextEvent.id&&r.status==='yes'); return att.length>0&&(<p className="w-full text-jc-gray-dark text-xs mt-1">{att.length} attending: {att.map(a=>a.fullName).join(', ')}</p>) })()}
                       </div>
                     </div>
                   </div>
@@ -734,13 +877,32 @@ export default function PortalPage() {
                     <p className="text-jc-red text-xs font-bold uppercase tracking-widest">
                       {new Date(selectedDay+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})}
                     </p>
-                    <button
-                      onClick={openPersonalForm}
-                      className="text-jc-red text-xs font-bold uppercase tracking-widest hover:underline"
-                      aria-label="Add personal event"
-                    >
-                      + Add
-                    </button>
+                    {isBoard ? (
+                      <div className="flex items-center gap-3">
+                        <button
+                          onClick={() => openOrgEventForm()}
+                          className="text-jc-red text-xs font-bold uppercase tracking-widest hover:underline"
+                          aria-label="Add org event"
+                        >
+                          + Add Event
+                        </button>
+                        <button
+                          onClick={openPersonalForm}
+                          className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest hover:underline"
+                          aria-label="Add personal event"
+                        >
+                          + Personal
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={openPersonalForm}
+                        className="text-jc-red text-xs font-bold uppercase tracking-widest hover:underline"
+                        aria-label="Add personal event"
+                      >
+                        + Add
+                      </button>
+                    )}
                   </div>
                   {selectedEvents.length===0
                     ? <div className="px-5 py-6 text-center"><p className="text-jc-gray-dark text-sm">No events on this day.</p></div>
@@ -754,28 +916,39 @@ export default function PortalPage() {
                             <h4 className="text-jc-black font-black text-sm mb-1">{ev.title}</h4>
                             {ev.time && <p className="text-jc-gray-dark text-xs">{ev.time}</p>}
                             {ev.location && <p className="text-jc-gray-dark text-xs">{ev.location}</p>}
-                            <div className="flex gap-2 mt-3">
+                            <div className="flex gap-2 mt-3 flex-wrap">
                               {ev.personal ? (
                                 <button
-                                  onClick={()=>deletePersonalEvent(ev.id as string)}
+                                  onClick={()=>deletePersonalEvent(ev.id)}
                                   className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark hover:text-jc-red text-xs font-bold uppercase px-3 py-1 transition-colors"
                                 >
                                   Delete
                                 </button>
-                              ) : rsvps[ev.id as number] ? (
-                                <div className="flex items-center gap-2">
-                                  <span className={`text-xs font-bold px-2 py-1 ${rsvps[ev.id as number]==='yes'?'bg-green-100 text-green-700':'bg-jc-gray text-jc-gray-dark'}`}>
-                                    {rsvps[ev.id as number]==='yes'?'Attending':'Not Attending'}
-                                  </span>
-                                  <button onClick={()=>setRsvps(p=>{const n={...p};delete n[ev.id as number];return n})} className="text-jc-gray-dark text-xs hover:text-jc-red">Change</button>
-                                </div>
-                              ):(
+                              ) : (
                                 <>
-                                  <button onClick={()=>setRsvps(p=>({...p,[ev.id as number]:'yes'}))} className="bg-jc-red hover:bg-jc-red-dark text-white text-xs font-bold uppercase px-3 py-1 transition-colors">RSVP Yes</button>
-                                  <button onClick={()=>setRsvps(p=>({...p,[ev.id as number]:'no'}))}  className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark text-xs font-bold uppercase px-3 py-1 transition-colors">Can&apos;t Go</button>
+                                  {rsvpMap[ev.id] ? (
+                                    <div className="flex items-center gap-2">
+                                      <span className={`text-xs font-bold px-2 py-1 ${rsvpMap[ev.id]==='yes'?'bg-green-100 text-green-700':'bg-jc-gray text-jc-gray-dark'}`}>
+                                        {rsvpMap[ev.id]==='yes'?'Attending':'Not Attending'}
+                                      </span>
+                                      <button onClick={()=>deleteRsvp(ev.id)} className="text-jc-gray-dark text-xs hover:text-jc-red">Change</button>
+                                    </div>
+                                  ) : (
+                                    <>
+                                      <button onClick={()=>upsertRsvp(ev.id,'yes')} className="bg-jc-red hover:bg-jc-red-dark text-white text-xs font-bold uppercase px-3 py-1 transition-colors">RSVP Yes</button>
+                                      <button onClick={()=>upsertRsvp(ev.id,'no')} className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark text-xs font-bold uppercase px-3 py-1 transition-colors">Can&apos;t Go</button>
+                                    </>
+                                  )}
+                                  {(isAdmin || (isBoard && ev.createdBy === user?.id)) && (
+                                    <>
+                                      <button onClick={()=>openOrgEventForm(ev)} className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark hover:text-jc-red text-xs font-bold uppercase px-3 py-1 transition-colors">Edit</button>
+                                      <button onClick={()=>deleteOrgEvent(ev.id)} className="border border-red-200 hover:border-jc-red text-red-400 hover:text-jc-red text-xs font-bold uppercase px-3 py-1 transition-colors">Delete</button>
+                                    </>
+                                  )}
                                 </>
                               )}
                             </div>
+                            {!ev.personal && (()=>{ const att=allRsvps.filter(r=>r.eventId===ev.id&&r.status==='yes'); return att.length>0&&(<p className="text-jc-gray-dark text-xs mt-2">{att.length} attending: {att.map(a=>a.fullName).join(', ')}</p>) })()}
                           </div>
                         ))}
                       </div>
@@ -801,6 +974,50 @@ export default function PortalPage() {
                     </div>
                 }
               </div>
+
+              {/* Add / Edit Org Event modal */}
+              {eventFormOpen && (
+                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4" onClick={()=>setEventFormOpen(false)}>
+                  <div className="bg-white w-full max-w-md border border-jc-gray-mid" onClick={e=>e.stopPropagation()}>
+                    <div className="px-6 py-4 border-b border-jc-gray-mid flex items-center justify-between">
+                      <h3 className="text-jc-black font-black text-lg">{editingEventId ? 'Edit Event' : 'Add Org Event'}</h3>
+                      <button onClick={()=>setEventFormOpen(false)} className="text-jc-gray-dark hover:text-jc-black" aria-label="Close">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
+                      </button>
+                    </div>
+                    <div className="p-6 space-y-4">
+                      <div>
+                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Title</label>
+                        <input type="text" value={eventForm.title} onChange={e=>setEventForm(f=>({...f,title:e.target.value}))} placeholder="e.g. Board Happy Hour" className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"/>
+                      </div>
+                      <div>
+                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Date</label>
+                        <input type="date" value={eventForm.dateKey} onChange={e=>setEventForm(f=>({...f,dateKey:e.target.value}))} className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"/>
+                      </div>
+                      <div>
+                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Time (optional)</label>
+                        <input type="text" value={eventForm.time} onChange={e=>setEventForm(f=>({...f,time:e.target.value}))} placeholder="e.g. 6:30 PM – 8:00 PM" className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"/>
+                      </div>
+                      <div>
+                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Location (optional)</label>
+                        <input type="text" value={eventForm.location} onChange={e=>setEventForm(f=>({...f,location:e.target.value}))} placeholder="e.g. The Drake Hotel, Chicago" className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"/>
+                      </div>
+                      <div>
+                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Type</label>
+                        <select value={eventForm.type} onChange={e=>setEventForm(f=>({...f,type:e.target.value}))} className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm bg-white">
+                          {['Meeting','Event','Fundraiser','Social'].map(t=><option key={t} value={t}>{t}</option>)}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="px-6 py-4 border-t border-jc-gray-mid flex gap-2 justify-end">
+                      <button onClick={()=>setEventFormOpen(false)} className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark text-xs font-bold uppercase px-4 py-2 transition-colors">Cancel</button>
+                      <button onClick={saveOrgEvent} disabled={eventSaving || !eventForm.title.trim() || !eventForm.dateKey} className="bg-jc-red hover:bg-jc-red-dark disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold uppercase px-4 py-2 transition-colors">
+                        {eventSaving ? 'Saving…' : editingEventId ? 'Save Changes' : 'Add Event'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Add Personal Event modal */}
               {personalFormOpen && (
@@ -918,21 +1135,30 @@ export default function PortalPage() {
                             </p>
                           </div>
 
-                          {/* RSVP */}
-                          <div className="flex items-center gap-2 flex-shrink-0">
-                            {rsvps[ev.id] ? (
-                              <>
-                                <span className={`text-xs font-bold px-3 py-1.5 ${rsvps[ev.id]==='yes'?'bg-green-100 text-green-700':'bg-jc-gray text-jc-gray-dark'}`}>
-                                  {rsvps[ev.id]==='yes'?'Attending':'Not Attending'}
-                                </span>
-                                <button onClick={()=>setRsvps(p=>{const n={...p};delete n[ev.id];return n})} className="text-jc-gray-dark text-xs hover:text-jc-red transition-colors">Change</button>
-                              </>
-                            ) : (
-                              <>
-                                <button onClick={()=>setRsvps(p=>({...p,[ev.id]:'yes'}))} className="bg-jc-red hover:bg-jc-red-dark text-white text-xs font-bold uppercase px-3 py-1.5 transition-colors">RSVP Yes</button>
-                                <button onClick={()=>setRsvps(p=>({...p,[ev.id]:'no'}))} className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark hover:text-jc-red text-xs font-bold uppercase px-3 py-1.5 transition-colors">Can&apos;t Go</button>
-                              </>
+                          {/* RSVP + board controls */}
+                          <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
+                            <div className="flex items-center gap-2">
+                              {rsvpMap[ev.id] ? (
+                                <>
+                                  <span className={`text-xs font-bold px-3 py-1.5 ${rsvpMap[ev.id]==='yes'?'bg-green-100 text-green-700':'bg-jc-gray text-jc-gray-dark'}`}>
+                                    {rsvpMap[ev.id]==='yes'?'Attending':'Not Attending'}
+                                  </span>
+                                  <button onClick={()=>deleteRsvp(ev.id)} className="text-jc-gray-dark text-xs hover:text-jc-red transition-colors">Change</button>
+                                </>
+                              ) : (
+                                <>
+                                  <button onClick={()=>upsertRsvp(ev.id,'yes')} className="bg-jc-red hover:bg-jc-red-dark text-white text-xs font-bold uppercase px-3 py-1.5 transition-colors">RSVP Yes</button>
+                                  <button onClick={()=>upsertRsvp(ev.id,'no')} className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark hover:text-jc-red text-xs font-bold uppercase px-3 py-1.5 transition-colors">Can&apos;t Go</button>
+                                </>
+                              )}
+                            </div>
+                            {(isAdmin || (isBoard && ev.createdBy === user?.id)) && (
+                              <div className="flex items-center gap-2">
+                                <button onClick={()=>openOrgEventForm(ev)} className="text-jc-gray-dark hover:text-jc-red text-xs font-bold uppercase transition-colors">Edit</button>
+                                <button onClick={()=>deleteOrgEvent(ev.id)} className="text-red-400 hover:text-jc-red text-xs font-bold uppercase transition-colors">Delete</button>
+                              </div>
                             )}
+                            {(()=>{ const att=allRsvps.filter(r=>r.eventId===ev.id&&r.status==='yes'); return att.length>0&&(<p className="text-jc-gray-dark text-xs">{att.length} attending</p>) })()}
                           </div>
                         </div>
                       ))}
