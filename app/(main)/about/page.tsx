@@ -87,8 +87,8 @@ export default function OurCausePage() {
               <Image
                 src="/jc-logo-color.jpg"
                 alt="Junior Council logo"
-                width={340}
-                height={340}
+                width={440}
+                height={440}
                 className="object-contain"
               />
             </div>
