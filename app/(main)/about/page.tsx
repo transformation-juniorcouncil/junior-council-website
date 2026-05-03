@@ -83,9 +83,9 @@ export default function OurCausePage() {
             </div>
 
             {/* Logo */}
-            <div className="flex justify-center lg:pt-2">
+            <div className="flex items-center justify-center">
               <Image
-                src="/jc%20logo.jpg"
+                src="/jc-logo-color.jpg"
                 alt="Junior Council logo"
                 width={340}
                 height={340}
