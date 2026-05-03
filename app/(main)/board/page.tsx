@@ -1,32 +1,47 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Board of Directors | Junior Council',
-  description:
-    'Meet the Junior Council Board of Directors — Chicago professionals leading the fight for youth with HIV and AIDS.',
+import { useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+
+type BoardMember = {
+  name: string
+  title: string
+  photo?: string
+  company?: string
+  memberSince?: string
+  bio?: string
 }
 
-const boardMembers = [
-  { name: 'Eve Voci',               title: 'President' },
-  { name: 'Gabe Spach',             title: 'Vice President' },
-  { name: 'Charlie Nash',           title: 'Treasurer' },
-  { name: 'Hailie Schroll',         title: 'Snowball' },
-  { name: 'KK Begley',              title: 'Secretary' },
-  { name: 'Thomas Ware',            title: 'Engagement' },
-  { name: 'Danielle Imbrigiotta',   title: 'Recruitment' },
-  { name: 'Caroline Cheung',        title: 'Education' },
-  { name: 'Erin Bylina',            title: 'Silent Auction' },
-  { name: 'Isabella Del Muro',      title: 'W4AC / Fundraising Pages' },
-  { name: 'Marisa Stefani',         title: 'Corporate Co-Chair' },
-  { name: 'Jessica Linley',         title: 'Corporate Co-Chair' },
-  { name: 'Brooklyn Mychalowych',   title: 'Creative' },
-  { name: 'Catie Hinton',           title: 'PR' },
-  { name: 'Emily Splinter',         title: 'Hospitality' },
-  { name: 'Diana Wolf',             title: 'Transformation Director' },
+const boardMembers: BoardMember[] = [
+  { name: 'Eve Voci',             title: 'President' },
+  { name: 'Gabe Spach',          title: 'Vice President' },
+  { name: 'Charlie Nash',         title: 'Treasurer' },
+  { name: 'Hailie Schroll',       title: 'Snowball' },
+  { name: 'KK Begley',            title: 'Secretary' },
+  { name: 'Thomas Ware',          title: 'Engagement' },
+  { name: 'Danielle Imbrigiotta', title: 'Recruitment' },
+  { name: 'Caroline Cheung',      title: 'Education' },
+  { name: 'Erin Bylina',          title: 'Silent Auction' },
+  { name: 'Isabella Del Muro',    title: 'W4AC / Fundraising Pages' },
+  { name: 'Marisa Stefani',       title: 'Corporate Co-Chair' },
+  { name: 'Jessica Linley',       title: 'Corporate Co-Chair' },
+  { name: 'Brooklyn Mychalowych', title: 'Creative' },
+  { name: 'Catie Hinton',         title: 'PR' },
+  { name: 'Emily Splinter',       title: 'Hospitality' },
+  {
+    name: 'Diana Wolf',
+    title: 'Transformation Director',
+    photo: '/diana-wolf.jpg',
+    company: 'Cognizant',
+    memberSince: 'November 2025',
+    bio: 'A global adventurer at heart, Diana has explored 20+ countries — her most recent trip taking her to the vibrant streets of Thailand. Of Austrian and Mexican heritage, she speaks English, Spanish, and German fluently. When she\'s not consulting in the financial tech space at Cognizant, you\'ll find her training for her first triathlon or buried in GMAT prep. Basically, she doesn\'t really know how to sit still.',
+  },
 ]
 
 export default function BoardPage() {
+  const [selected, setSelected] = useState<BoardMember | null>(null)
+
   return (
     <div className="pt-16">
       {/* Page Header */}
@@ -56,41 +71,145 @@ export default function BoardPage() {
       <section className="bg-white py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {boardMembers.map((member, i) => (
-              <div
-                key={i}
-                className="group border border-jc-gray-mid hover:border-jc-red transition-colors"
-              >
-                {/* Photo placeholder */}
-                <div className="bg-jc-gray aspect-square flex items-center justify-center border-b border-jc-gray-mid group-hover:border-jc-red transition-colors">
-                  <svg
-                    className="w-16 h-16 text-jc-gray-mid"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1}
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            {boardMembers.map((member, i) => {
+              const isClickable = Boolean(member.bio)
+              const isSelected = selected?.name === member.name
+              return (
+                <div
+                  key={i}
+                  onClick={() => isClickable && setSelected(isSelected ? null : member)}
+                  className={`group border transition-colors ${
+                    isSelected
+                      ? 'border-jc-red'
+                      : 'border-jc-gray-mid hover:border-jc-red'
+                  } ${isClickable ? 'cursor-pointer' : ''}`}
+                >
+                  {/* Photo */}
+                  <div className={`aspect-square border-b transition-colors overflow-hidden ${
+                    isSelected ? 'border-jc-red' : 'border-jc-gray-mid group-hover:border-jc-red'
+                  } ${member.photo ? '' : 'bg-jc-gray flex items-center justify-center'}`}>
+                    {member.photo ? (
+                      <Image
+                        src={member.photo}
+                        alt={member.name}
+                        width={400}
+                        height={400}
+                        className="w-full h-full object-cover object-top"
+                      />
+                    ) : (
+                      <svg
+                        className="w-16 h-16 text-jc-gray-mid"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1}
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                    )}
+                  </div>
+
+                  {/* Info */}
+                  <div className="p-5 flex items-start justify-between">
+                    <div>
+                      <div className="text-jc-red text-xs font-bold tracking-widest uppercase mb-1">
+                        {member.title}
+                      </div>
+                      <h2 className="text-jc-black font-black text-lg leading-tight">
+                        {member.name}
+                      </h2>
+                    </div>
+                    {isClickable && (
+                      <div className={`mt-1 flex-shrink-0 transition-transform duration-200 ${isSelected ? 'rotate-180' : ''}`}>
+                        <svg className="w-4 h-4 text-jc-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Expanded profile panel */}
+          {selected && (
+            <div className="mt-10 border border-jc-red bg-white animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="grid grid-cols-1 md:grid-cols-3">
+                {/* Photo */}
+                <div className="relative aspect-square md:aspect-auto md:min-h-[320px] overflow-hidden border-b md:border-b-0 md:border-r border-jc-red">
+                  {selected.photo ? (
+                    <Image
+                      src={selected.photo}
+                      alt={selected.name}
+                      fill
+                      className="object-cover object-top"
                     />
-                  </svg>
+                  ) : (
+                    <div className="w-full h-full bg-jc-gray flex items-center justify-center">
+                      <svg className="w-20 h-20 text-jc-gray-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
 
-                {/* Info */}
-                <div className="p-5">
-                  <div className="text-jc-red text-xs font-bold tracking-widest uppercase mb-1">
-                    {member.title}
+                {/* Details */}
+                <div className="md:col-span-2 p-8 sm:p-10">
+                  <div className="flex items-start justify-between mb-6">
+                    <div>
+                      <div className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase mb-2">
+                        {selected.title}
+                      </div>
+                      <h3 className="text-jc-black font-black text-3xl tracking-tight">
+                        {selected.name}
+                      </h3>
+                    </div>
+                    <button
+                      onClick={() => setSelected(null)}
+                      className="text-jc-gray-dark hover:text-jc-black transition-colors mt-1"
+                      aria-label="Close profile"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
                   </div>
-                  <h2 className="text-jc-black font-black text-lg leading-tight">
-                    {member.name}
-                  </h2>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8 pb-8 border-b border-jc-gray-mid">
+                    {selected.company && (
+                      <div>
+                        <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-1">Company</div>
+                        <div className="text-jc-black font-bold text-sm">{selected.company}</div>
+                      </div>
+                    )}
+                    {selected.memberSince && (
+                      <div>
+                        <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-1">Member Since</div>
+                        <div className="text-jc-black font-bold text-sm">{selected.memberSince}</div>
+                      </div>
+                    )}
+                    <div>
+                      <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-1">Role</div>
+                      <div className="text-jc-black font-bold text-sm">{selected.title}</div>
+                    </div>
+                  </div>
+
+                  {selected.bio && (
+                    <div>
+                      <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-3">About</div>
+                      <p className="text-jc-gray-dark leading-relaxed">{selected.bio}</p>
+                    </div>
+                  )}
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -126,17 +245,13 @@ export default function BoardPage() {
             <div className="grid grid-cols-2 gap-4">
               {[
                 { value: '100%', label: 'Volunteer board — no paid staff overhead' },
-                { value: '2x', label: 'Annual board meetings minimum' },
-                { value: '$0', label: 'Administrative overhead from donations' },
+                { value: '2x',   label: 'Annual board meetings minimum' },
+                { value: '$0',   label: 'Administrative overhead from donations' },
                 { value: '501(c)(3)', label: 'Registered nonprofit status' },
               ].map((stat, i) => (
                 <div key={i} className="bg-jc-charcoal border border-white/10 p-6">
-                  <div className="text-jc-red font-black text-3xl mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-white/60 text-xs leading-relaxed">
-                    {stat.label}
-                  </div>
+                  <div className="text-jc-red font-black text-3xl mb-2">{stat.value}</div>
+                  <div className="text-white/60 text-xs leading-relaxed">{stat.label}</div>
                 </div>
               ))}
             </div>
