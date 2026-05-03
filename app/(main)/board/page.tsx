@@ -96,7 +96,7 @@ export default function BoardPage() {
                         alt={member.name}
                         width={400}
                         height={400}
-                        className="w-full h-full object-cover object-center scale-90"
+                        className="w-full h-full object-cover object-top scale-75 translate-y-8"
                       />
                     ) : (
                       <svg
