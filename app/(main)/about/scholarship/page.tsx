@@ -96,7 +96,26 @@ export default function ScholarshipPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Apply CTA */}
+      <section className="bg-jc-red py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-white font-black text-3xl sm:text-4xl mb-4 tracking-tight">
+            Ready to Apply?
+          </h2>
+          <p className="text-white/80 mb-8 max-w-xl mx-auto">
+            Applications are reviewed annually by our scholarship committee.
+            Fill out the form below to be considered for the next award cycle.
+          </p>
+          <Link
+            href="/about/scholarship/apply"
+            className="inline-flex items-center justify-center bg-white hover:bg-white/90 text-jc-red font-black text-sm tracking-widest uppercase px-10 py-4 transition-colors"
+          >
+            Apply Now
+          </Link>
+        </div>
+      </section>
+
+      {/* Donate CTA */}
       <section className="bg-jc-black py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-white font-black text-3xl sm:text-4xl mb-4 tracking-tight">
