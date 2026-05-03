@@ -143,25 +143,25 @@ export default function OurCausePage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-jc-black py-16">
+      <section className="bg-jc-red py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-white font-black text-3xl sm:text-4xl mb-4 tracking-tight">
-            Ready to Make a <span className="text-jc-red">Difference?</span>
+            Ready to Make a Difference?
           </h2>
-          <p className="text-white/60 mb-8">
+          <p className="text-white/80 mb-8">
             Join Junior Council and be part of the fight for youth with HIV and
             AIDS in Chicago.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/membership#join"
-              className="inline-flex items-center justify-center bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-8 py-4 transition-colors"
+              className="inline-flex items-center justify-center bg-white hover:bg-white/90 text-jc-red font-black text-sm tracking-widest uppercase px-8 py-4 transition-colors"
             >
               Get Involved
             </Link>
             <Link
               href="/support#donate"
-              className="inline-flex items-center justify-center border-2 border-white/30 text-white font-black text-sm tracking-widest uppercase px-8 py-4 hover:bg-white/10 transition-colors"
+              className="inline-flex items-center justify-center border-2 border-white/50 text-white font-black text-sm tracking-widest uppercase px-8 py-4 hover:bg-white/10 transition-colors"
             >
               Donate Now
             </Link>
