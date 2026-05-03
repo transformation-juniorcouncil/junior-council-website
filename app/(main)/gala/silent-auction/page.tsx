@@ -40,7 +40,7 @@ export default function SilentAuctionPage() {
       <section className="bg-jc-red py-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-white font-bold text-sm tracking-wide">
-            🎯 Preview items below — official bidding opens at Snowball on February 27, 2027!
+            Preview items below — official bidding opens at Snowball on February 27, 2027!
           </p>
         </div>
       </section>

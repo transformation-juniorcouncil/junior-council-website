@@ -45,7 +45,7 @@ export default function AuctionCountdown() {
       <section className="bg-jc-red py-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-white font-black text-2xl sm:text-3xl tracking-tight">
-            🎉 Bidding is now open!
+            Bidding is now open!
           </p>
           <p className="text-white/80 text-sm mt-2">Head to the auction floor and place your bids.</p>
         </div>
