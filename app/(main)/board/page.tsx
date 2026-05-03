@@ -127,9 +127,9 @@ export default function BoardPage() {
                       </h2>
                     </div>
                     {isClickable && (
-                      <div className={`mt-1 flex-shrink-0 transition-transform duration-200 ${isSelected ? 'rotate-180' : ''}`}>
+                      <div className="mt-1 flex-shrink-0">
                         <svg className="w-4 h-4 text-jc-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                       </div>
                     )}
@@ -139,81 +139,82 @@ export default function BoardPage() {
             })}
           </div>
 
-          {/* Expanded profile panel */}
+          {/* Modal popup */}
           {selected && (
-            <div className="mt-10 border border-jc-red bg-white animate-in fade-in slide-in-from-top-2 duration-200">
-              <div className="grid grid-cols-1 md:grid-cols-3">
-                {/* Photo */}
-                <div className="relative aspect-square md:aspect-auto md:min-h-[320px] overflow-hidden border-b md:border-b-0 md:border-r border-jc-red">
-                  {selected.photo ? (
-                    <Image
-                      src={selected.photo}
-                      alt={selected.name}
-                      fill
-                      className="object-cover object-top"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-jc-gray flex items-center justify-center">
-                      <svg className="w-20 h-20 text-jc-gray-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                      </svg>
-                    </div>
-                  )}
-                </div>
-
-                {/* Details */}
-                <div className="md:col-span-2 p-8 sm:p-10">
-                  <div className="flex items-start justify-between mb-6">
-                    <div>
-                      <div className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase mb-2">
-                        {selected.title}
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/60"
+              onClick={() => setSelected(null)}
+            >
+              <div
+                className="bg-white w-full max-w-2xl border-t-4 border-jc-red shadow-2xl overflow-hidden"
+                onClick={e => e.stopPropagation()}
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2">
+                  {/* Photo */}
+                  <div className="relative aspect-square overflow-hidden bg-jc-gray">
+                    {selected.photo ? (
+                      <Image
+                        src={selected.photo}
+                        alt={selected.name}
+                        fill
+                        className="object-cover object-center scale-75"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <svg className="w-20 h-20 text-jc-gray-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
                       </div>
-                      <h3 className="text-jc-black font-black text-3xl tracking-tight">
-                        {selected.name}
-                      </h3>
-                    </div>
-                    <button
-                      onClick={() => setSelected(null)}
-                      className="text-jc-gray-dark hover:text-jc-black transition-colors mt-1"
-                      aria-label="Close profile"
-                    >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
+                    )}
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-6 mb-8 pb-8 border-b border-jc-gray-mid">
-                    {selected.jobTitle && (
+                  {/* Details */}
+                  <div className="p-8 flex flex-col justify-center">
+                    <div className="flex items-start justify-between mb-4">
                       <div>
-                        <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-1">Job Title</div>
-                        <div className="text-jc-black font-bold text-sm">{selected.jobTitle}</div>
+                        <div className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase mb-1">
+                          {selected.title}
+                        </div>
+                        <h3 className="text-jc-black font-black text-2xl tracking-tight">
+                          {selected.name}
+                        </h3>
                       </div>
-                    )}
-                    {selected.company && (
-                      <div>
-                        <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-1">Company</div>
-                        <div className="text-jc-black font-bold text-sm">{selected.company}</div>
-                      </div>
-                    )}
-                    {selected.memberSince && (
-                      <div>
-                        <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-1">Member Since</div>
-                        <div className="text-jc-black font-bold text-sm">{selected.memberSince}</div>
-                      </div>
-                    )}
-                    <div>
-                      <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-1">Board Role</div>
-                      <div className="text-jc-black font-bold text-sm">{selected.title}</div>
+                      <button
+                        onClick={() => setSelected(null)}
+                        className="text-jc-gray-dark hover:text-jc-black transition-colors"
+                        aria-label="Close profile"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
                     </div>
-                  </div>
 
-                  {selected.bio && (
-                    <div>
-                      <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-3">About</div>
-                      <p className="text-jc-gray-dark leading-relaxed">{selected.bio}</p>
+                    <div className="space-y-3 mb-6 pb-6 border-b border-jc-gray-mid">
+                      {selected.jobTitle && (
+                        <div>
+                          <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-0.5">Job Title</div>
+                          <div className="text-jc-black font-bold text-sm">{selected.jobTitle}</div>
+                        </div>
+                      )}
+                      {selected.company && (
+                        <div>
+                          <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-0.5">Company</div>
+                          <div className="text-jc-black font-bold text-sm">{selected.company}</div>
+                        </div>
+                      )}
+                      {selected.memberSince && (
+                        <div>
+                          <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-0.5">Member Since</div>
+                          <div className="text-jc-black font-bold text-sm">{selected.memberSince}</div>
+                        </div>
+                      )}
                     </div>
-                  )}
+
+                    {selected.bio && (
+                      <p className="text-jc-gray-dark text-sm leading-relaxed">{selected.bio}</p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
