@@ -164,7 +164,7 @@ export default function GalaPage() {
                 {[
                   { label: 'Date', value: 'Winter 2027 — Announcing Soon' },
                   { label: 'Location', value: 'Chicago, IL' },
-                  { label: 'Dress Code', value: 'Black Tie Optional' },
+                  { label: 'Dress Code', value: 'Black Tie' },
                   { label: 'Tickets', value: 'Contact us to get notified' },
                 ].map((detail, i) => (
                   <div key={i} className="border-l-2 border-jc-red pl-4">
