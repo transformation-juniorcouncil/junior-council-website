@@ -414,56 +414,6 @@ export default function HomePage() {
         )
       })()}
 
-      {/* ─── GET INVOLVED ─────────────────────────────────────────────── */}
-      <section className="bg-white py-24 lg:py-32" aria-label="Get involved">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
-              <span className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase">
-                Get Involved
-              </span>
-              <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
-            </div>
-            <h2 className="text-jc-black font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight">
-              There&apos;s a Place For You Here.
-            </h2>
-            <p className="text-jc-gray-dark text-lg mt-4 max-w-2xl mx-auto">
-              Whether you&apos;re looking to join our community, attend an event, or
-              partner with us as a business — your involvement creates real impact.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {involvementCards.map((card, i) => (
-              <div
-                key={i}
-                className="group border border-jc-gray-mid hover:border-jc-red transition-colors p-8 flex flex-col"
-              >
-                <div className="text-jc-red mb-5 group-hover:scale-110 transition-transform origin-left">
-                  {card.icon}
-                </div>
-                <h3 className="text-jc-black font-black text-xl mb-3">
-                  {card.title}
-                </h3>
-                <p className="text-jc-gray-dark text-sm leading-relaxed mb-6 flex-grow">
-                  {card.description}
-                </p>
-                <Link
-                  href={card.href}
-                  className="inline-flex items-center text-jc-black font-bold text-xs uppercase tracking-widest hover:text-jc-red transition-colors group-hover:text-jc-red"
-                >
-                  {card.cta}
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ─── ANNUAL GALA TEASER ───────────────────────────────────────── */}
       <section
         className="bg-jc-black py-24 lg:py-32 relative overflow-hidden"
@@ -556,6 +506,56 @@ export default function HomePage() {
                 aria-hidden="true"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── GET INVOLVED ─────────────────────────────────────────────── */}
+      <section className="bg-white py-24 lg:py-32" aria-label="Get involved">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
+              <span className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase">
+                Get Involved
+              </span>
+              <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
+            </div>
+            <h2 className="text-jc-black font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight">
+              There&apos;s a Place For You Here.
+            </h2>
+            <p className="text-jc-gray-dark text-lg mt-4 max-w-2xl mx-auto">
+              Whether you&apos;re looking to join our community, attend an event, or
+              partner with us as a business — your involvement creates real impact.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {involvementCards.map((card, i) => (
+              <div
+                key={i}
+                className="group border border-jc-gray-mid hover:border-jc-red transition-colors p-8 flex flex-col"
+              >
+                <div className="text-jc-red mb-5 group-hover:scale-110 transition-transform origin-left">
+                  {card.icon}
+                </div>
+                <h3 className="text-jc-black font-black text-xl mb-3">
+                  {card.title}
+                </h3>
+                <p className="text-jc-gray-dark text-sm leading-relaxed mb-6 flex-grow">
+                  {card.description}
+                </p>
+                <Link
+                  href={card.href}
+                  className="inline-flex items-center text-jc-black font-bold text-xs uppercase tracking-widest hover:text-jc-red transition-colors group-hover:text-jc-red"
+                >
+                  {card.cta}
+                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </section>
