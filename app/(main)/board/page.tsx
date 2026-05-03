@@ -8,6 +8,7 @@ type BoardMember = {
   name: string
   title: string
   photo?: string
+  jobTitle?: string
   company?: string
   memberSince?: string
   bio?: string
@@ -33,9 +34,10 @@ const boardMembers: BoardMember[] = [
     name: 'Diana Wolf',
     title: 'Transformation Director',
     photo: '/diana-wolf.jpg',
+    jobTitle: 'Financial Tech Consultant',
     company: 'Cognizant',
     memberSince: 'November 2025',
-    bio: 'A global adventurer at heart, Diana has explored 20+ countries — her most recent trip taking her to the vibrant streets of Thailand. Of Austrian and Mexican heritage, she speaks English, Spanish, and German fluently. When she\'s not consulting in the financial tech space at Cognizant, you\'ll find her training for her first triathlon or buried in GMAT prep. Basically, she doesn\'t really know how to sit still.',
+    bio: 'A global adventurer at heart, Diana has explored 20+ countries — her most recent trip taking her to the vibrant streets of Thailand. Of Austrian and Mexican heritage, she speaks English, Spanish, and German fluently. When she\'s not consulting in the financial tech space at Cognizant, you\'ll find her training for her first triathlon or buried in GMAT prep.',
   },
 ]
 
@@ -94,7 +96,7 @@ export default function BoardPage() {
                         alt={member.name}
                         width={400}
                         height={400}
-                        className="w-full h-full object-cover object-top"
+                        className="w-full h-full object-cover object-center scale-90"
                       />
                     ) : (
                       <svg
@@ -181,7 +183,13 @@ export default function BoardPage() {
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8 pb-8 border-b border-jc-gray-mid">
+                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-6 mb-8 pb-8 border-b border-jc-gray-mid">
+                    {selected.jobTitle && (
+                      <div>
+                        <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-1">Job Title</div>
+                        <div className="text-jc-black font-bold text-sm">{selected.jobTitle}</div>
+                      </div>
+                    )}
                     {selected.company && (
                       <div>
                         <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-1">Company</div>
@@ -195,7 +203,7 @@ export default function BoardPage() {
                       </div>
                     )}
                     <div>
-                      <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-1">Role</div>
+                      <div className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest mb-1">Board Role</div>
                       <div className="text-jc-black font-bold text-sm">{selected.title}</div>
                     </div>
                   </div>
