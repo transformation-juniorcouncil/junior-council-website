@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 
 // ← Update this date once the gala date is confirmed
-const AUCTION_START = new Date('2027-01-23T19:00:00-06:00') // Jan 23, 2027 · 7:00 PM CT
+const AUCTION_START = new Date('2027-02-27T19:00:00-06:00') // Feb 27, 2027 · 7:00 PM CT
 
 type TimeLeft = {
   days: number
@@ -88,7 +88,7 @@ export default function AuctionCountdown() {
         </div>
 
         <p className="text-white/30 text-xs mt-8 uppercase tracking-widest">
-          January 23, 2027 · 7:00 PM CT · Chicago, IL
+          February 27, 2027 · 7:00 PM CT · Chicago, IL
         </p>
       </div>
     </section>
