@@ -160,6 +160,79 @@ export default function RecapPage() {
         </div>
       </section>
 
+      {/* 2026 Sponsors */}
+      <section className="bg-jc-charcoal py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          {/* Corporate Sponsors */}
+          <div className="mb-16">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
+              <span className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase">Snowball 2026</span>
+            </div>
+            <h3 className="text-white font-black text-2xl sm:text-3xl tracking-tight mb-8">
+              Corporate <span className="text-jc-red">Sponsors</span>
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              {[
+                'Blue Cross Blue Shield of Illinois',
+                'CBRE',
+                'Clayco',
+                'EnergyCX',
+                'RSMUS Foundation',
+                'Neuberger Berman',
+                'Merrill Lynch',
+                'Concord Group',
+                'Barnes & Thornburg',
+                'American Medical Association',
+                'Old Republic International',
+                'CST Academy Therapeutic Preschool',
+                'GoGlow',
+                "Men's Wearhouse & Jos. A. Bank",
+                'Blacklane',
+                'Janet Mandell',
+                'Pin Me Up Chicago',
+              ].map((name, i) => (
+                <div key={i} className="border border-white/10 px-4 py-3 text-white/80 text-sm font-semibold text-center hover:border-jc-red hover:text-white transition-colors">
+                  {name}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Hospitality Sponsors */}
+          <div>
+            <h3 className="text-white font-black text-2xl sm:text-3xl tracking-tight mb-8">
+              Hospitality <span className="text-jc-red">Sponsors</span>
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+              {[
+                'Tandoor Char House', 'Sushi San', 'Polombia', 'Summer House Santa Monica',
+                "Nonna's", 'Paradise Park', 'Happy Camper', "Gene and Georgetti's",
+                'Bombay Eats', "Tito's", 'Goose Island', 'Anheuser-Busch',
+                'Spritz Society', 'Craft House Cocktails', 'A Hospitality Company',
+                'Bubble House Brewing Company', 'Cafe Bionda', 'Cafe Yaya', 'Cebu',
+                'Khmai', "Nancy's Pizzeria", 'Biatch Tequila', 'Chay', 'CH Distillery',
+                'Chicago Beverage', 'Doc Brown', 'Go Brewing', 'Hubbard Inn',
+                'Hush Aqua', "JoJo's Shake Bar", 'Koval', 'Rheingeist Brewery',
+                'Organic Spirits', 'STK Steakhouse', 'LaCroix', 'Solemn Oath Brewery',
+                'MMMM Enjoy', 'Pepsi', 'Revolution Brewing', 'Ritual Zero Proof',
+                'RPM Steak', 'RPM Restaurants', "Trader Joe's", 'Do Rite Donuts',
+                'Bacardi', 'Athletic Brewing', 'Uni Uni', 'Select Beverage Company',
+                'Link Drinks Transfusion', 'Venteux',
+              ].map((name, i) => (
+                <div key={i} className="border border-white/10 px-3 py-2.5 text-white/70 text-xs font-semibold text-center hover:border-jc-red hover:text-white transition-colors">
+                  {name}
+                </div>
+              ))}
+            </div>
+            <p className="text-white/30 text-xs mt-8 text-center">
+              Thank you to all 50+ hospitality sponsors who made Snowball 2026 possible.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Divider for future years */}
       <section className="bg-jc-gray py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
