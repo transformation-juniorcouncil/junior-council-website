@@ -1,19 +1,10 @@
 import type { Metadata } from 'next'
+import ContactForm from '@/components/ContactForm'
 
 export const metadata: Metadata = {
   title: 'Contact | Junior Council',
   description: 'Get in touch with Junior Council — membership, partnerships, events, and more.',
 }
-
-const contactReasons = [
-  { value: 'membership', label: 'Membership Inquiry' },
-  { value: 'corporate', label: 'Corporate Partnership' },
-  { value: 'hospitality', label: 'Hospitality Partnership' },
-  { value: 'inkind', label: 'In-Kind Donation' },
-  { value: 'gala', label: 'Gala / Event Inquiry' },
-  { value: 'media', label: 'Media & Press' },
-  { value: 'general', label: 'General Inquiry' },
-]
 
 export default function ContactPage() {
   return (
@@ -47,129 +38,7 @@ export default function ContactPage() {
               <h2 className="text-jc-black font-black text-2xl sm:text-3xl mb-8 tracking-tight">
                 Send Us a <span className="text-jc-red">Message</span>
               </h2>
-              <form
-                className="space-y-6"
-                aria-label="Contact form"
-                noValidate
-              >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      htmlFor="first-name"
-                      className="block text-jc-black text-sm font-bold uppercase tracking-wide mb-2"
-                    >
-                      First Name <span className="text-jc-red" aria-hidden="true">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="first-name"
-                      name="first-name"
-                      required
-                      autoComplete="given-name"
-                      className="w-full border-2 border-jc-gray-mid focus:border-jc-red outline-none px-4 py-3 text-jc-black transition-colors"
-                      aria-required="true"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="last-name"
-                      className="block text-jc-black text-sm font-bold uppercase tracking-wide mb-2"
-                    >
-                      Last Name <span className="text-jc-red" aria-hidden="true">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="last-name"
-                      name="last-name"
-                      required
-                      autoComplete="family-name"
-                      className="w-full border-2 border-jc-gray-mid focus:border-jc-red outline-none px-4 py-3 text-jc-black transition-colors"
-                      aria-required="true"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-jc-black text-sm font-bold uppercase tracking-wide mb-2"
-                  >
-                    Email Address <span className="text-jc-red" aria-hidden="true">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    autoComplete="email"
-                    className="w-full border-2 border-jc-gray-mid focus:border-jc-red outline-none px-4 py-3 text-jc-black transition-colors"
-                    aria-required="true"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="organization"
-                    className="block text-jc-black text-sm font-bold uppercase tracking-wide mb-2"
-                  >
-                    Organization / Company
-                  </label>
-                  <input
-                    type="text"
-                    id="organization"
-                    name="organization"
-                    autoComplete="organization"
-                    className="w-full border-2 border-jc-gray-mid focus:border-jc-red outline-none px-4 py-3 text-jc-black transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="reason"
-                    className="block text-jc-black text-sm font-bold uppercase tracking-wide mb-2"
-                  >
-                    Reason for Contact <span className="text-jc-red" aria-hidden="true">*</span>
-                  </label>
-                  <select
-                    id="reason"
-                    name="reason"
-                    required
-                    className="w-full border-2 border-jc-gray-mid focus:border-jc-red outline-none px-4 py-3 text-jc-black transition-colors bg-white"
-                    aria-required="true"
-                  >
-                    <option value="">Select a reason...</option>
-                    {contactReasons.map((r) => (
-                      <option key={r.value} value={r.value}>
-                        {r.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-jc-black text-sm font-bold uppercase tracking-wide mb-2"
-                  >
-                    Message <span className="text-jc-red" aria-hidden="true">*</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={6}
-                    className="w-full border-2 border-jc-gray-mid focus:border-jc-red outline-none px-4 py-3 text-jc-black transition-colors resize-y"
-                    aria-required="true"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-8 py-4 transition-colors focus:outline-none focus:ring-2 focus:ring-jc-red focus:ring-offset-2"
-                >
-                  Send Message
-                </button>
-              </form>
+              <ContactForm />
             </div>
 
             {/* Contact Info */}
