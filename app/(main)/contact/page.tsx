@@ -183,10 +183,10 @@ export default function ContactPage() {
                     Email
                   </div>
                   <a
-                    href="mailto:info@juniorcouncil.org"
+                    href="mailto:president@juniorcouncil.org"
                     className="text-jc-gray-dark hover:text-jc-red transition-colors text-sm"
                   >
-                    info@juniorcouncil.org
+                    president@juniorcouncil.org
                   </a>
                 </div>
                 <div className="border-l-4 border-jc-red pl-4">

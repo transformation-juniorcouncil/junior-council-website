@@ -2033,7 +2033,7 @@ export default function PortalPage() {
               </svg>
               <p className="text-jc-gray-dark text-sm font-medium mb-1">Payment processor coming soon</p>
               <p className="text-jc-gray-dark text-xs">
-                Contact <a href="mailto:info@juniorcouncil.org" className="text-jc-red font-bold hover:underline">info@juniorcouncil.org</a> to arrange payment.
+                Contact <a href="mailto:president@juniorcouncil.org" className="text-jc-red font-bold hover:underline">president@juniorcouncil.org</a> to arrange payment.
               </p>
             </div>
             <button onClick={()=>setDuesModalOpen(false)} className="w-full mt-4 border-2 border-jc-gray-mid hover:border-jc-red text-jc-black hover:text-jc-red font-black text-xs tracking-widest uppercase py-3 transition-colors">

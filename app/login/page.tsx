@@ -214,8 +214,8 @@ function LoginPageInner() {
 
           <p className="text-white/20 text-xs text-center mt-6">
             Having trouble signing in? Contact{' '}
-            <a href="mailto:info@juniorcouncil.org" className="text-white/40 hover:text-white transition-colors">
-              info@juniorcouncil.org
+            <a href="mailto:president@juniorcouncil.org" className="text-white/40 hover:text-white transition-colors">
+              president@juniorcouncil.org
             </a>
           </p>
         </div>
