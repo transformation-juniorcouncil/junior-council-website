@@ -40,7 +40,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
   }
 
-  const toEmail = routingMap[reason]
+  // TODO: replace with routingMap[reason] once juniorcouncil.org is verified in Resend
+  const toEmail = 'transformation@juniorcouncil.org'
+
   if (!toEmail) {
     return NextResponse.json({ error: 'Unknown contact reason' }, { status: 400 })
   }
@@ -48,7 +50,7 @@ export async function POST(req: Request) {
   const reasonLabel = reasonLabels[reason] ?? reason
 
   const { error } = await resend.emails.send({
-    from: 'Junior Council Website <no-reply@juniorcouncil.org>',
+    from: 'Junior Council Website <onboarding@resend.dev>',
     to: toEmail,
     replyTo: email,
     subject: `[JC Contact] ${reasonLabel} — ${firstName} ${lastName}`,
