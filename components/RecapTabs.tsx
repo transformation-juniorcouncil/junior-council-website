@@ -7,23 +7,22 @@ const tabs = ['Photos', 'Corporate Sponsors', 'Hospitality Sponsors'] as const
 type Tab = typeof tabs[number]
 
 const corporateSponsors = [
+  'Vistage',
+  'Neuberger Berman',
   'Blue Cross Blue Shield of Illinois',
+  'Merrill Lynch',
+  'RSM Foundation',
+  'Dexter Blackwell',
+  'American Medical Association',
+  'Energy CX',
   'CBRE',
   'Clayco',
-  'EnergyCX',
-  'RSMUS Foundation',
-  'Neuberger Berman',
-  'Merrill Lynch',
-  'Concord Group',
-  'Barnes & Thornburg',
-  'American Medical Association',
   'Old Republic International',
-  'CST Academy Therapeutic Preschool',
-  'GoGlow',
-  "Men's Wearhouse & Jos. A. Bank",
+  'Barnes and Thornburg LLP',
+  'Chicago Speech Therapy Academy',
+  'Hoffman Foundation',
+  'Concord Group',
   'Blacklane',
-  'Janet Mandell',
-  'Pin Me Up Chicago',
 ]
 
 const hospitalitySponsors = [
