@@ -821,356 +821,48 @@ export default function PortalPage() {
 
         {/* ── CALENDAR & EVENTS ────────────────────────────────────────────── */}
         {activeTab==='calendar' && (
-          <>
-          <div className="grid lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 bg-white border border-jc-gray-mid">
-              <div className="flex items-center justify-between px-6 py-4 border-b border-jc-gray-mid">
-                <button onClick={prevMonth} className="w-8 h-8 flex items-center justify-center hover:bg-jc-gray transition-colors" aria-label="Previous month">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/></svg>
-                </button>
-                <h2 className="text-jc-black font-black text-lg">{MONTHS[calMonth]} <span className="text-jc-red">{calYear}</span></h2>
-                <button onClick={nextMonth} className="w-8 h-8 flex items-center justify-center hover:bg-jc-gray transition-colors" aria-label="Next month">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
-                </button>
+          <div className="space-y-6">
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h2 className="text-jc-black font-black text-2xl tracking-tight">
+                  JC <span className="text-jc-red">Calendar</span>
+                </h2>
+                <p className="text-jc-gray-dark text-sm mt-1">All Junior Council events, meetings, and socials in one place.</p>
               </div>
-              <div className="grid grid-cols-7 border-b border-jc-gray-mid">
-                {DAYS.map(d=><div key={d} className="py-2 text-center text-xs font-bold uppercase tracking-widest text-jc-gray-dark">{d}</div>)}
-              </div>
-              <div className="grid grid-cols-7">
-                {Array.from({length:firstDayOfWeek}).map((_,i)=><div key={`e${i}`} className="border-r border-b border-jc-gray-mid min-h-[80px] bg-jc-gray/30"/>)}
-                {Array.from({length:daysInMonth}).map((_,i)=>{
-                  const day=i+1
-                  const key=`${calYear}-${pad(calMonth+1)}-${pad(day)}`
-                  const dayEvents=eventsOnDay(day)
-                  const isToday=today.getFullYear()===calYear&&today.getMonth()===calMonth&&today.getDate()===day
-                  const isSelected=selectedDay===key
-                  const col=(firstDayOfWeek+i)%7
-                  return (
-                    <div key={day} onClick={()=>setSelectedDay(isSelected?null:key)}
-                      className={`border-b border-jc-gray-mid min-h-[80px] p-2 cursor-pointer transition-colors ${col<6?'border-r':''} ${isSelected?'bg-jc-red/5':' hover:bg-jc-gray/40'}`}>
-                      <div className={`w-7 h-7 flex items-center justify-center text-sm font-bold mb-1 ${isToday?'bg-jc-red text-white':isSelected?'text-jc-red':'text-jc-black'}`}>{day}</div>
-                      <div className="space-y-0.5">
-                        {dayEvents.slice(0,2).map(ev=>(
-                          <div key={ev.id} className="flex items-center gap-1">
-                            <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${eventTypeDots[ev.type]}`}/>
-                            <span className="text-jc-black text-xs truncate hidden sm:block">{ev.title}</span>
-                          </div>
-                        ))}
-                        {dayEvents.length>2&&<div className="text-jc-gray-dark text-xs">+{dayEvents.length-2} more</div>}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
+              <a
+                href="https://calendar.google.com/calendar/r?cid=juniorcouncil.org_tiul9akldge6a8vu014dhmlrt0%40group.calendar.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-jc-red hover:bg-jc-red-dark text-white font-black text-xs tracking-widest uppercase px-5 py-3 transition-colors self-start"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Add to My Google Calendar
+              </a>
             </div>
-            <div className="space-y-5">
-              <div className="bg-white border border-jc-gray-mid p-5">
-                <h3 className="text-jc-black font-black text-sm mb-3 uppercase tracking-widest">Legend</h3>
-                <div className="space-y-2">
-                  {Object.entries(eventTypeDots).map(([type,dot])=>(
-                    <div key={type} className="flex items-center gap-2"><div className={`w-3 h-3 rounded-full ${dot}`}/><span className="text-jc-gray-dark text-sm">{type}</span></div>
-                  ))}
-                </div>
-              </div>
-              {selectedDay&&(
-                <div className="bg-white border border-jc-red">
-                  <div className="px-5 py-3 border-b border-jc-red bg-jc-red/5 flex items-center justify-between">
-                    <p className="text-jc-red text-xs font-bold uppercase tracking-widest">
-                      {new Date(selectedDay+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})}
-                    </p>
-                    {isBoard ? (
-                      <div className="flex items-center gap-3">
-                        <button
-                          onClick={() => openOrgEventForm()}
-                          className="text-jc-red text-xs font-bold uppercase tracking-widest hover:underline"
-                          aria-label="Add org event"
-                        >
-                          + Org Event
-                        </button>
-                        <button
-                          onClick={openPersonalForm}
-                          className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest hover:underline"
-                          aria-label="Add personal event"
-                        >
-                          + Personal
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        onClick={openPersonalForm}
-                        className="text-jc-red text-xs font-bold uppercase tracking-widest hover:underline"
-                        aria-label="Add personal event"
-                      >
-                        + Personal Event
-                      </button>
-                    )}
-                  </div>
-                  {selectedEvents.length===0
-                    ? <div className="px-5 py-6 text-center"><p className="text-jc-gray-dark text-sm">No events on this day.</p></div>
-                    : <div className="divide-y divide-jc-gray-mid">
-                        {selectedEvents.map(ev=>(
-                          <div key={ev.id} className="px-5 py-4">
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className={`text-xs font-bold px-2 py-0.5 ${eventTypeColors[ev.type]}`}>{ev.type}</span>
-                              {ev.personal && <span className="text-jc-gray-dark text-xs">(only visible to you)</span>}
-                            </div>
-                            <h4 className="text-jc-black font-black text-sm mb-1">{ev.title}</h4>
-                            {ev.time && <p className="text-jc-gray-dark text-xs">{ev.time}</p>}
-                            {ev.location && <p className="text-jc-gray-dark text-xs">{ev.location}</p>}
-                            <div className="flex gap-2 mt-3 flex-wrap">
-                              {ev.personal ? (
-                                <button
-                                  onClick={()=>deletePersonalEvent(ev.id)}
-                                  className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark hover:text-jc-red text-xs font-bold uppercase px-3 py-1 transition-colors"
-                                >
-                                  Delete
-                                </button>
-                              ) : (
-                                <>
-                                  {rsvpMap[ev.id] ? (
-                                    <div className="flex items-center gap-2">
-                                      <span className={`text-xs font-bold px-2 py-1 ${rsvpMap[ev.id]==='yes'?'bg-green-100 text-green-700':'bg-jc-gray text-jc-gray-dark'}`}>
-                                        {rsvpMap[ev.id]==='yes'?'Attending':'Not Attending'}
-                                      </span>
-                                      <button onClick={()=>deleteRsvp(ev.id)} className="text-jc-gray-dark text-xs hover:text-jc-red">Change</button>
-                                    </div>
-                                  ) : (
-                                    <>
-                                      <button onClick={()=>upsertRsvp(ev.id,'yes')} className="bg-jc-red hover:bg-jc-red-dark text-white text-xs font-bold uppercase px-3 py-1 transition-colors">RSVP Yes</button>
-                                      <button onClick={()=>upsertRsvp(ev.id,'no')} className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark text-xs font-bold uppercase px-3 py-1 transition-colors">Can&apos;t Go</button>
-                                    </>
-                                  )}
-                                  {(isAdmin || (isBoard && ev.createdBy === user?.id)) && (
-                                    <>
-                                      <button onClick={()=>openOrgEventForm(ev)} className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark hover:text-jc-red text-xs font-bold uppercase px-3 py-1 transition-colors">Edit</button>
-                                      <button onClick={()=>deleteOrgEvent(ev.id)} className="border border-red-200 hover:border-jc-red text-red-400 hover:text-jc-red text-xs font-bold uppercase px-3 py-1 transition-colors">Delete</button>
-                                    </>
-                                  )}
-                                </>
-                              )}
-                            </div>
-                            {!ev.personal && (()=>{ const att=allRsvps.filter(r=>r.eventId===ev.id&&r.status==='yes'); return att.length>0&&(<p className="text-jc-gray-dark text-xs mt-2">{att.length} attending: {att.map(a=>a.fullName).join(', ')}</p>) })()}
-                          </div>
-                        ))}
-                      </div>
-                  }
-                </div>
-              )}
-              <div className="bg-white border border-jc-gray-mid">
-                <div className="px-5 py-3 border-b border-jc-gray-mid"><h3 className="text-jc-black font-black text-sm">Events This Month</h3></div>
-                {combinedEvents.filter(e=>e.dateKey.startsWith(`${calYear}-${pad(calMonth+1)}`)).length===0
-                  ? <div className="px-5 py-6 text-center"><p className="text-jc-gray-dark text-sm">No events this month.</p></div>
-                  : <div className="divide-y divide-jc-gray-mid">
-                      {combinedEvents.filter(e=>e.dateKey.startsWith(`${calYear}-${pad(calMonth+1)}`))
-                        .sort((a,b)=>a.dateKey.localeCompare(b.dateKey))
-                        .map(ev=>(
-                          <button key={ev.id} onClick={()=>setSelectedDay(ev.dateKey)} className="w-full text-left px-5 py-3 hover:bg-jc-gray transition-colors group">
-                            <div className="flex items-center gap-2 mb-0.5">
-                              <div className={`w-2 h-2 rounded-full flex-shrink-0 ${eventTypeDots[ev.type]}`}/>
-                              <span className="text-jc-black text-sm font-bold group-hover:text-jc-red transition-colors truncate">{ev.title}</span>
-                            </div>
-                            <p className="text-jc-gray-dark text-xs pl-4">{ev.date}{ev.time?` · ${ev.time}`:''}</p>
-                          </button>
-                        ))}
-                    </div>
-                }
-              </div>
 
-              {/* Add / Edit Org Event modal */}
-              {eventFormOpen && (
-                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4" onClick={()=>setEventFormOpen(false)}>
-                  <div className="bg-white w-full max-w-md border border-jc-gray-mid" onClick={e=>e.stopPropagation()}>
-                    <div className="px-6 py-4 border-b border-jc-gray-mid flex items-center justify-between">
-                      <h3 className="text-jc-black font-black text-lg">{editingEventId ? 'Edit Event' : 'Add Org Event'}</h3>
-                      <button onClick={()=>setEventFormOpen(false)} className="text-jc-gray-dark hover:text-jc-black" aria-label="Close">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
-                      </button>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      <p className="text-jc-gray-dark text-xs">This event will appear on the org calendar and be visible to all members.</p>
-                      <div>
-                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Title</label>
-                        <input type="text" value={eventForm.title} onChange={e=>setEventForm(f=>({...f,title:e.target.value}))} placeholder="e.g. Board Happy Hour" className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"/>
-                      </div>
-                      <div>
-                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Date</label>
-                        <input type="date" value={eventForm.dateKey} onChange={e=>setEventForm(f=>({...f,dateKey:e.target.value}))} className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"/>
-                      </div>
-                      <div>
-                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Time (optional)</label>
-                        <input type="text" value={eventForm.time} onChange={e=>setEventForm(f=>({...f,time:e.target.value}))} placeholder="e.g. 6:30 PM – 8:00 PM" className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"/>
-                      </div>
-                      <div>
-                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Location (optional)</label>
-                        <input type="text" value={eventForm.location} onChange={e=>setEventForm(f=>({...f,location:e.target.value}))} placeholder="e.g. The Drake Hotel, Chicago" className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"/>
-                      </div>
-                      <div>
-                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Type</label>
-                        <select value={eventForm.type} onChange={e=>setEventForm(f=>({...f,type:e.target.value}))} className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm bg-white">
-                          {['Meeting','Event','Fundraiser','Social'].map(t=><option key={t} value={t}>{t}</option>)}
-                        </select>
-                      </div>
-                    </div>
-                    <div className="px-6 py-4 border-t border-jc-gray-mid flex gap-2 justify-end">
-                      <button onClick={()=>setEventFormOpen(false)} className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark text-xs font-bold uppercase px-4 py-2 transition-colors">Cancel</button>
-                      <button onClick={saveOrgEvent} disabled={eventSaving || !eventForm.title.trim() || !eventForm.dateKey} className="bg-jc-red hover:bg-jc-red-dark disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold uppercase px-4 py-2 transition-colors">
-                        {eventSaving ? 'Saving…' : editingEventId ? 'Save Changes' : 'Add Event'}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Add Personal Event modal */}
-              {personalFormOpen && (
-                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4" onClick={()=>setPersonalFormOpen(false)}>
-                  <div className="bg-white w-full max-w-md border border-jc-gray-mid" onClick={e=>e.stopPropagation()}>
-                    <div className="px-6 py-4 border-b border-jc-gray-mid flex items-center justify-between">
-                      <h3 className="text-jc-black font-black text-lg">Add Personal Event</h3>
-                      <button onClick={()=>setPersonalFormOpen(false)} className="text-jc-gray-dark hover:text-jc-black" aria-label="Close">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
-                      </button>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      <p className="text-jc-gray-dark text-xs">Only you can see this event — it won&apos;t appear on the org calendar.</p>
-                      <div>
-                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Title</label>
-                        <input
-                          type="text"
-                          value={personalForm.title}
-                          onChange={e=>setPersonalForm(f=>({...f,title:e.target.value}))}
-                          placeholder="e.g. Coffee with board member"
-                          className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Date</label>
-                        <input
-                          type="date"
-                          value={personalForm.dateKey}
-                          onChange={e=>setPersonalForm(f=>({...f,dateKey:e.target.value}))}
-                          className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Time (optional)</label>
-                        <input
-                          type="text"
-                          value={personalForm.time}
-                          onChange={e=>setPersonalForm(f=>({...f,time:e.target.value}))}
-                          placeholder="e.g. 3:00 PM"
-                          className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-jc-black text-xs font-bold uppercase tracking-widest mb-2">Location (optional)</label>
-                        <input
-                          type="text"
-                          value={personalForm.location}
-                          onChange={e=>setPersonalForm(f=>({...f,location:e.target.value}))}
-                          placeholder="e.g. Sawada Coffee"
-                          className="w-full border border-jc-gray-mid focus:border-jc-red outline-none px-4 py-2 text-sm"
-                        />
-                      </div>
-                    </div>
-                    <div className="px-6 py-4 border-t border-jc-gray-mid flex gap-2 justify-end">
-                      <button onClick={()=>setPersonalFormOpen(false)} className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark text-xs font-bold uppercase px-4 py-2 transition-colors">Cancel</button>
-                      <button
-                        onClick={savePersonalEvent}
-                        disabled={personalSaving || !personalForm.title.trim() || !personalForm.dateKey}
-                        className="bg-jc-red hover:bg-jc-red-dark disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold uppercase px-4 py-2 transition-colors"
-                      >
-                        {personalSaving?'Saving…':'Save Event'}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
+            {/* Google Calendar Embed */}
+            <div className="bg-white border border-jc-gray-mid overflow-hidden">
+              <iframe
+                src="https://calendar.google.com/calendar/embed?src=juniorcouncil.org_tiul9akldge6a8vu014dhmlrt0%40group.calendar.google.com&ctz=America%2FChicago&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&mode=MONTH&color=%23C1121F"
+                style={{ border: 0 }}
+                width="100%"
+                height="650"
+                frameBorder="0"
+                scrolling="no"
+                title="Junior Council Calendar"
+              />
             </div>
+
+            <p className="text-jc-gray-dark text-xs text-center">
+              Events are managed by the JC board. Questions? Contact{' '}
+              <a href="mailto:secretary@juniorcouncil.org" className="text-jc-red font-bold hover:underline">
+                secretary@juniorcouncil.org
+              </a>
+            </p>
           </div>
-
-          {/* ── Full year schedule ── */}
-          <div className="mt-12">
-            <div className="flex items-center gap-3 mb-1">
-              <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true"/>
-              <span className="text-jc-red text-xs font-bold tracking-widest uppercase">2026 Season</span>
-            </div>
-            <h2 className="text-jc-black font-black text-3xl tracking-tight mb-8">Full Year Events</h2>
-
-            {(()=>{
-              // Group events by month
-              const groups: Record<string, CalEvent[]> = {}
-              upcomingEvents.forEach(ev => {
-                const monthKey = ev.dateKey.slice(0,7)
-                if (!groups[monthKey]) groups[monthKey] = []
-                groups[monthKey].push(ev)
-              })
-              return Object.entries(groups).map(([key, evs]) => {
-                const monthName = MONTHS[parseInt(key.slice(5,7))-1]
-                return (
-                  <div key={key} className="mb-10">
-                    {/* Month header */}
-                    <div className="flex items-center gap-4 mb-5">
-                      <h3 className="text-jc-black font-black text-xl flex-shrink-0">{monthName}</h3>
-                      <div className="flex-grow h-px bg-jc-gray-mid"/>
-                      <span className="text-jc-gray-dark text-xs flex-shrink-0">{evs.length} event{evs.length!==1?'s':''}</span>
-                    </div>
-
-                    <div className="space-y-3">
-                      {evs.map(ev => (
-                        <div key={ev.id} className="bg-white border border-jc-gray-mid flex flex-col sm:flex-row sm:items-center gap-4 px-5 py-4 hover:border-jc-red/40 transition-colors">
-                          {/* Date block */}
-                          <div className="flex-shrink-0 w-14 text-center hidden sm:block">
-                            <div className="text-jc-red font-black text-xl leading-none">{parseInt(ev.dateKey.slice(8,10))}</div>
-                            <div className="text-jc-gray-dark text-xs uppercase tracking-wide">{ev.date.split(' ')[0].slice(0,3)}</div>
-                          </div>
-                          <div className="w-px h-10 bg-jc-gray-mid flex-shrink-0 hidden sm:block"/>
-
-                          {/* Info */}
-                          <div className="flex-grow min-w-0">
-                            <div className="flex items-center gap-2 mb-1 flex-wrap">
-                              <span className={`text-xs font-bold px-2 py-0.5 flex-shrink-0 ${eventTypeColors[ev.type]}`}>{ev.type}</span>
-                              <h4 className="text-jc-black font-black text-sm">{ev.title}</h4>
-                            </div>
-                            <p className="text-jc-gray-dark text-xs">
-                              <span className="sm:hidden">{ev.date} · </span>{ev.time} · {ev.location}
-                            </p>
-                          </div>
-
-                          {/* RSVP + board controls */}
-                          <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
-                            <div className="flex items-center gap-2">
-                              {rsvpMap[ev.id] ? (
-                                <>
-                                  <span className={`text-xs font-bold px-3 py-1.5 ${rsvpMap[ev.id]==='yes'?'bg-green-100 text-green-700':'bg-jc-gray text-jc-gray-dark'}`}>
-                                    {rsvpMap[ev.id]==='yes'?'Attending':'Not Attending'}
-                                  </span>
-                                  <button onClick={()=>deleteRsvp(ev.id)} className="text-jc-gray-dark text-xs hover:text-jc-red transition-colors">Change</button>
-                                </>
-                              ) : (
-                                <>
-                                  <button onClick={()=>upsertRsvp(ev.id,'yes')} className="bg-jc-red hover:bg-jc-red-dark text-white text-xs font-bold uppercase px-3 py-1.5 transition-colors">RSVP Yes</button>
-                                  <button onClick={()=>upsertRsvp(ev.id,'no')} className="border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark hover:text-jc-red text-xs font-bold uppercase px-3 py-1.5 transition-colors">Can&apos;t Go</button>
-                                </>
-                              )}
-                            </div>
-                            {(isAdmin || (isBoard && ev.createdBy === user?.id)) && (
-                              <div className="flex items-center gap-2">
-                                <button onClick={()=>openOrgEventForm(ev)} className="text-jc-gray-dark hover:text-jc-red text-xs font-bold uppercase transition-colors">Edit</button>
-                                <button onClick={()=>deleteOrgEvent(ev.id)} className="text-red-400 hover:text-jc-red text-xs font-bold uppercase transition-colors">Delete</button>
-                              </div>
-                            )}
-                            {(()=>{ const att=allRsvps.filter(r=>r.eventId===ev.id&&r.status==='yes'); return att.length>0&&(<p className="text-jc-gray-dark text-xs">{att.length} attending</p>) })()}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )
-              })
-            })()}
-          </div>
-          </>
         )}
 
         {/* ── IMPACT TRACKER ────────────────────────────────────────────────── */}
