@@ -17,7 +17,7 @@ type Post = {
   comments: Comment[]; showComments: boolean
   poll?: PollOption[]; votedOption?: number
 }
-type Tab = 'dashboard' | 'calendar' | 'impact' | 'resources' | 'feed' | 'profile'
+type Tab = 'dashboard' | 'calendar' | 'impact' | 'resources' | 'profile'
 
 type Profile = {
   name: string; pronouns: string; avatar: string | null; bio: string
@@ -530,7 +530,6 @@ export default function PortalPage() {
     { key:'calendar'  as Tab, label:'Calendar & Events', icon:'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' },
     { key:'impact'    as Tab, label:'Impact Tracker', icon:'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' },
     { key:'resources' as Tab, label:'Resources',      icon:'M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z' },
-    { key:'feed'      as Tab, label:'Community',      icon:'M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z' },
   ]
 
   return (
@@ -1174,201 +1173,6 @@ export default function PortalPage() {
         )}
 
         {/* ── COMMUNITY FEED ────────────────────────────────────────────────── */}
-        {activeTab==='feed' && (
-          <div className="max-w-2xl mx-auto">
-
-            {/* Composer */}
-            <div className="bg-white border border-jc-gray-mid mb-6">
-              <div className="px-5 py-4 border-b border-jc-gray-mid">
-                <h2 className="text-jc-black font-black text-base">Create a Post</h2>
-              </div>
-              <div className="p-5">
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="w-9 h-9 bg-jc-red flex items-center justify-center flex-shrink-0 text-white text-xs font-black">ME</div>
-                  <textarea value={postText} onChange={e=>setPostText(e.target.value)}
-                    placeholder={showPoll?"Ask your question...":"Share an update with the JC community..."}
-                    rows={3} className="flex-grow border border-jc-gray-mid focus:border-jc-red px-3 py-2 text-sm text-jc-black outline-none resize-none transition-colors placeholder:text-jc-gray-mid"/>
-                </div>
-
-                {/* Image preview */}
-                {postImage&&(
-                  <div className="relative mb-4 ml-12">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={postImage} alt="Preview" className="max-h-48 object-cover w-full"/>
-                    <button onClick={()=>{setPostImage(null);if(fileInputRef.current)fileInputRef.current.value=''}}
-                      className="absolute top-2 right-2 bg-jc-black/70 text-white w-6 h-6 flex items-center justify-center hover:bg-jc-black" aria-label="Remove image">
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/>
-                      </svg>
-                    </button>
-                  </div>
-                )}
-
-                {/* Poll options */}
-                {showPoll&&(
-                  <div className="mb-4 ml-12 space-y-2">
-                    {pollOptions.map((opt,i)=>(
-                      <div key={i} className="flex items-center gap-2">
-                        <input type="text" value={opt} onChange={e=>setPollOptions(p=>{const n=[...p];n[i]=e.target.value;return n})}
-                          placeholder={`Option ${i+1}`}
-                          className="flex-grow border border-jc-gray-mid focus:border-jc-red px-3 py-2 text-sm outline-none transition-colors"/>
-                        {pollOptions.length>2&&(
-                          <button onClick={()=>setPollOptions(p=>p.filter((_,j)=>j!==i))} className="text-jc-gray-mid hover:text-jc-red transition-colors" aria-label="Remove option">
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
-                          </button>
-                        )}
-                      </div>
-                    ))}
-                    {pollOptions.length<4&&(
-                      <button onClick={()=>setPollOptions(p=>[...p,''])} className="text-jc-red text-xs font-bold hover:underline">+ Add option</button>
-                    )}
-                  </div>
-                )}
-
-                <div className="flex items-center justify-between ml-12">
-                  <div className="flex items-center gap-3">
-                    {/* Image */}
-                    {!showPoll&&(
-                      <button onClick={()=>fileInputRef.current?.click()} className="flex items-center gap-1.5 text-jc-gray-dark hover:text-jc-red text-xs font-bold uppercase tracking-wide transition-colors" aria-label="Add image">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-                        Photo
-                      </button>
-                    )}
-                    <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleImageSelect}/>
-                    {/* Poll toggle */}
-                    {!postImage&&(
-                      <button onClick={()=>{setShowPoll(!showPoll);if(showPoll)setPollOptions(['',''])}}
-                        className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide transition-colors ${showPoll?'text-jc-red':'text-jc-gray-dark hover:text-jc-red'}`}>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                        </svg>
-                        {showPoll?'Remove Poll':'Add Poll'}
-                      </button>
-                    )}
-                  </div>
-                  <button onClick={handleSubmitPost}
-                    disabled={!postText.trim()&&!postImage&&!(showPoll&&pollOptions.filter(o=>o.trim()).length>=2)}
-                    className="bg-jc-red hover:bg-jc-red-dark disabled:opacity-30 disabled:cursor-not-allowed text-white font-black text-xs tracking-widest uppercase px-5 py-2 transition-colors">
-                    Post
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Feed */}
-            <div className="space-y-5">
-              {posts.map(post=>{
-                const totalVotes = post.poll?.reduce((s,o)=>s+o.votes,0)??0
-                return (
-                  <div key={post.id} className="bg-white border border-jc-gray-mid">
-                    {/* Header */}
-                    <div className="px-5 pt-5 pb-3 flex items-start justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 bg-jc-black flex items-center justify-center flex-shrink-0 text-white text-xs font-black">{post.initials}</div>
-                        <div>
-                          <div className="text-jc-black font-black text-sm">{post.author}</div>
-                          <div className="text-jc-gray-dark text-xs">{post.time}</div>
-                        </div>
-                      </div>
-                      {post.author==='You'&&(
-                        <button onClick={()=>handleDeletePost(post.id)} className="text-jc-gray-mid hover:text-jc-red transition-colors" aria-label="Delete post">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                          </svg>
-                        </button>
-                      )}
-                    </div>
-
-                    {/* Body */}
-                    {post.text&&<div className="px-5 pb-3"><p className="text-jc-black text-sm leading-relaxed">{post.text}</p></div>}
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    {post.image&&<img src={post.image} alt="Post" className="w-full max-h-80 object-cover"/>}
-
-                    {/* Poll */}
-                    {post.poll&&(
-                      <div className="px-5 pb-4 space-y-2">
-                        {post.poll.map(option=>{
-                          const pct = totalVotes>0 ? Math.round((option.votes/totalVotes)*100) : 0
-                          const isVoted = post.votedOption===option.id
-                          return (
-                            <button key={option.id} onClick={()=>handleVote(post.id,option.id)} disabled={!!post.votedOption}
-                              className={`w-full text-left border-2 transition-all overflow-hidden ${isVoted?'border-jc-red':'border-jc-gray-mid hover:border-jc-red/50'} ${post.votedOption?'cursor-default':''}`}>
-                              <div className="relative px-4 py-2.5">
-                                {/* Background bar */}
-                                {post.votedOption&&(
-                                  <div className={`absolute inset-0 transition-all ${isVoted?'bg-jc-red/10':'bg-jc-gray/60'}`} style={{width:`${pct}%`}}/>
-                                )}
-                                <div className="relative flex items-center justify-between">
-                                  <span className={`text-sm font-bold ${isVoted?'text-jc-red':'text-jc-black'}`}>{option.text}</span>
-                                  {post.votedOption&&<span className={`text-xs font-black ${isVoted?'text-jc-red':'text-jc-gray-dark'}`}>{pct}%</span>}
-                                </div>
-                              </div>
-                            </button>
-                          )
-                        })}
-                        <p className="text-jc-gray-dark text-xs">
-                          {totalVotes} vote{totalVotes!==1?'s':''}{post.votedOption?' · You voted':' · Click to vote'}
-                        </p>
-                      </div>
-                    )}
-
-                    {/* Actions */}
-                    <div className="px-5 py-3 border-t border-jc-gray-mid flex items-center gap-5">
-                      <button onClick={()=>handleLike(post.id)}
-                        className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide transition-colors ${post.liked?'text-jc-red':'text-jc-gray-dark hover:text-jc-red'}`}>
-                        <svg className="w-4 h-4" fill={post.liked?'currentColor':'none'} stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                        </svg>
-                        {post.likes} {post.likes===1?'Like':'Likes'}
-                      </button>
-                      <button onClick={()=>handleToggleComments(post.id)}
-                        className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-jc-gray-dark hover:text-jc-red transition-colors">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-                        </svg>
-                        {post.comments.length} {post.comments.length===1?'Comment':'Comments'}
-                      </button>
-                    </div>
-
-                    {/* Comments */}
-                    {post.showComments&&(
-                      <div className="border-t border-jc-gray-mid px-5 py-4 bg-jc-gray/40">
-                        {post.comments.length>0&&(
-                          <div className="space-y-3 mb-4">
-                            {post.comments.map(comment=>(
-                              <div key={comment.id} className="flex items-start gap-2.5">
-                                <div className="w-7 h-7 bg-jc-black flex items-center justify-center flex-shrink-0 text-white text-xs font-black">
-                                  {comment.author==='You'?'ME':comment.author.split(' ').map(n=>n[0]).join('').slice(0,2)}
-                                </div>
-                                <div className="bg-white border border-jc-gray-mid px-3 py-2 flex-grow">
-                                  <div className="text-jc-black font-bold text-xs mb-0.5">{comment.author}</div>
-                                  <p className="text-jc-gray-dark text-xs leading-relaxed">{comment.text}</p>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-7 h-7 bg-jc-red flex items-center justify-center flex-shrink-0 text-white text-xs font-black">ME</div>
-                          <input type="text" value={commentInputs[post.id]??''} onChange={e=>setCommentInputs(p=>({...p,[post.id]:e.target.value}))}
-                            onKeyDown={e=>{if(e.key==='Enter')handleAddComment(post.id)}}
-                            placeholder="Write a comment..." className="flex-grow border border-jc-gray-mid focus:border-jc-red px-3 py-1.5 text-xs text-jc-black outline-none transition-colors bg-white placeholder:text-jc-gray-mid"/>
-                          <button onClick={()=>handleAddComment(post.id)} className="bg-jc-red hover:bg-jc-red-dark text-white text-xs font-bold px-3 py-1.5 transition-colors">Post</button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* ── PROFILE ───────────────────────────────────────────────────────── */}
         {activeTab==='profile' && (
           <div className="max-w-4xl mx-auto">
 
