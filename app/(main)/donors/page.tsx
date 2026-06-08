@@ -93,10 +93,9 @@ const donors = {
   wellness: [
     { name: 'GoGlow', category: 'Spray Tan' },
     { name: 'Pin Me Up Chicago', category: 'Hair & Makeup' },
-    { name: 'Wellness Partner Name', category: 'Fitness' },
-    { name: 'Wellness Partner Name', category: 'Spa & Beauty' },
-    { name: 'Wellness Partner Name', category: 'Nutrition' },
-    { name: 'Wellness Partner Name', category: 'Mental Health' },
+    { name: 'VinHausa', category: 'Yoga & Dance' },
+    { name: 'Equinox', category: 'Cycling' },
+    { name: 'Barre3', category: 'Barre' },
   ],
 }
 
@@ -306,7 +305,7 @@ export default function DonorsPage() {
       </section>
 
       {/* ── WELLNESS FOR A CAUSE ──────────────────────────────────────── */}
-      <section id="wellness" className="bg-jc-black py-20 scroll-mt-16">
+      <section id="wellness" className="bg-white py-20 scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
             <div>
@@ -316,10 +315,10 @@ export default function DonorsPage() {
                   Category
                 </span>
               </div>
-              <h2 className="text-white font-black text-3xl sm:text-4xl tracking-tight">
+              <h2 className="text-jc-black font-black text-3xl sm:text-4xl tracking-tight">
                 Wellness <span className="text-jc-red">for a Cause</span>
               </h2>
-              <p className="text-white/50 text-sm mt-3 max-w-xl">
+              <p className="text-jc-gray-dark text-sm mt-3 max-w-xl">
                 Our Wellness for a Cause partners support Junior Council through
                 health and wellness initiatives, helping fund care for
                 adolescents living with HIV and AIDS.
@@ -327,7 +326,7 @@ export default function DonorsPage() {
             </div>
             <Link
               href="/contact"
-              className="flex-shrink-0 text-xs font-bold uppercase tracking-widest text-white/50 hover:text-white transition-colors border-b border-white/20 hover:border-white pb-1"
+              className="flex-shrink-0 text-xs font-bold uppercase tracking-widest text-jc-gray-dark hover:text-jc-red transition-colors border-b border-jc-gray-mid hover:border-jc-red pb-1"
             >
               Become a Wellness Partner →
             </Link>
@@ -337,14 +336,14 @@ export default function DonorsPage() {
             {donors.wellness.map((donor, i) => (
               <div
                 key={i}
-                className="border border-white/10 hover:border-jc-red transition-colors p-6 flex flex-col items-center justify-center text-center min-h-[120px] group"
+                className="border border-jc-gray-mid hover:border-jc-red transition-colors p-6 flex flex-col items-center justify-center text-center min-h-[120px] group"
               >
-                <div className="w-12 h-12 bg-white/5 rounded-sm mb-3 flex items-center justify-center group-hover:bg-jc-red/20 transition-colors" aria-hidden="true">
-                  <svg className="w-6 h-6 text-white/20 group-hover:text-jc-red transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 bg-jc-gray rounded-sm mb-3 flex items-center justify-center group-hover:bg-jc-red/10 transition-colors" aria-hidden="true">
+                  <svg className="w-6 h-6 text-jc-gray-mid group-hover:text-jc-red transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                 </div>
-                <div className="text-white font-black text-sm leading-tight mb-1">
+                <div className="text-jc-black font-black text-sm leading-tight mb-1">
                   {donor.name}
                 </div>
                 <div className="text-jc-red text-xs font-semibold uppercase tracking-wide">
