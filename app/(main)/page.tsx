@@ -64,7 +64,7 @@ export default function HomePage() {
           {/* Large subtle red diagonal block */}
           <div className="absolute -right-24 top-0 w-2/5 h-full bg-jc-red/8 transform skew-x-[-8deg]" />
           {/* Red accent stripe */}
-          <div className="absolute right-0 top-0 w-1.5 h-full bg-jc-red" />
+          
           {/* Subtle grid texture */}
           <div
             className="absolute inset-0 opacity-[0.03]"
@@ -287,7 +287,7 @@ export default function HomePage() {
         aria-label="Annual Snowball Gala"
       >
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-          <div className="absolute left-0 top-0 w-1.5 h-full bg-jc-red" />
+          
           <div className="absolute -left-24 top-0 w-2/5 h-full bg-jc-red/5 transform skew-x-[-8deg]" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

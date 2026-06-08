@@ -45,7 +45,7 @@ export default function MembershipPage() {
     <div className="pt-16">
       {/* Page Header */}
       <section className="bg-jc-black py-24 relative overflow-hidden">
-        <div className="absolute right-0 top-0 w-1.5 h-full bg-jc-red" aria-hidden="true" />
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />

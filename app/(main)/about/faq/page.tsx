@@ -61,7 +61,7 @@ export default function FAQPage() {
     <div className="pt-16">
       {/* Page Header */}
       <section className="bg-jc-black py-24 relative overflow-hidden">
-        <div className="absolute right-0 top-0 w-1.5 h-full bg-jc-red" aria-hidden="true" />
+        
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
           <div className="absolute -right-24 top-0 w-2/5 h-full bg-jc-red/8 transform skew-x-[-8deg]" />
         </div>

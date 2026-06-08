@@ -68,7 +68,7 @@ export default function AccessibilityWidget() {
         onClick={() => setOpen(o => !o)}
         aria-label="Open accessibility menu"
         aria-expanded={open}
-        className="fixed top-4 right-4 z-50 w-10 h-10 bg-jc-red hover:bg-jc-red-dark text-white flex items-center justify-center shadow-lg transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-jc-red"
+        className="fixed top-4 right-4 z-50 w-10 h-10 rounded-full bg-jc-red hover:bg-jc-red-dark text-white flex items-center justify-center shadow-lg transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-jc-red"
       >
         {anyActive && (
           <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full" aria-hidden="true" />
