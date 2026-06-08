@@ -281,6 +281,26 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── DR. JAO TESTIMONIAL ──────────────────────────────────────── */}
+      <section className="bg-jc-charcoal py-20 lg:py-24" aria-label="Testimonial from Dr. Jao">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
+            <span className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase">From the Clinic</span>
+            <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
+          </div>
+          <blockquote>
+            <p className="text-white text-xl sm:text-2xl lg:text-3xl font-black leading-snug tracking-tight mb-8">
+              &ldquo;We are deeply grateful for Junior Council&apos;s support in our clinic over the last two decades. They have inspired us with their energy, drive, and passion, and their generosity has been poured out on our patients, ensuring that patients receive the resources, treatment, and compassion they deserve.&rdquo;
+            </p>
+            <footer>
+              <div className="w-12 h-0.5 bg-jc-red mx-auto mb-4" aria-hidden="true" />
+              <p className="text-jc-red font-black text-sm uppercase tracking-widest">Jennifer Jao, MD, MPH</p>
+              <p className="text-white/40 text-xs mt-1 uppercase tracking-wide">Lurie Children&apos;s SID Program</p>
+            </footer>
+          </blockquote>
+        </div>
+      </section>
 
       {/* ─── ANNUAL GALA TEASER ───────────────────────────────────────── */}
       <section
