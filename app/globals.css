@@ -68,7 +68,7 @@ html.a11y-big-text p, html.a11y-big-text li, html.a11y-big-text span {
 }
 
 /* High Contrast — white bg, black text, JC red accents */
-html.a11y-high-contrast * {
+html.a11y-high-contrast *:not(#a11y-widget):not(#a11y-widget *) {
   background-color: #ffffff !important;
   color: #000000 !important;
   border-color: #000000 !important;

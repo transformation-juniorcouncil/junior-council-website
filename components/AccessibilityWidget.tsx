@@ -62,7 +62,7 @@ export default function AccessibilityWidget() {
   ]
 
   return (
-    <>
+    <div id="a11y-widget">
       {/* Trigger button */}
       <button
         onClick={() => setOpen(o => !o)}
@@ -154,6 +154,6 @@ export default function AccessibilityWidget() {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
