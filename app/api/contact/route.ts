@@ -8,7 +8,7 @@ const routingMap: Record<string, string[]> = {
   membership:  ['membership@juniorcouncil.org'],
   corporate:   ['corporate@juniorcouncil.org'],
   hospitality: ['hospitality@juniorcouncil.org'],
-  inkind:      ['hospitality@juniorcouncil.org'],
+  inkind:      ['silentauction@juniorcouncil.org'],
   gala:        ['snowball@juniorcouncil.org', 'president@juniorcouncil.org'],
   media:       ['social@juniorcouncil.org', 'media@juniorcouncil.org'],
   general:     ['president@juniorcouncil.org', 'secretary@juniorcouncil.org'],
