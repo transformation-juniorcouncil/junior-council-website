@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import TicketNotifyForm from '@/components/TicketNotifyForm'
 
 export const metadata: Metadata = {
   title: 'Get Your Tickets | Snowball 2027 | Junior Council',
@@ -50,20 +51,7 @@ export default function TicketsPage() {
             notified the moment they drop — they sell out fast.
           </p>
 
-          {/* Email notify form placeholder */}
-          <div className="bg-jc-gray p-8 text-left max-w-md mx-auto">
-            <h3 className="text-jc-black font-black text-lg mb-4">Notify Me When Tickets Go Live</h3>
-            <div className="flex flex-col gap-3">
-              <input
-                type="email"
-                placeholder="your@email.com"
-                className="w-full border-2 border-jc-gray-mid focus:border-jc-red px-4 py-3 text-sm outline-none transition-colors"
-              />
-              <button className="w-full bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase py-3 transition-colors">
-                Notify Me
-              </button>
-            </div>
-          </div>
+          <TicketNotifyForm />
         </div>
       </section>
 
