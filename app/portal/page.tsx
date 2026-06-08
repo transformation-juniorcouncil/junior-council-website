@@ -776,22 +776,6 @@ export default function PortalPage() {
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3 mt-5 flex-wrap">
-                        {rsvpMap[nextEvent.id] ? (
-                          <>
-                            <span className={`text-xs font-bold px-4 py-2.5 ${rsvpMap[nextEvent.id]==='yes'?'bg-green-100 text-green-700':'bg-jc-gray text-jc-gray-dark'}`}>
-                              {rsvpMap[nextEvent.id]==='yes'?'You\'re Attending':'Not Attending'}
-                            </span>
-                            <button onClick={()=>deleteRsvp(nextEvent.id)} className="text-jc-gray-dark text-xs hover:text-jc-red transition-colors">Change</button>
-                          </>
-                        ) : (
-                          <>
-                            <button onClick={()=>upsertRsvp(nextEvent.id,'yes')} className="bg-jc-red hover:bg-jc-red-dark text-white font-black text-xs uppercase tracking-widest px-6 py-3 transition-colors">RSVP Yes</button>
-                            <button onClick={()=>upsertRsvp(nextEvent.id,'no')} className="border-2 border-jc-gray-mid hover:border-jc-red text-jc-gray-dark hover:text-jc-red font-bold text-xs uppercase px-4 py-3 transition-colors">Can&apos;t Go</button>
-                          </>
-                        )}
-                        {(()=>{ const att=allRsvps.filter(r=>r.eventId===nextEvent.id&&r.status==='yes'); return att.length>0&&(<p className="w-full text-jc-gray-dark text-xs mt-1">{att.length} attending: {att.map(a=>a.fullName).join(', ')}</p>) })()}
-                      </div>
                     </div>
                   </div>
                 ) : (
