@@ -11,24 +11,132 @@ type BoardMember = {
   company?: string
   memberSince?: string
   bio?: string
+  linkedin?: string
 }
 
 const boardMembers: BoardMember[] = [
-  { name: 'Eve Voci',             title: 'President' },
-  { name: 'Gabe Spach',          title: 'Vice President' },
-  { name: 'Charlie Nash',         title: 'Treasurer' },
-  { name: 'Hailie Schroll',       title: 'Snowball' },
-  { name: 'KK Begley',            title: 'Secretary' },
-  { name: 'Thomas Ware',          title: 'Engagement' },
-  { name: 'Danielle Imbrigiotta', title: 'Recruitment' },
-  { name: 'Caroline Cheung',      title: 'Education' },
-  { name: 'Erin Bylina',          title: 'Silent Auction' },
-  { name: 'Isabella Del Muro',    title: 'W4AC / Fundraising Pages' },
-  { name: 'Marisa Stefani',       title: 'Corporate Co-Chair' },
-  { name: 'Jessica Linley',       title: 'Corporate Co-Chair' },
-  { name: 'Brooklyn Mychalowych', title: 'Creative' },
-  { name: 'Catie Hinton',         title: 'PR' },
-  { name: 'Emily Splinter',       title: 'Hospitality' },
+  {
+    name: 'Eve Voci',
+    title: 'President',
+    jobTitle: 'Corporate Retail Buyer, Apparel & Accessories and Crafting',
+    company: 'Barnes & Noble / Paper Source',
+    bio: 'Eve Voci is a corporate retail Buyer in the Apparel & Accessories and Crafting divisions at Barnes & Noble and Paper Source stores. Originally from Grosse Pointe Park, Michigan, Eve is also an alum of the Eli Broad Business School at Michigan State. Passionate about community impact and industry innovation, Eve is actively involved in organizations supporting healthcare philanthropy and the fashion industry. She enjoys her free time dog sitting, needlepointing, and traveling!',
+    linkedin: 'https://www.linkedin.com/in/evevoci/',
+  },
+  {
+    name: 'Gabe Spach',
+    title: 'Vice President',
+    jobTitle: 'Director of Partnerships',
+    company: 'Sawmill Sports Hub',
+    memberSince: 'March 2025',
+    bio: 'Gabe Spach is a Seattle native currently working as the Director of Partnerships at Sawmill Sports Hub. Gabe has an MBA from Seattle University with a focus in Sports & Entertainment. In his free time, he enjoys running, playing golf, going to concerts, and attending baseball games. Gabe has been involved with Junior Council since March 2025 and is excited to be a part of this year\'s board.',
+  },
+  {
+    name: 'Charlie Nash',
+    title: 'Treasurer',
+    jobTitle: 'Lead Data Engineer',
+    company: 'United Center',
+    memberSince: 'December 2024',
+    bio: 'Charlie Nash hails from Winnetka, Illinois and joined Junior Council to get more involved in his community and build new friendships. After joining in December 2024, Charlie hit the ground running as the 2025/2026 board\'s Corporate Director and now serves as this year\'s Treasurer. A graduate of DePauw University, Charlie works as the lead data engineer at the United Center. Outside of work, Charlie is an avid sports fan, a regular at his local CrossFit gym, and enjoys spending time with friends, family, and his 5-year-old dog, Bear.',
+    linkedin: 'https://www.linkedin.com/in/charles-nash-399b37116/',
+  },
+  {
+    name: 'Hailie Schroll',
+    title: 'Snowball Director',
+    jobTitle: 'Event Coordinator',
+    company: 'Shore Capital Partners',
+    memberSince: '2024',
+    bio: 'Hailie Schroll graduated from Indiana University with a B.S. in Tourism, Hospitality and Event Management. She currently works as an Event Coordinator at Shore Capital Partners, where she manages corporate events, meetings, and travel logistics. Hailie joined Junior Council in 2024 and previously served as Hospitality Director. Now in her second year as Snowball Director, she is excited to continue supporting Junior Council\'s mission through fundraising and event planning. When she\'s not planning events, Hailie enjoys exploring Chicago, traveling, hosting friends, and spending time with her cats, Parker and Pippa.',
+    linkedin: 'https://www.linkedin.com/in/hailie-schroll/',
+  },
+  {
+    name: 'KK Begley',
+    title: 'Secretary',
+    jobTitle: 'Healthcare Administrator',
+    company: 'Rush University Medical Center',
+    memberSince: 'February 2026',
+    bio: 'Kk Begley holds a Master of Health Administration from the University of Kentucky and works in administration at Rush University Medical Center. She joined Junior Council in February 2026 and is ecstatic to be on the board this year. In her free time, Kk enjoys trying new restaurants and bars around Chicago, playing pickleball, traveling, and attending live sporting events and concerts.',
+  },
+  {
+    name: 'Thomas Ware',
+    title: 'Engagement Director',
+    jobTitle: 'Associate Marketing Manager, Gatorade',
+    company: 'PepsiCo',
+    bio: 'Thomas Ware is an Associate Marketing Manager for Gatorade at PepsiCo. An alum of Dartmouth College and the University of Chicago Booth School of Business, Thomas is originally from Wisconsin. In his spare time he enjoys marathon training, playing and watching baseball, and political comedy.',
+    linkedin: 'https://www.linkedin.com/in/thomasholmesware',
+  },
+  {
+    name: 'Danielle Imbrigiotta',
+    title: 'Recruitment Director',
+    jobTitle: 'Management Consultant',
+    company: 'BDO',
+    bio: 'Danielle Imbrigiotta is a Florida native and a double Gator from the University of Florida, where she earned a Master\'s in International Business and a Bachelor of Business Administration. She moved to Chicago to begin her career as a consultant with BDO\'s Management Consulting group, where she has worked for the past three and a half years. Danielle enjoys exploring the city, traveling, reading, and participating in outdoor activities. She is especially grateful that Junior Council has introduced her to so many great friends.',
+    linkedin: 'https://www.linkedin.com/in/danielle-imbrigiotta',
+  },
+  {
+    name: 'Caroline Cheung',
+    title: 'Education Director',
+    jobTitle: 'Underwriting Operations Specialist',
+    company: 'Travelers Insurance',
+    memberSince: 'August 2024',
+    bio: 'Caroline Cheung is from Northbrook, Illinois and graduated from TCU with a B.A. in Mathematics with a concentration in Actuarial Science and a B.S. in Economics. She currently works as an Underwriting Operations Specialist at Travelers Insurance. Caroline joined Junior Council in August 2024 and is excited to serve as Education Director. Outside of work, Caroline is a big Chicago White Sox fan and enjoys spending time with friends and family, playing with her cat Sunny, and doing arts and crafts!',
+    linkedin: 'https://www.linkedin.com/in/carolinemcheung',
+  },
+  {
+    name: 'Erin Bylina',
+    title: 'Silent Auction Director',
+    jobTitle: 'Special Education Teacher',
+    memberSince: 'October 2023',
+    bio: 'Erin Bylina graduated from Bradley University with degrees in Special Education and Elementary Education, and completed her graduate degree from UIC in Behavior Intervention and Curriculum Adaptation. She currently teaches kindergarten at a therapeutic practice in Chicago and tutors students of all ages. Erin has been a JC member since October 2023 and has previously served as Snowball Committee Lead and Hospitality Director. In her free time, she enjoys spending time with family and friends and exploring Chicago\'s restaurants and events.',
+  },
+  {
+    name: 'Isabella Del Muro',
+    title: 'W4AC / Fundraising Director',
+    jobTitle: 'Clinical Research Coordinator',
+    company: 'Rush University Medical Center',
+    bio: 'Isabella del Muro is a Chicago native and public health graduate student at DePaul University, as well as a Clinical Research Coordinator at Rush University Medical Center. She graduated from the University of Kansas with a degree in Molecular Cellular Developmental Biology and a minor in Astrobiology. Isabella is also a [solidcore] coach with a passion for community engagement, wellness, and philanthropy. She joined Junior Council to combine her interests in healthcare advocacy and fundraising in support of Lurie Children\'s. In her free time, she enjoys marathon running, fitness, traveling, concerts, motorsports, and exploring Chicago\'s restaurant scene.',
+    linkedin: 'https://www.linkedin.com/in/idel-muro/',
+  },
+  {
+    name: 'Marisa Stefani',
+    title: 'Corporate Co-Chair',
+    jobTitle: 'Manager, Accounting & Projects',
+    company: 'CF Industries',
+    bio: 'Marisa Stefani holds a Master\'s in Accounting from the University of Illinois Urbana-Champaign and is a CPA and Manager of Accounting & Projects at CF Industries, the world\'s largest ammonia producer. In her third year as a Junior Council member, Marisa is thrilled to serve on the board as Corporate Co-Chair. A committed fitness enthusiast with over 1,400 barre classes completed, she also ran the 2014 Chicago Marathon and studied abroad in Belgium. In her free time, Marisa enjoys golfing, traveling, trying new restaurants, and spending time with friends and family.',
+    linkedin: 'https://www.linkedin.com/in/marisa-stefani-cpa-981b8627',
+  },
+  {
+    name: 'Jessica Linley',
+    title: 'Corporate Co-Chair',
+    jobTitle: 'Epidemiological Research Assistant',
+    company: 'Rush Alzheimer\'s Disease Center',
+    memberSince: 'March 2025',
+    bio: 'Jessica Linley graduated from Northern Illinois University in 2023 with a Bachelor of Science in Psychology and Non-Profit Studies. She is currently employed at Rush Alzheimer\'s Disease Center as an Epidemiological Research Assistant. Jessica joined Junior Council in March 2025.',
+    linkedin: 'https://www.linkedin.com/in/jessica-linley-604938236',
+  },
+  {
+    name: 'Brooklyn Mychalowych',
+    title: 'Creative Director',
+    jobTitle: 'Lawyer Support Assistant',
+    company: 'Jenner & Block',
+    bio: 'Brooklyn Mychalowych is a Michigan native and graduate of Michigan State University, where she earned a degree in English. She currently works as a Lawyer Support Assistant at Jenner & Block. In her free time, Brooklyn enjoys exploring both new and longtime hobbies, including sailing, DJing, mosaics, embroidery, travel, fashion, and other creative pursuits.',
+    linkedin: 'https://www.linkedin.com/in/brooklynmych',
+  },
+  {
+    name: 'Catie Hinton',
+    title: 'PR Director',
+    bio: 'Catie Hinton was born and raised in Seattle, Washington, and moved to Chicago after graduating from Washington State University to begin her career. She spent several months living in Paris while attending EM Normandie Business School\'s Marketing and Digital in Luxury & Lifestyle Program. In her free time she enjoys sailing, golfing, cooking, and traveling. She is excited to continue exploring Chicago and being part of the Junior Council.',
+    linkedin: 'https://www.linkedin.com/in/catiehinton/',
+  },
+  {
+    name: 'Emily Splinter',
+    title: 'Hospitality Director',
+    jobTitle: 'Administrative Assistant',
+    company: 'BDO',
+    memberSince: '2025',
+    bio: 'Emily Splinter is a Chicago native who graduated from the University of Wisconsin–Madison with a degree in Art, a Minor in Environmental Science, and a Minor in Theatre & Drama. She spent several months living in Florence, Italy while attending the Santa Reparata International School of Art. She currently works as an Administrative Assistant at BDO. In her free time, Emily enjoys biking, painting, cooking, and traveling. She joined Junior Council in 2025 and is excited to continue her participation with this year\'s Board of Directors.',
+    linkedin: 'https://www.linkedin.com/in/emily-splinter/',
+  },
   {
     name: 'Diana Wolf',
     title: 'Transformation Director',
@@ -37,6 +145,7 @@ const boardMembers: BoardMember[] = [
     company: 'Cognizant',
     memberSince: 'November 2025',
     bio: 'A University of Dayton graduate with a degree in Finance and a minor in German, Diana is a global adventurer at heart who has explored 25+ countries — her most recent trip taking her to the vibrant streets of Thailand. Of Austrian and Mexican heritage, she speaks English, Spanish, and German fluently. When she\'s not consulting in the financial tech space at Cognizant, you\'ll find her on the Chicago Lakefront Trail training for her first triathlon or buried in GMAT prep.',
+    linkedin: 'https://www.linkedin.com/in/wolfdiana/',
   },
 ]
 
@@ -130,7 +239,7 @@ export default function BoardPage() {
                     {isClickable && (
                       <div className="mt-1 flex-shrink-0">
                         <svg className="w-4 h-4 text-jc-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                       </div>
                     )}
@@ -147,7 +256,7 @@ export default function BoardPage() {
               onClick={() => setSelected(null)}
             >
               <div
-                className="bg-white w-full max-w-2xl border-t-4 border-jc-red shadow-2xl overflow-hidden"
+                className="bg-white w-full max-w-2xl border-t-4 border-jc-red shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
                 onClick={e => e.stopPropagation()}
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2">
@@ -215,7 +324,21 @@ export default function BoardPage() {
                     </div>
 
                     {selected.bio && (
-                      <p className="text-jc-gray-dark text-sm leading-relaxed">{selected.bio}</p>
+                      <p className="text-jc-gray-dark text-sm leading-relaxed mb-6">{selected.bio}</p>
+                    )}
+
+                    {selected.linkedin && (
+                      <a
+                        href={selected.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-jc-black hover:text-jc-red font-bold text-xs uppercase tracking-widest border-b-2 border-jc-red pb-0.5 transition-colors self-start"
+                      >
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        View LinkedIn
+                      </a>
                     )}
                   </div>
                 </div>
