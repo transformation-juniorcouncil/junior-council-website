@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type Event = {
   title: string
@@ -10,43 +11,34 @@ type Event = {
   location?: string
   type: string
   description: string
+  photo?: string
+  photoPosition?: string
   cta?: { label: string; href: string; external?: boolean } | null
   featured?: boolean
 }
 
 const upcomingEvents: Event[] = [
   {
-    title: 'VinHausa at Soldier Field',
-    date: 'June 11, 2026',
-    time: 'All Day',
-    location: 'Soldier Field, Chicago',
-    type: 'Community',
-    description: 'An epic outdoor wine and music festival at Soldier Field. Join fellow JC members for an unforgettable summer evening.',
-    cta: { label: 'Get Tickets', href: 'https://www.vinhausa.us/events/vinhausa-soldier-field', external: true },
-    featured: true,
-  },
-  {
     title: 'Chicago Pride Fest',
     date: 'June 20 – 21, 2026',
     location: 'Halsted Street, Chicago',
-    type: 'Community',
-    description: 'Celebrate Pride with the JC community at one of Chicago\'s most vibrant summer traditions.',
-    cta: null,
+    type: 'Volunteer',
+    description: 'Celebrate Pride with the JC community at one of Chicago\'s most vibrant summer traditions. Join us for a JC Post-Pride event on Saturday, June 20 at 9:30 PM at Dad\'s Place.',
+    cta: { label: 'Event Info', href: 'https://northalsted.com/main-events/chicago-pride-fest/', external: true },
   },
   {
-    title: 'Sunday Cycling at Equinox',
-    date: 'Every Sunday',
-    time: '9:45 AM',
+    title: 'Cycling at Equinox',
+    date: 'July 2026 — Date TBD',
     location: 'Equinox, Chicago',
-    type: 'Wellness',
-    description: 'Weekly Sunday morning cycling class with JC members. All levels welcome — show up, sweat, connect.',
+    type: 'Wellness for a Cause',
+    description: 'A Sunday morning cycling class with JC members. All levels welcome — show up, sweat, connect. Date in July TBD.',
     cta: null,
   },
   {
     title: 'Northalsted Market Days',
     date: 'Summer 2026',
     location: 'Halsted Street, Chicago',
-    type: 'Community',
+    type: 'Volunteer',
     description: 'One of the Midwest\'s largest street festivals. Stay tuned for details on how to join us.',
     cta: { label: 'Festival Info', href: 'https://northalsted.com/main-events/northalsted-market-days/', external: true },
   },
@@ -62,26 +54,39 @@ const upcomingEvents: Event[] = [
 
 const pastEvents: Event[] = [
   {
+    title: 'VinHausa at Soldier Field',
+    date: 'June 11, 2026',
+    time: '6:30 PM',
+    location: 'Soldier Field, Chicago',
+    type: 'Wellness for a Cause',
+    description: 'Where yoga meets house music. Join Junior Council members at this outdoor yoga event at Soldier Field — a percentage of proceeds will benefit Junior Council.',
+    cta: { label: 'Event Info', href: 'https://www.vinhausa.us/events/vinhausa-soldier-field', external: true },
+  },
+  {
     title: 'BOD Transition Party',
-    date: 'Spring 2026',
+    date: 'May 30, 2026',
     location: 'Chicago Trolley',
     type: 'Member Event',
     description: 'A wig-themed trolley ride through Chicago celebrating the transition from the 2025/26 board to the 2026/27 board.',
+    photo: '/IMG_2494.JPG',
+    photoPosition: 'center 35%',
     cta: null,
   },
   {
     title: 'Walk for Lurie\'s',
-    date: 'Spring 2026',
+    date: 'June 7, 2026',
     location: 'Chicago, IL',
     type: 'Fundraiser',
     description: 'JC members walked alongside hundreds of Chicagoans raising funds and awareness for Lurie Children\'s Hospital.',
+    photo: '/IMG_CE3D86AFEEE2-1.jpeg',
+    photoPosition: 'center 35%',
     cta: { label: 'Learn More', href: 'https://events.luriechildrens.org/walk-for-luriechildrens', external: true },
   },
 ]
 
 const typeStyles: Record<string, { pill: string; accent: string }> = {
-  'Community':   { pill: 'bg-blue-100 text-blue-700',   accent: 'border-blue-400' },
-  'Wellness':    { pill: 'bg-green-100 text-green-700',  accent: 'border-green-400' },
+  'Volunteer':   { pill: 'bg-blue-100 text-blue-700',   accent: 'border-blue-400' },
+  'Wellness for a Cause': { pill: 'bg-green-100 text-green-700', accent: 'border-green-400' },
   'Signature':   { pill: 'bg-jc-black text-white',       accent: 'border-jc-red' },
   'Fundraiser':  { pill: 'bg-jc-red/10 text-jc-red',     accent: 'border-jc-red' },
   'Member Event':{ pill: 'bg-jc-gray text-jc-gray-dark', accent: 'border-jc-gray-mid' },
@@ -90,8 +95,8 @@ const typeStyles: Record<string, { pill: string; accent: string }> = {
 export default function EventsPage() {
   const [tab, setTab] = useState<'upcoming' | 'past'>('upcoming')
 
-  const featured = upcomingEvents.find(e => e.featured)!
-  const rest = upcomingEvents.filter(e => !e.featured)
+  const featured = null
+  const rest = upcomingEvents
 
   return (
     <div className="pt-16">
@@ -148,67 +153,7 @@ export default function EventsPage() {
         <section className="bg-white py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
 
-            {/* Featured / Next Up */}
-            <div className="relative bg-jc-black overflow-hidden">
-              <div className="absolute top-0 left-0 w-1 h-full bg-jc-red" aria-hidden="true" />
-              <div className="absolute top-4 right-4">
-                <span className="bg-jc-red text-white text-xs font-black uppercase tracking-widest px-3 py-1">
-                  Next Up
-                </span>
-              </div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                {/* Date block */}
-                <div className="bg-jc-red px-10 py-12 flex flex-col justify-center">
-                  <p className="text-white/70 text-xs font-bold uppercase tracking-widest mb-2">{featured.type}</p>
-                  <h2 className="text-white font-black text-3xl sm:text-4xl leading-tight tracking-tight mb-6">
-                    {featured.title}
-                  </h2>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <svg className="w-4 h-4 text-white/70 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                      <span className="text-white font-bold text-sm">{featured.date}</span>
-                    </div>
-                    {featured.time && (
-                      <div className="flex items-center gap-3">
-                        <svg className="w-4 h-4 text-white/70 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span className="text-white font-bold text-sm">{featured.time}</span>
-                      </div>
-                    )}
-                    <div className="flex items-center gap-3">
-                      <svg className="w-4 h-4 text-white/70 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      <span className="text-white font-bold text-sm">{featured.location}</span>
-                    </div>
-                  </div>
-                </div>
-                {/* Description block */}
-                <div className="px-10 py-12 flex flex-col justify-center">
-                  <p className="text-white/70 text-base leading-relaxed mb-8">
-                    {featured.description}
-                  </p>
-                  {featured.cta && (
-                    <Link
-                      href={featured.cta.href}
-                      {...(featured.cta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                      className="inline-flex items-center gap-2 bg-white text-jc-black hover:bg-jc-gray font-black text-xs tracking-widest uppercase px-6 py-3 transition-colors self-start"
-                    >
-                      {featured.cta.label}
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </Link>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* Rest of upcoming — 2-col grid */}
+            {/* Upcoming grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-5">
               {rest.map((event, i) => {
                 const style = typeStyles[event.type] ?? typeStyles['Community']
@@ -276,47 +221,59 @@ export default function EventsPage() {
       {tab === 'past' && (
         <section className="bg-white py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
               {pastEvents.map((event, i) => {
                 const style = typeStyles[event.type] ?? typeStyles['Member Event']
                 return (
-                  <div key={i} className="border border-jc-gray-mid bg-jc-gray/50 p-8 flex flex-col opacity-80">
-                    <div className="flex items-start justify-between mb-4">
-                      <span className={`inline-block text-xs font-bold uppercase tracking-widest px-2 py-0.5 ${style.pill}`}>
-                        {event.type}
-                      </span>
-                      <span className="text-jc-gray-dark text-xs uppercase tracking-widest font-bold">Past</span>
-                    </div>
-                    <h3 className="text-jc-black font-black text-xl mb-3">{event.title}</h3>
+                  <div
+                    key={i}
+                    className={`border-t-4 bg-jc-gray border-jc-gray-mid p-6 flex flex-col ${style.accent}`}
+                  >
+                    <span className={`inline-block text-xs font-bold uppercase tracking-widest px-2 py-0.5 mb-4 self-start ${style.pill}`}>
+                      {event.type}
+                    </span>
+                    <h3 className="text-jc-black font-black text-lg leading-tight mb-3">{event.title}</h3>
                     <div className="space-y-1.5 mb-4">
                       <div className="flex items-center gap-2">
-                        <svg className="w-3.5 h-3.5 text-jc-gray-dark flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
-                        <span className="text-jc-gray-dark text-xs">{event.date}</span>
+                        <span className="text-jc-gray-dark text-xs font-bold">{event.date}</span>
                       </div>
+                      {event.time && (
+                        <div className="flex items-center gap-2">
+                          <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span className="text-jc-gray-dark text-xs font-bold">{event.time}</span>
+                        </div>
+                      )}
                       {event.location && (
                         <div className="flex items-center gap-2">
-                          <svg className="w-3.5 h-3.5 text-jc-gray-dark flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                           </svg>
-                          <span className="text-jc-gray-dark text-xs">{event.location}</span>
+                          <span className="text-jc-gray-dark text-xs font-bold">{event.location}</span>
                         </div>
                       )}
                     </div>
                     <p className="text-jc-gray-dark text-sm leading-relaxed flex-grow mb-5">{event.description}</p>
-                    {event.cta && (
+                    {event.cta ? (
                       <Link
                         href={event.cta.href}
                         {...(event.cta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                        className="inline-flex items-center gap-1 text-jc-gray-dark hover:text-jc-black font-black text-xs uppercase tracking-widest border-b border-jc-gray-mid pb-0.5 transition-colors self-start"
+                        className="inline-flex items-center gap-1 text-jc-black hover:text-jc-red font-black text-xs uppercase tracking-widest border-b border-jc-red pb-0.5 transition-colors self-start mt-auto"
                       >
                         {event.cta.label}
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
                       </Link>
+                    ) : (
+                      <span className="text-jc-gray-dark text-xs uppercase tracking-widest font-bold mt-auto">
+                        Member Event
+                      </span>
                     )}
                   </div>
                 )
