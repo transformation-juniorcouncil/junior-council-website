@@ -60,7 +60,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Thomas Ware',
     title: 'Engagement Director',
-    jobTitle: 'Associate Marketing Manager, Gatorade',
+    jobTitle: 'Associate Marketing Manager',
     company: 'PepsiCo',
     bio: 'Thomas Ware is an Associate Marketing Manager for Gatorade at PepsiCo. An alum of Dartmouth College and the University of Chicago Booth School of Business, Thomas is originally from Wisconsin. In his spare time he enjoys marathon training, playing and watching baseball, and political comedy.',
     linkedin: 'https://www.linkedin.com/in/thomasholmesware',
