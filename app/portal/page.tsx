@@ -528,7 +528,7 @@ export default function PortalPage() {
   // Greeting — computed at component level so the hero renders on every tab
   const hour      = today.getHours()
   const greeting  = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
-  const firstName = profile.name === 'Member Name' ? 'Member' : profile.name.split(' ')[0]
+  const firstName = profile.name === 'Member Name' ? 'Member' : profile.name
 
   // Feed
   const [posts, setPosts]               = useState<Post[]>(seedPosts)
@@ -773,13 +773,6 @@ export default function PortalPage() {
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                             <p className="text-jc-gray-dark text-sm">{nextEvent.time}</p>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
-                            <p className="text-jc-gray-dark text-sm">{nextEvent.location}</p>
                           </div>
                         </div>
                       </div>
