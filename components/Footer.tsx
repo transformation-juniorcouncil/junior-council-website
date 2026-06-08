@@ -14,7 +14,7 @@ const footerLinks = {
     { href: '/membership#dues', label: 'Membership Dues' },
   ],
   'Support': [
-    { href: '/support#donate', label: 'Personal Donations' },
+    { href: 'https://my.onecause.com/fundraiser/organizations/sf-001C0000018LfpcIAC/fundraisers/fundraiser:4f72a4df-6a73-4d3c-b436-c3350aba4f3b/friendly', label: 'Personal Donations' },
     { href: '/support#corporate', label: 'Corporate Partnerships' },
     { href: '/support#hospitality', label: 'Hospitality Partners' },
     { href: '/support#inkind', label: 'In-Kind Donations' },

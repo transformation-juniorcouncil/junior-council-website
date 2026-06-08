@@ -65,9 +65,14 @@ export default function DonatePage() {
                   </button>
                 ))}
               </div>
-              <button className="w-full bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-8 py-4 transition-colors">
+              <a
+                href="https://my.onecause.com/fundraiser/organizations/sf-001C0000018LfpcIAC/fundraisers/fundraiser:4f72a4df-6a73-4d3c-b436-c3350aba4f3b/friendly"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-8 py-4 transition-colors text-center"
+              >
                 Donate Now
-              </button>
+              </a>
               <p className="text-jc-gray-dark text-xs mt-3 text-center">
                 Secure donation processing via [Payment Processor]
               </p>

@@ -194,7 +194,9 @@ export default function OurCausePage() {
               Get Involved
             </Link>
             <Link
-              href="/support#donate"
+              href="https://my.onecause.com/fundraiser/organizations/sf-001C0000018LfpcIAC/fundraisers/fundraiser:4f72a4df-6a73-4d3c-b436-c3350aba4f3b/friendly"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center border-2 border-white/50 text-white font-black text-sm tracking-widest uppercase px-8 py-4 hover:bg-white/10 transition-colors"
             >
               Donate Now

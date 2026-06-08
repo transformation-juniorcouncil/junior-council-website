@@ -152,7 +152,9 @@ export default function SupportPage() {
           </div>
           <div className="mt-8 text-center">
             <Link
-              href="/donate"
+              href="https://my.onecause.com/fundraiser/organizations/sf-001C0000018LfpcIAC/fundraisers/fundraiser:4f72a4df-6a73-4d3c-b436-c3350aba4f3b/friendly"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-10 py-4 transition-colors"
             >
               Make a Donation

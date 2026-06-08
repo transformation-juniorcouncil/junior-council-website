@@ -118,7 +118,7 @@ export default function HomePage() {
                 </svg>
               </Link>
               <Link
-                href="/support#donate"
+                href="https://my.onecause.com/fundraiser/organizations/sf-001C0000018LfpcIAC/fundraisers/fundraiser:4f72a4df-6a73-4d3c-b436-c3350aba4f3b/friendly" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-8 py-4 transition-colors focus:outline-none focus:ring-2 focus:ring-jc-red focus:ring-offset-2 focus:ring-offset-jc-black"
               >
                 Make a Donation
@@ -442,7 +442,7 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/support#donate"
+              href="https://my.onecause.com/fundraiser/organizations/sf-001C0000018LfpcIAC/fundraisers/fundraiser:4f72a4df-6a73-4d3c-b436-c3350aba4f3b/friendly" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center justify-center bg-white text-jc-black font-black text-sm tracking-widest uppercase px-10 py-4 hover:bg-jc-gray-mid transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-jc-red"
             >
               Make a Donation
