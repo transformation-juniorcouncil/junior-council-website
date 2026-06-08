@@ -734,13 +734,11 @@ export default function PortalPage() {
           const todayStr   = `${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`
           const nextEvent  = upcomingEvents.find(e => e.dateKey >= todayStr) ?? null
           const daysUntil  = nextEvent ? Math.ceil((new Date(nextEvent.dateKey+'T00:00:00').getTime() - new Date(todayStr+'T00:00:00').getTime()) / 86400000) : null
-          const ringR      = 36; const ringC = 2 * Math.PI * ringR
-          const ringOffset = ringC * (1 - completedCount / TOTAL_GOALS)
           return (
-            <div className="space-y-5">
+            <div className="grid lg:grid-cols-3 gap-5">
 
               {/* ── Next event ── */}
-              <div className="bg-white border border-jc-gray-mid">
+              <div className="lg:col-span-2 bg-white border border-jc-gray-mid">
                 <div className="px-6 py-3 border-b border-jc-gray-mid flex items-center justify-between">
                   <span className="text-jc-red text-xs font-black uppercase tracking-[0.2em]">Next Up</span>
                   <button onClick={()=>setActiveTab('calendar')} className="text-jc-gray-dark text-xs font-bold hover:text-jc-red transition-colors">Full calendar →</button>
@@ -810,35 +808,8 @@ export default function PortalPage() {
                 )}
               </div>
 
-              {/* ── Goals + Dues ── */}
-              <div className="grid sm:grid-cols-3 gap-5">
-
-                {/* Goals */}
-                <div className="sm:col-span-2 bg-white border border-jc-gray-mid p-5 flex items-center gap-5 cursor-pointer hover:border-jc-red transition-colors group"
-                  onClick={()=>setActiveTab('impact')} role="button" aria-label="View Impact Tracker">
-                  <div className="relative flex-shrink-0 w-16 h-16">
-                    <svg className="w-16 h-16 -rotate-90" viewBox="0 0 88 88" aria-hidden="true">
-                      <circle cx="44" cy="44" r={ringR} fill="none" stroke="#e8e8e8" strokeWidth="7"/>
-                      <circle cx="44" cy="44" r={ringR} fill="none" stroke="#C8102E" strokeWidth="7"
-                        strokeDasharray={ringC} strokeDashoffset={ringOffset}
-                        className="transition-all duration-700"/>
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center flex-col">
-                      <span className="text-jc-black font-black text-lg leading-none">{completedCount}</span>
-                      <span className="text-jc-gray-dark text-xs">of {TOTAL_GOALS}</span>
-                    </div>
-                  </div>
-                  <div className="flex-grow">
-                    <p className="text-jc-gray-dark text-xs uppercase tracking-widest mb-1">Season Goals</p>
-                    <p className="text-jc-black font-black text-lg leading-tight mb-3">
-                      {completedCount === TOTAL_GOALS ? 'All Complete!' : completedCount === 0 ? 'Get Started' : `${completedCount} of ${TOTAL_GOALS} Done`}
-                    </p>
-                    <span className="text-jc-red text-xs font-bold group-hover:underline">View Impact Tracker →</span>
-                  </div>
-                </div>
-
-                {/* Dues */}
-                <div className="bg-jc-black p-5 flex flex-col justify-between">
+              {/* ── Dues ── */}
+              <div className="bg-jc-black p-5 flex flex-col justify-between">
                   <div>
                     <p className="text-white/60 text-xs uppercase tracking-widest mb-1.5">2026–2027 Dues</p>
                     <p className={`font-black text-3xl leading-none mb-2 ${duesPaid ? 'text-green-400' : 'text-jc-red'}`}>
@@ -856,8 +827,6 @@ export default function PortalPage() {
                     </button>
                   )}
                 </div>
-
-              </div>
             </div>
           )
         })()}
