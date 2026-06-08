@@ -204,8 +204,8 @@ export default function HomePage() {
               </p>
               <p className="text-jc-gray-dark text-base leading-relaxed mb-8">
                 Through fundraising events, corporate partnerships, and community
-                engagement, we channel 100% of resources directly to the Adolescent
-                HIV program at{' '}
+                engagement, we channel 100% of resources directly to the Special
+                Infectious Diseases Program (Lurie Children&apos;s SID Program) at{' '}
                 <a
                   href="https://www.luriechildrens.org"
                   target="_blank"
