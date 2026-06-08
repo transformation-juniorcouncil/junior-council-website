@@ -337,6 +337,62 @@ export default function SupportPage() {
         </div>
       </section>
 
+      {/* Wellness for a Cause */}
+      <section id="wellness" className="bg-jc-gray py-20 scroll-mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
+            <span className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase">Wellness for a Cause</span>
+          </div>
+          <h2 className="text-jc-black font-black text-3xl sm:text-4xl mb-4 tracking-tight">
+            Wellness <span className="text-jc-red">Partnerships</span>
+          </h2>
+          <p className="text-jc-gray-dark text-lg leading-relaxed mb-10 max-w-3xl">
+            Junior Council partners with fitness and wellness brands to host events that raise funds and awareness for our mission. A portion of proceeds from every Wellness for a Cause event benefits adolescents living with HIV and AIDS at Lurie Children&apos;s Hospital.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+            {[
+              {
+                name: 'VinHausa',
+                description: 'An outdoor yoga and house music experience. Junior Council members joined hundreds of Chicagoans at Soldier Field for a percentage-of-proceeds benefit event.',
+                href: 'https://www.vinhausa.us',
+              },
+              {
+                name: 'Equinox',
+                description: 'Junior Council hosts a cycling class at Equinox Chicago, bringing members together for a morning sweat with a portion of proceeds supporting our mission.',
+                href: null,
+              },
+            ].map((partner, i) => (
+              <div key={i} className="bg-white border-t-4 border-jc-red p-6 flex flex-col">
+                <h3 className="text-jc-black font-black text-xl mb-3">{partner.name}</h3>
+                <p className="text-jc-gray-dark text-sm leading-relaxed flex-grow mb-4">{partner.description}</p>
+                {partner.href && (
+                  <a
+                    href={partner.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-jc-black hover:text-jc-red font-black text-xs uppercase tracking-widest border-b border-jc-red pb-0.5 transition-colors self-start"
+                  >
+                    Learn More
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <Link
+              href="/contact"
+              className="inline-flex items-center bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-10 py-4 transition-colors"
+            >
+              Become a Wellness Partner
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* In-Kind Donations */}
       <section id="inkind" className="bg-jc-charcoal py-20 scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

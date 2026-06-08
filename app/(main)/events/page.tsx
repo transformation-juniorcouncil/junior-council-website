@@ -35,12 +35,28 @@ const upcomingEvents: Event[] = [
     cta: null,
   },
   {
+    title: 'JC Palooza',
+    date: 'August 14, 2026',
+    location: 'Chicago, IL',
+    type: 'Member Event',
+    description: 'Come celebrate Lollapalooza with Junior Council! More details to come.',
+    cta: null,
+  },
+  {
     title: 'Northalsted Market Days',
     date: 'Summer 2026',
     location: 'Halsted Street, Chicago',
     type: 'Volunteer',
     description: 'One of the Midwest\'s largest street festivals. Stay tuned for details on how to join us.',
     cta: { label: 'Festival Info', href: 'https://northalsted.com/main-events/northalsted-market-days/', external: true },
+  },
+  {
+    title: 'Annual Golf Outing',
+    date: 'Date & Location TBD',
+    location: 'Chicago, IL',
+    type: 'Fundraiser',
+    description: 'Join Junior Council and our corporate sponsors for a day on the course raising funds for our mission. Details coming soon.',
+    cta: null,
   },
   {
     title: 'Annual Snowball Gala 2027',
