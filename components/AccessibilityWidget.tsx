@@ -73,8 +73,11 @@ export default function AccessibilityWidget() {
         {anyActive && (
           <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full" aria-hidden="true" />
         )}
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          {/* Head */}
+          <circle cx="12" cy="3.5" r="1.75" />
+          {/* Body leaning forward with raised arm */}
+          <path d="M12 6.5c-1 0-1.8.6-2.1 1.4L8.5 11H6a1 1 0 000 2h3a1 1 0 00.9-.6l.6-1.4.5 2H8a1 1 0 00-.9.6l-2 4.5a1 1 0 001.8.8L8.7 16h4.6l1 3a1 1 0 001.9-.6l-1.3-4a1 1 0 00-.9-.4h-2l-.4-2h2.9a1 1 0 00.9-.6l1.1-2.6a1 1 0 00-1.8-.8l-.7 1.6H13l-.4-1.6c.1 0 .2-.1.4-.1 0 0 1.5-.3 2-.9a1 1 0 00-1.4-1.4c-.1.1-.4.3-1.6.4z" />
         </svg>
       </button>
 
