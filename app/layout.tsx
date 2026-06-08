@@ -42,9 +42,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* UserWay Accessibility Widget
             To activate: sign up free at userway.org, get your account ID,
             and replace REPLACE_WITH_YOUR_ACCOUNT_ID below */}
+        {/* NOTE: UserWay account configured for Vercel preview URL.
+            Once juniorcouncil.org domain is live, update the domain
+            in the UserWay dashboard at userway.org to match. */}
         <Script
           src="https://cdn.userway.org/widget.js"
-          data-account="REPLACE_WITH_YOUR_ACCOUNT_ID"
+          data-account="Lc427Ysm8T"
           strategy="lazyOnload"
         />
       </body>
