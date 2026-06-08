@@ -91,8 +91,6 @@ const donors = {
     { name: 'Auction Donor Name', item: 'Services' },
   ],
   wellness: [
-    { name: 'GoGlow', category: 'Spray Tan' },
-    { name: 'Pin Me Up Chicago', category: 'Hair & Makeup' },
     { name: 'VinHausa', category: 'Yoga & Dance' },
     { name: 'Equinox', category: 'Cycling' },
     { name: 'Barre3', category: 'Barre' },
