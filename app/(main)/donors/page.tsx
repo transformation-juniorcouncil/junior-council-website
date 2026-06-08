@@ -92,9 +92,9 @@ const donors = {
     { name: 'Auction Donor Name', item: 'Services' },
   ],
   wellness: [
-    { name: 'VinHausa', category: 'Yoga & Dance', website: 'https://www.vinhausa.us', logo: '/vinhausa logo.png' },
-    { name: 'Equinox', category: 'Cycling', website: 'https://www.equinox.com', logo: '/equinox logo.png' },
-    { name: 'Barre3', category: 'Barre', website: 'https://barre3.com', logo: '/barre 3 logo.png' },
+    { name: 'VinHausa', category: 'Yoga & Dance', website: 'https://www.vinhausa.us', logo: '/vinhausa-logo.png' },
+    { name: 'Equinox', category: 'Cycling', website: 'https://www.equinox.com', logo: '/equinox-logo.png' },
+    { name: 'Barre3', category: 'Barre', website: 'https://barre3.com', logo: '/barre3-logo.png' },
   ],
 }
 
