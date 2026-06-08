@@ -337,6 +337,54 @@ export default function SupportPage() {
         </div>
       </section>
 
+      {/* In-Kind Donations */}
+      <section id="inkind" className="bg-white py-20 scroll-mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <h2 className="text-jc-black font-black text-3xl sm:text-4xl mb-6 tracking-tight">
+              In-Kind <span className="text-jc-red">Donations</span>
+            </h2>
+            <p className="text-jc-gray-dark text-lg leading-relaxed mb-5">
+              In-kind donations — goods, services, or experiences — power our
+              silent auction and reduce event costs, meaning more of every dollar
+              goes directly to patient care at Lurie Children&apos;s Hospital.
+            </p>
+            <p className="text-jc-gray-dark leading-relaxed mb-8">
+              We accept in-kind donations year-round. Items for our silent
+              auction are especially valued. All donated items are recognized in
+              our event program and on our social media channels.
+            </p>
+            <div className="grid grid-cols-2 gap-4 mb-8">
+              {[
+                'Experiences & Travel',
+                'Sports & Entertainment Tickets',
+                'Restaurant Gift Certificates',
+                'Luxury & Lifestyle Items',
+                'Art & Collectibles',
+                'Services (spa, fitness, etc.)',
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-jc-red flex-shrink-0" aria-hidden="true" />
+                  <span className="text-jc-gray-dark text-sm">{item}</span>
+                </div>
+              ))}
+            </div>
+            <Link
+              href="/contact"
+              className="inline-flex items-center bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-8 py-4 transition-colors"
+            >
+              Donate an Item
+            </Link>
+            <p className="text-jc-gray-dark text-sm mt-5">
+              For further information, contact Erin Bylina at{' '}
+              <a href="mailto:silentauction@juniorcouncil.org" className="text-jc-red font-bold hover:underline">
+                silentauction@juniorcouncil.org
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Wellness for a Cause */}
       <section id="wellness" className="bg-jc-gray py-20 scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -387,59 +435,17 @@ export default function SupportPage() {
               </div>
             ))}
           </div>
-          <div className="text-center">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-6">
             <Link
               href="/contact"
               className="inline-flex items-center bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-10 py-4 transition-colors"
             >
               Become a Wellness Partner
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* In-Kind Donations */}
-      <section id="inkind" className="bg-jc-charcoal py-20 scroll-mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h2 className="text-white font-black text-3xl sm:text-4xl mb-6 tracking-tight">
-              In-Kind <span className="text-jc-red">Donations</span>
-            </h2>
-            <p className="text-white/70 text-lg leading-relaxed mb-5">
-              In-kind donations — goods, services, or experiences — power our
-              silent auction and reduce event costs, meaning more of every dollar
-              goes directly to patient care at Lurie Children&apos;s Hospital.
-            </p>
-            <p className="text-white/70 leading-relaxed mb-8">
-              We accept in-kind donations year-round. Items for our silent
-              auction are especially valued. All donated items are recognized in
-              our event program and on our social media channels.
-            </p>
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              {[
-                'Experiences & Travel',
-                'Sports & Entertainment Tickets',
-                'Restaurant Gift Certificates',
-                'Luxury & Lifestyle Items',
-                'Art & Collectibles',
-                'Services (spa, fitness, etc.)',
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-jc-red flex-shrink-0" aria-hidden="true" />
-                  <span className="text-white/70 text-sm">{item}</span>
-                </div>
-              ))}
-            </div>
-            <Link
-              href="/contact"
-              className="inline-flex items-center border-2 border-white hover:bg-white hover:text-jc-black text-white font-black text-sm tracking-widest uppercase px-8 py-4 transition-colors"
-            >
-              Donate an Item
-            </Link>
-            <p className="text-white/60 text-sm mt-5">
-              For further information, contact Erin Bylina at{' '}
-              <a href="mailto:silentauction@juniorcouncil.com" className="text-jc-red font-bold hover:underline">
-                silentauction@juniorcouncil.com
+            <p className="text-jc-gray-dark text-sm">
+              For further information, contact Isabella Del Muro at{' '}
+              <a href="mailto:w4ac@juniorcouncil.org" className="text-jc-red font-bold hover:underline">
+                w4ac@juniorcouncil.org
               </a>
             </p>
           </div>
