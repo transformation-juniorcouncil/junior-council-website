@@ -53,6 +53,120 @@ body {
   }
 }
 
+/* ── Custom Accessibility Widget Modes ─────────────────────────────────────── */
+
+/* Bigger Text */
+html.a11y-big-text body {
+  font-size: 120% !important;
+}
+html.a11y-big-text h1 { font-size: 3.5rem !important; }
+html.a11y-big-text h2 { font-size: 2.5rem !important; }
+html.a11y-big-text h3 { font-size: 1.75rem !important; }
+html.a11y-big-text p, html.a11y-big-text li, html.a11y-big-text span {
+  font-size: 1.1rem !important;
+  line-height: 1.8 !important;
+}
+
+/* High Contrast — white bg, black text, JC red accents */
+html.a11y-high-contrast * {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* Keep red for brand accents */
+html.a11y-high-contrast .text-jc-red,
+html.a11y-high-contrast [class*="text-jc-red"],
+html.a11y-high-contrast h1 span,
+html.a11y-high-contrast h2 span,
+html.a11y-high-contrast h3 span {
+  color: #C1121F !important;
+}
+
+/* Red buttons stay red with white text */
+html.a11y-high-contrast .bg-jc-red,
+html.a11y-high-contrast [class*="bg-jc-red"] {
+  background-color: #C1121F !important;
+  color: #ffffff !important;
+}
+html.a11y-high-contrast .bg-jc-red *,
+html.a11y-high-contrast [class*="bg-jc-red"] * {
+  color: #ffffff !important;
+}
+
+/* Black sections — invert to white bg, black text */
+html.a11y-high-contrast .bg-jc-black,
+html.a11y-high-contrast .bg-jc-charcoal,
+html.a11y-high-contrast [class*="bg-jc-black"],
+html.a11y-high-contrast [class*="bg-jc-charcoal"] {
+  background-color: #ffffff !important;
+  border: 2px solid #000000 !important;
+}
+html.a11y-high-contrast .bg-jc-black *,
+html.a11y-high-contrast .bg-jc-charcoal * {
+  color: #000000 !important;
+}
+
+/* Nav */
+html.a11y-high-contrast nav,
+html.a11y-high-contrast header {
+  background-color: #ffffff !important;
+  border-bottom: 2px solid #000000 !important;
+}
+
+/* Links */
+html.a11y-high-contrast a {
+  color: #C1121F !important;
+  text-decoration: underline !important;
+}
+
+/* Images & decorative elements — keep visible */
+html.a11y-high-contrast img {
+  filter: contrast(1.1) !important;
+}
+html.a11y-high-contrast [aria-hidden="true"] div,
+html.a11y-high-contrast .absolute[aria-hidden="true"] {
+  opacity: 0 !important;
+}
+
+/* Red accent lines/bars stay red */
+html.a11y-high-contrast .bg-jc-red.w-8,
+html.a11y-high-contrast .bg-jc-red.w-1\.5,
+html.a11y-high-contrast .bg-jc-red.h-0\.5 {
+  background-color: #C1121F !important;
+}
+
+/* Text Spacing */
+html.a11y-text-spacing p,
+html.a11y-text-spacing li,
+html.a11y-text-spacing span,
+html.a11y-text-spacing a {
+  letter-spacing: 0.05em !important;
+  word-spacing: 0.1em !important;
+  line-height: 1.9 !important;
+}
+
+/* Pause Animations */
+html.a11y-pause-animations *,
+html.a11y-pause-animations *::before,
+html.a11y-pause-animations *::after {
+  animation-play-state: paused !important;
+  transition-duration: 0ms !important;
+}
+
+/* Dyslexia Friendly Font */
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+html.a11y-dyslexic body,
+html.a11y-dyslexic p,
+html.a11y-dyslexic li,
+html.a11y-dyslexic span,
+html.a11y-dyslexic a {
+  font-family: 'Atkinson Hyperlegible', sans-serif !important;
+  line-height: 1.8 !important;
+}
+
 /* Shrink UserWay accessibility widget button */
 #userwayAccessibilityIcon,
 [id^="userway-"] svg,
