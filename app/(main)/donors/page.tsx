@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import LogoImage from '@/components/LogoImage'
 
@@ -91,9 +92,9 @@ const donors = {
     { name: 'Auction Donor Name', item: 'Services' },
   ],
   wellness: [
-    { name: 'VinHausa', category: 'Yoga & Dance' },
-    { name: 'Equinox', category: 'Cycling' },
-    { name: 'Barre3', category: 'Barre' },
+    { name: 'VinHausa', category: 'Yoga & Dance', website: 'https://www.vinhausa.us', logo: '/vinhausa logo.png' },
+    { name: 'Equinox', category: 'Cycling', website: 'https://www.equinox.com', logo: '/equinox logo.png' },
+    { name: 'Barre3', category: 'Barre', website: 'https://barre3.com', logo: '/barre 3 logo.png' },
   ],
 }
 
@@ -332,22 +333,29 @@ export default function DonorsPage() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {donors.wellness.map((donor, i) => (
-              <div
+              <a
                 key={i}
-                className="border border-jc-gray-mid hover:border-jc-red transition-colors p-6 flex flex-col items-center justify-center text-center min-h-[120px] group"
+                href={donor.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-jc-gray-mid hover:border-jc-red transition-colors p-5 flex flex-col items-center text-center group cursor-pointer"
               >
-                <div className="w-12 h-12 bg-jc-gray rounded-sm mb-3 flex items-center justify-center group-hover:bg-jc-red/10 transition-colors" aria-hidden="true">
-                  <svg className="w-6 h-6 text-jc-gray-mid group-hover:text-jc-red transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
+                <div className="w-16 h-16 bg-jc-gray rounded-sm mb-3 flex items-center justify-center group-hover:bg-jc-red/10 transition-colors flex-shrink-0 overflow-hidden">
+                  <Image
+                    src={donor.logo}
+                    alt={donor.name}
+                    width={56}
+                    height={56}
+                    className="object-contain"
+                  />
                 </div>
-                <div className="text-jc-black font-black text-sm leading-tight mb-1">
+                <div className="text-jc-black font-black text-sm leading-tight mb-1 group-hover:text-jc-red transition-colors">
                   {donor.name}
                 </div>
                 <div className="text-jc-red text-xs font-semibold uppercase tracking-wide">
                   {donor.category}
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
