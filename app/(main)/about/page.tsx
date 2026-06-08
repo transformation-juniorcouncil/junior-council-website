@@ -160,6 +160,19 @@ export default function OurCausePage() {
           <p className="text-jc-gray-dark text-lg mb-12 max-w-2xl">
             Behind every dollar raised is a young person getting the care they deserve. Here are their stories.
           </p>
+
+          {/* Dr. Jao featured quote */}
+          <blockquote className="bg-jc-charcoal p-10 mb-10 border-l-4 border-jc-red">
+            <div className="text-jc-red font-black text-5xl leading-none mb-4" aria-hidden="true">&ldquo;</div>
+            <p className="text-white text-lg sm:text-xl leading-relaxed mb-8">
+              We are deeply grateful for Junior Council&apos;s support in our clinic over the last two decades. They have inspired us with their energy, drive, and passion, and their generosity has been poured out on our patients, ensuring that patients receive the resources, treatment, and compassion they deserve.
+            </p>
+            <footer className="border-t border-white/10 pt-6">
+              <p className="text-jc-red font-black text-sm uppercase tracking-widest">Jennifer Jao, MD, MPH</p>
+              <p className="text-white/40 text-xs mt-1 uppercase tracking-wide">Lurie Children&apos;s SID Program</p>
+            </footer>
+          </blockquote>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
