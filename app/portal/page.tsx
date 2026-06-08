@@ -525,6 +525,11 @@ export default function PortalPage() {
   const saveProfile = () => { setProfile(profileDraft); setEditingProfile(false) }
   const cancelEdit  = () => { setProfileDraft(profile); setEditingProfile(false) }
 
+  // Greeting — computed at component level so the hero renders on every tab
+  const hour      = today.getHours()
+  const greeting  = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
+  const firstName = profile.name === 'Member Name' ? 'Member' : profile.name.split(' ')[0]
+
   // Feed
   const [posts, setPosts]               = useState<Post[]>(seedPosts)
   const [postText, setPostText]         = useState('')
@@ -685,7 +690,25 @@ export default function PortalPage() {
         </div>
       </nav>
 
-      {/* Tab bar */}
+      {/* Greeting hero — always visible across all tabs */}
+      <div className="bg-jc-black">
+        <div className="h-0.5 w-full bg-jc-red"/>
+        <div className="px-8 sm:px-12 py-7 sm:py-9">
+          <p className="text-jc-red text-xs font-bold tracking-[0.3em] uppercase mb-3">{greeting}</p>
+          <h1 className="text-white font-black text-5xl sm:text-6xl tracking-tight leading-none mb-4">{firstName}</h1>
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className="text-white/60 text-xs tracking-[0.2em] uppercase">Junior Council</span>
+            <div className="w-1 h-1 bg-white/40 rounded-full"/>
+            <span className="text-white/60 text-xs tracking-[0.2em] uppercase">2026 / 2027 Season</span>
+            <div className="w-1 h-1 bg-white/40 rounded-full"/>
+            <span className="text-white/60 text-xs tracking-[0.2em] uppercase">
+              {today.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Tab bar — below the greeting */}
       <div className="bg-jc-charcoal border-b border-white/10 px-4 sm:px-6 lg:px-8 py-3">
         <div className="max-w-7xl mx-auto">
           <div className="inline-flex bg-black/40 p-1 gap-1 rounded-sm flex-wrap">
@@ -708,53 +731,13 @@ export default function PortalPage() {
 
         {/* ── DASHBOARD ─────────────────────────────────────────────────────── */}
         {activeTab==='dashboard' && (()=>{
-          const hour       = today.getHours()
-          const greeting   = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
-          const firstName  = profile.name === 'Member Name' ? 'Member' : profile.name.split(' ')[0]
           const todayStr   = `${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`
           const nextEvent  = upcomingEvents.find(e => e.dateKey >= todayStr) ?? null
           const daysUntil  = nextEvent ? Math.ceil((new Date(nextEvent.dateKey+'T00:00:00').getTime() - new Date(todayStr+'T00:00:00').getTime()) / 86400000) : null
-          const raisedAmt  = 242000; const goalAmt = 250000
-          const raisedPct  = Math.min(Math.round(raisedAmt / goalAmt * 100), 100)
           const ringR      = 36; const ringC = 2 * Math.PI * ringR
           const ringOffset = ringC * (1 - completedCount / TOTAL_GOALS)
           return (
             <div className="space-y-5">
-
-              {/* ── Hero ── */}
-              <div className="bg-jc-black">
-                <div className="h-0.5 w-full bg-jc-red"/>
-                <div className="px-8 sm:px-12 py-7 sm:py-9">
-                  <p className="text-jc-red text-xs font-bold tracking-[0.3em] uppercase mb-3">{greeting}</p>
-                  <h1 className="text-white font-black text-5xl sm:text-6xl tracking-tight leading-none mb-4">{firstName}</h1>
-                  <div className="flex items-center gap-3 flex-wrap">
-                    <span className="text-white/60 text-xs tracking-[0.2em] uppercase">Junior Council</span>
-                    <div className="w-1 h-1 bg-white/40 rounded-full"/>
-                    <span className="text-white/60 text-xs tracking-[0.2em] uppercase">2026 / 2027 Season</span>
-                    <div className="w-1 h-1 bg-white/40 rounded-full"/>
-                    <span className="text-white/60 text-xs tracking-[0.2em] uppercase">
-                      {today.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})}
-                    </span>
-                  </div>
-                </div>
-                {/* Fundraising strip */}
-                <div className="border-t border-white/10 px-8 sm:px-12 py-4 flex items-center gap-6 flex-wrap">
-                  <div>
-                    <p className="text-white/60 text-xs uppercase tracking-widest mb-0.5">2026 Fundraising Goal</p>
-                    <div className="flex items-baseline gap-3">
-                      <span className="text-white font-black text-2xl">${raisedAmt.toLocaleString()}</span>
-                      <span className="text-white/60 text-xs">of ${goalAmt.toLocaleString()}</span>
-                    </div>
-                  </div>
-                  <div className="flex-grow flex items-center gap-4 min-w-[160px]">
-                    <div className="flex-grow h-px bg-white/20 relative overflow-hidden">
-                      <div className="absolute inset-y-0 left-0 bg-jc-red transition-all" style={{width:`${raisedPct}%`}}/>
-                    </div>
-                    <span className="text-jc-red font-black text-sm flex-shrink-0">{raisedPct}%</span>
-                  </div>
-                  <span className="text-white/60 text-xs">${(goalAmt-raisedAmt).toLocaleString()} to go</span>
-                </div>
-              </div>
 
               {/* ── Next event ── */}
               <div className="bg-white border border-jc-gray-mid">
