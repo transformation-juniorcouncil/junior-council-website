@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 // Routing map — some reasons go to multiple recipients
 const routingMap: Record<string, string[]> = {
-  membership:  ['membership@juniorcouncil.org'],
+  membership:  ['transformation@juniorcouncil.org'],
   corporate:   ['corporate@juniorcouncil.org'],
   hospitality: ['hospitality@juniorcouncil.org'],
   inkind:      ['hospitality@juniorcouncil.org'],
