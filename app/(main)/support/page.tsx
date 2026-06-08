@@ -358,6 +358,11 @@ export default function SupportPage() {
                 href: 'https://www.vinhausa.us',
               },
               {
+                name: 'Barre3',
+                description: 'Junior Council hosts a Barre3 strength class in Chicago. Tickets are $25 with a portion of proceeds benefiting adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
+                href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:c4974874-6b96-49e9-bd45-1a18370d97c4/home/story',
+              },
+              {
                 name: 'Equinox',
                 description: 'Junior Council hosts a cycling class at Equinox Chicago, bringing members together for a morning sweat with a portion of proceeds supporting our mission.',
                 href: null,

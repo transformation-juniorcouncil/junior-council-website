@@ -35,6 +35,15 @@ const upcomingEvents: Event[] = [
     cta: null,
   },
   {
+    title: 'Wellness for a Cause: Barre3',
+    date: 'June 29, 2026',
+    time: '7:30 PM',
+    location: 'Barre3, Chicago',
+    type: 'Wellness for a Cause',
+    description: 'Join Junior Council for a Barre3 strength class benefiting our mission. Tickets are $25 — a portion of proceeds supports adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
+    cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:c4974874-6b96-49e9-bd45-1a18370d97c4/home/story', external: true },
+  },
+  {
     title: 'JC Palooza',
     date: 'August 14, 2026',
     location: 'Chicago, IL',
