@@ -39,7 +39,7 @@ const navLinks: NavLink[] = [
       { href: '/gala', label: 'About Snowball' },
       { href: '/gala/tickets', label: 'Get Your Tickets' },
       { href: '/gala/silent-auction', label: 'Silent Auction' },
-      { href: '/gala/recap', label: 'Event Recaps' },
+      { href: '/gala/recap', label: '2026 Snowball Recap' },
     ],
   },
   {
