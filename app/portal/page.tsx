@@ -17,7 +17,7 @@ type Post = {
   comments: Comment[]; showComments: boolean
   poll?: PollOption[]; votedOption?: number
 }
-type Tab = 'dashboard' | 'calendar' | 'impact' | 'resources' | 'profile'
+type Tab = 'dashboard' | 'calendar' | 'impact' | 'resources' | 'profile' | 'dues'
 
 type Profile = {
   name: string; pronouns: string; avatar: string | null; bio: string
@@ -583,12 +583,14 @@ export default function PortalPage() {
   ))
   const handleDeletePost = (id:number) => setPosts(p => p.filter(post => post.id!==id))
 
-  const tabs = [
-    { key:'dashboard' as Tab, label:'Dashboard',      icon:'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
+  const baseTabs = [
+    { key:'dashboard' as Tab, label:'Dashboard',         icon:'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
     { key:'calendar'  as Tab, label:'Calendar & Events', icon:'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' },
-    { key:'impact'    as Tab, label:'Impact Tracker', icon:'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' },
-    { key:'resources' as Tab, label:'Resources',      icon:'M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z' },
+    { key:'impact'    as Tab, label:'Impact Tracker',    icon:'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' },
+    { key:'resources' as Tab, label:'Resources',         icon:'M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z' },
   ]
+  const duesTab = { key:'dues' as Tab, label:'Pay Dues', icon:'M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z' }
+  const tabs = duesPaid ? baseTabs : [...baseTabs, duesTab]
 
   return (
     <div className="min-h-screen bg-jc-gray">
@@ -735,10 +737,10 @@ export default function PortalPage() {
           const nextEvent  = upcomingEvents.find(e => e.dateKey >= todayStr) ?? null
           const daysUntil  = nextEvent ? Math.ceil((new Date(nextEvent.dateKey+'T00:00:00').getTime() - new Date(todayStr+'T00:00:00').getTime()) / 86400000) : null
           return (
-            <div className="grid lg:grid-cols-3 gap-5">
+            <div>
 
               {/* ── Next event ── */}
-              <div className="lg:col-span-2 bg-white border border-jc-gray-mid">
+              <div className="bg-white border border-jc-gray-mid">
                 <div className="px-6 py-3 border-b border-jc-gray-mid flex items-center justify-between">
                   <span className="text-jc-red text-xs font-black uppercase tracking-[0.2em]">Next Up</span>
                   <button onClick={()=>setActiveTab('calendar')} className="text-jc-gray-dark text-xs font-bold hover:text-jc-red transition-colors">Full calendar →</button>
@@ -784,26 +786,6 @@ export default function PortalPage() {
                   </div>
                 )}
               </div>
-
-              {/* ── Dues ── */}
-              <div className="bg-jc-black p-5 flex flex-col justify-between">
-                  <div>
-                    <p className="text-white/60 text-xs uppercase tracking-widest mb-1.5">2026–2027 Dues</p>
-                    <p className={`font-black text-3xl leading-none mb-2 ${duesPaid ? 'text-green-400' : 'text-jc-red'}`}>
-                      {duesPaid ? 'Paid' : 'Unpaid'}
-                    </p>
-                    <p className="text-white/70 text-xs leading-relaxed">Annual dues keep your membership active.</p>
-                  </div>
-                  {duesPaid ? (
-                    <div className="mt-5 w-full bg-green-500/20 border border-green-500/40 text-green-400 font-black text-xs tracking-widest uppercase py-3 text-center">
-                      Dues Paid
-                    </div>
-                  ) : (
-                    <button onClick={()=>setDuesModalOpen(true)} className="mt-5 w-full bg-jc-red hover:bg-jc-red-dark text-white font-black text-xs tracking-widest uppercase py-3 transition-colors">
-                      Pay Dues Now
-                    </button>
-                  )}
-                </div>
             </div>
           )
         })()}
@@ -1205,6 +1187,51 @@ export default function PortalPage() {
           </div>
         )}
 
+        {/* ── PAY DUES ──────────────────────────────────────────────────────── */}
+        {activeTab==='dues' && (
+          <div className="max-w-lg mx-auto">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true"/>
+              <span className="text-jc-red text-xs font-bold tracking-widest uppercase">Member Portal</span>
+            </div>
+            <h2 className="text-jc-black font-black text-3xl tracking-tight mb-8">Pay Your Dues</h2>
+
+            <div className="bg-white border border-jc-gray-mid">
+              <div className="border-l-4 border-jc-red px-6 py-5 flex items-center justify-between">
+                <span className="text-jc-black font-bold">2026–2027 Annual Dues</span>
+                <span className="text-jc-red font-black text-2xl">$100</span>
+              </div>
+              <div className="px-6 py-4 border-t border-jc-gray-mid">
+                <p className="text-jc-gray-dark text-sm">Please include your full name in the payment note.</p>
+              </div>
+            </div>
+
+            <div className="space-y-3 mt-6">
+              <a
+                href="https://venmo.com/u/juniorcounciltreasurer?txn=pay&amount=100&note=2026-2027+JC+Dues"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between w-full bg-[#008CFF] hover:bg-[#0070CC] text-white font-black text-sm tracking-wide px-6 py-5 transition-colors"
+              >
+                <span>Pay with Venmo</span>
+                <span className="text-white/80 text-xs font-bold">@juniorcounciltreasurer</span>
+              </a>
+              <button
+                onClick={() => { navigator.clipboard.writeText('treasurer@juniorcouncil.org'); setZelleCopied(true); setTimeout(() => setZelleCopied(false), 2000) }}
+                className="flex items-center justify-between w-full bg-[#6B2D8B] hover:bg-[#5a2576] text-white font-black text-sm tracking-wide px-6 py-5 transition-colors"
+              >
+                <span>{zelleCopied ? 'Copied!' : 'Pay with Zelle'}</span>
+                <span className="text-white/80 text-xs font-bold">{zelleCopied ? 'Paste into your Zelle app' : 'treasurer@juniorcouncil.org'}</span>
+              </button>
+            </div>
+
+            <p className="text-jc-gray-dark text-xs text-center mt-6">
+              Questions about dues? Contact{' '}
+              <a href="mailto:treasurer@juniorcouncil.org" className="text-jc-red font-bold hover:underline">treasurer@juniorcouncil.org</a>
+            </p>
+          </div>
+        )}
+
         {/* ── COMMUNITY FEED ────────────────────────────────────────────────── */}
         {activeTab==='profile' && (
           <div className="max-w-4xl mx-auto">
@@ -1533,53 +1560,6 @@ export default function PortalPage() {
         )}
 
       </div>
-
-      {/* Dues modal */}
-      {duesModalOpen&&(
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4" onClick={()=>setDuesModalOpen(false)}>
-          <div className="bg-white max-w-md w-full p-8" onClick={e=>e.stopPropagation()}>
-            <div className="flex items-start justify-between mb-6">
-              <div>
-                <p className="text-jc-red text-xs font-bold tracking-widest uppercase mb-1">Member Portal</p>
-                <h2 className="text-jc-black font-black text-2xl tracking-tight">Pay Your Dues</h2>
-              </div>
-              <button onClick={()=>setDuesModalOpen(false)} className="text-jc-gray-mid hover:text-jc-black transition-colors">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-              </button>
-            </div>
-            <div className="bg-jc-gray p-4 mb-6 border-l-4 border-jc-red">
-              <div className="flex items-center justify-between">
-                <span className="text-jc-black font-bold text-sm">2026–2027 Annual Dues</span>
-                <span className="text-jc-red font-black text-xl">$100</span>
-              </div>
-              <p className="text-jc-gray-dark text-xs mt-2">Please include your full name in the payment note.</p>
-            </div>
-            <div className="space-y-3 mb-2">
-              <a
-                href="https://venmo.com/u/juniorcounciltreasurer?txn=pay&amount=100&note=2026-2027+JC+Dues"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between w-full bg-[#008CFF] hover:bg-[#0070CC] text-white font-black text-sm tracking-wide px-5 py-4 transition-colors"
-              >
-                <span>Pay with Venmo</span>
-                <span className="text-white/80 text-xs font-bold">@juniorcounciltreasurer</span>
-              </a>
-              <button
-                onClick={() => { navigator.clipboard.writeText('treasurer@juniorcouncil.org'); setZelleCopied(true); setTimeout(() => setZelleCopied(false), 2000) }}
-                className="flex items-center justify-between w-full bg-[#6B2D8B] hover:bg-[#5a2576] text-white font-black text-sm tracking-wide px-5 py-4 transition-colors"
-              >
-                <span>{zelleCopied ? 'Copied!' : 'Pay with Zelle'}</span>
-                <span className="text-white/80 text-xs font-bold">{zelleCopied ? 'Paste into your Zelle app' : 'treasurer@juniorcouncil.org'}</span>
-              </button>
-            </div>
-            <button onClick={()=>setDuesModalOpen(false)} className="w-full mt-4 border-2 border-jc-gray-mid hover:border-jc-red text-jc-black hover:text-jc-red font-black text-xs tracking-widest uppercase py-3 transition-colors">
-              Close
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Admin — Invite member modal */}
       {inviteModalOpen && isAdmin && (
