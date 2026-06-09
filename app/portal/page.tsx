@@ -936,7 +936,7 @@ export default function PortalPage() {
             </div>
 
             {/* Resource cards */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
               {resources.map(res=>(
                 <a key={res.title} href={res.link} target="_blank" rel="noopener noreferrer"
                   className="bg-white border border-jc-gray-mid hover:border-jc-red transition-colors p-6 group flex flex-col">
