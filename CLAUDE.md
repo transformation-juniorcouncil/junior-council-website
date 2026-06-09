@@ -70,3 +70,18 @@ NEXT_PUBLIC_SITE_URL          # used in invite email redirect URLs
 
 - `app/portal/page.tsx` is a large client component with mostly seed/mock data — not yet fully wired to Supabase queries.
 - Resend is installed for invite emails (sent via `/api/admin/invite`).
+
+## Pre-Launch Checklist
+
+### Supabase URL Configuration (⚠️ must update before go-live)
+Currently configured with the Vercel preview domain for testing. Before launching at `juniorcouncil.org`:
+
+1. **Authentication → URL Configuration** in Supabase dashboard:
+   - Change **Site URL** from Vercel URL → `https://juniorcouncil.org`
+   - Update **Redirect URLs**: replace Vercel URL with `https://juniorcouncil.org/sign-up`
+
+2. **Authentication → Email Templates → Invite User**:
+   - Confirm the button/link still uses `{{ .SiteURL }}/sign-up?email={{ .Email }}`
+   - (No change needed here if Site URL is updated correctly)
+
+The invite flow: admin invites user in Supabase → user gets email → clicks link → lands on `/sign-up` with email pre-filled → enters 6-digit OTP code from email → sets password → enters portal.
