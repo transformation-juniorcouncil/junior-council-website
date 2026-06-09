@@ -692,7 +692,6 @@ export default function PortalPage() {
               {/* Profile info header */}
               <div className="px-4 py-3 border-b border-white/5">
                 <p className="text-white font-black text-sm truncate">{profile.name === 'Member Name' ? 'Member' : profile.name}</p>
-                <p className="text-white/40 text-xs truncate">{profile.jobTitle || 'JC Member 2026'}</p>
               </div>
               <button
                 onClick={() => { setActiveTab('profile'); setNavMenuOpen(false) }}
