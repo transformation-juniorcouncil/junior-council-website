@@ -926,45 +926,7 @@ export default function PortalPage() {
         {activeTab==='resources' && (
           <div className="space-y-8">
 
-            {/* Admin/Treasurer Dues Panel */}
-            {(isAdmin || isTreasurer) && (
-              <div className="bg-white border border-jc-gray-mid">
-                <div className="px-6 py-4 border-b border-jc-gray-mid flex items-center justify-between">
-                  <div>
-                    <div className="flex items-center gap-3 mb-1">
-                      <div className="w-6 h-0.5 bg-jc-red" aria-hidden="true"/>
-                      <span className="text-jc-red text-xs font-bold tracking-widest uppercase">Admin</span>
-                    </div>
-                    <h3 className="text-jc-black font-black text-xl">Dues Tracker</h3>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-jc-red font-black text-2xl">{allMembers.filter(m=>m.dues_paid).length}/{allMembers.length}</div>
-                    <div className="text-jc-gray-dark text-xs uppercase tracking-widest">Paid</div>
-                  </div>
-                </div>
-                <div className="divide-y divide-jc-gray-mid">
-                  {allMembers.map(member => (
-                    <div key={member.id} className="flex items-center justify-between px-6 py-4">
-                      <div>
-                        <div className="text-jc-black font-bold text-sm">{member.full_name || member.email}</div>
-                        <div className="text-jc-gray-dark text-xs">{member.email}</div>
-                      </div>
-                      <button
-                        onClick={() => toggleDues(member.id, member.dues_paid)}
-                        disabled={duesToggling === member.id}
-                        className={`text-xs font-black uppercase tracking-widest px-4 py-2 transition-colors disabled:opacity-50 ${
-                          member.dues_paid
-                            ? 'bg-green-100 text-green-700 hover:bg-red-100 hover:text-red-600'
-                            : 'bg-jc-gray text-jc-gray-dark hover:bg-jc-red hover:text-white'
-                        }`}
-                      >
-                        {duesToggling === member.id ? '...' : member.dues_paid ? 'Paid' : 'Mark Paid'}
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+
 
             <div>
               <div className="flex items-center gap-3 mb-2">
