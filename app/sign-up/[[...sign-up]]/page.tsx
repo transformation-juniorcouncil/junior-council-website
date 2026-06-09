@@ -166,8 +166,8 @@ export default function SignUpPage() {
 
           <p className="text-white/20 text-xs text-center mt-6">
             Need help?{' '}
-            <a href="mailto:president@juniorcouncil.org" className="text-white/40 hover:text-white transition-colors">
-              president@juniorcouncil.org
+            <a href="mailto:transformation@juniorcouncil.org" className="text-white/40 hover:text-white transition-colors">
+              transformation@juniorcouncil.org
             </a>
           </p>
         </div>

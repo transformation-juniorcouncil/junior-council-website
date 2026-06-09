@@ -63,7 +63,7 @@ export default function JoinPage() {
               </div>
 
               <a
-                href="mailto:president@juniorcouncil.org"
+                href="mailto:transformation@juniorcouncil.org"
                 className="block w-full bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase py-4 text-center transition-colors"
               >
                 Contact Us
@@ -81,8 +81,8 @@ export default function JoinPage() {
           </div>
 
           <p className="text-white/20 text-xs text-center mt-6">
-            <a href="mailto:president@juniorcouncil.org" className="text-white/40 hover:text-white transition-colors">
-              president@juniorcouncil.org
+            <a href="mailto:transformation@juniorcouncil.org" className="text-white/40 hover:text-white transition-colors">
+              transformation@juniorcouncil.org
             </a>
           </p>
         </div>
