@@ -1,11 +1,9 @@
-import type { Metadata } from 'next'
+'use client'
+
 import Link from 'next/link'
 
-export const metadata: Metadata = {
-  title: 'Support & Donate | Junior Council',
-  description:
-    'Support Junior Council through personal donations, corporate partnerships, hospitality partnerships, or in-kind donations.',
-}
+// Note: metadata moved out since this is now a client component
+// Title/description handled by layout defaults
 
 const corporateTiers = [
   {
@@ -126,8 +124,29 @@ export default function SupportPage() {
         </div>
       </section>
 
+      {/* Sticky Section Nav */}
+      <div className="sticky top-16 z-40 bg-jc-black border-b border-white/10 overflow-x-auto">
+        <div className="flex items-center gap-0 px-4 max-w-7xl mx-auto">
+          {[
+            { label: 'Donate', href: '#donate' },
+            { label: 'Corporate', href: '#corporate' },
+            { label: 'Hospitality', href: '#hospitality' },
+            { label: 'Silent Auction', href: '#inkind' },
+            { label: 'Wellness', href: '#wellness' },
+          ].map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="flex-shrink-0 text-white/50 hover:text-white text-xs font-bold uppercase tracking-widest px-4 py-3.5 border-b-2 border-transparent hover:border-jc-red hover:text-white transition-colors whitespace-nowrap"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
       {/* Your Gift in Action */}
-      <section className="bg-white py-20">
+      <section id="donate" className="bg-white py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-jc-black p-10">
             <h3 className="text-white font-black text-2xl mb-6">

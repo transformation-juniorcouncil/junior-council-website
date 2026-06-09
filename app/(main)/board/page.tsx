@@ -180,7 +180,7 @@ export default function BoardPage() {
       {/* Board Members Grid */}
       <section className="bg-white py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8">
             {boardMembers.map((member, i) => {
               const isClickable = Boolean(member.bio)
               const isSelected = selected?.name === member.name
@@ -227,12 +227,12 @@ export default function BoardPage() {
                   </div>
 
                   {/* Info */}
-                  <div className="p-5 flex items-start justify-between">
+                  <div className="p-3 sm:p-5 flex items-start justify-between">
                     <div>
                       <div className="text-jc-red text-xs font-bold tracking-widest uppercase mb-1">
                         {member.title}
                       </div>
-                      <h2 className="text-jc-black font-black text-lg leading-tight">
+                      <h2 className="text-jc-black font-black text-sm sm:text-lg leading-tight">
                         {member.name}
                       </h2>
                     </div>
