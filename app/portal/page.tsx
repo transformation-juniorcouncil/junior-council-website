@@ -89,7 +89,6 @@ const DONATION_ROUTES: Record<string,string> = {
   corporate:   'Marisa Stefani & Jessica Linley',
   auction:     'Erin Bylina',
   hospitality: 'Emily Splinter',
-  inkind:      'Diana Wolf',
 }
 
 // ─── Resources ────────────────────────────────────────────────────────────────
@@ -872,7 +871,6 @@ export default function PortalPage() {
                       <option value="corporate">Corporate Sponsor</option>
                       <option value="auction">Silent Auction Item</option>
                       <option value="hospitality">Hospitality Partner</option>
-                      <option value="inkind">In-Kind Donation</option>
                     </select>
                     {donorForm.type && (
                       <p className="text-jc-gray-dark text-xs mt-1">
