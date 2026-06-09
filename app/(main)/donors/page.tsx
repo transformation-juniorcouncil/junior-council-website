@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -124,7 +125,7 @@ export default function DonorsPage() {
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
-                <span className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase">2026–27</span>
+                <span className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase">2026</span>
               </div>
               <h2 className="text-jc-black font-black text-3xl sm:text-4xl tracking-tight">
                 Wellness <span className="text-jc-red">for a Cause</span>
@@ -134,7 +135,31 @@ export default function DonorsPage() {
               Become a Wellness Partner →
             </Link>
           </div>
-          <YourBrandGrid count={4} ctaHref="/contact" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
+              { name: 'VinHausa',  category: 'Yoga & Dance', website: 'https://www.vinhausa.us',   logo: '/vinhausa-logo.png' },
+              { name: 'Equinox',   category: 'Cycling',      website: 'https://www.equinox.com',   logo: '/equinox-logo.png' },
+              { name: 'Barre3',    category: 'Barre',        website: 'https://barre3.com',         logo: '/barre3-logo.png' },
+            ].map((partner, i) => (
+              <a
+                key={i}
+                href={partner.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-jc-gray-mid hover:border-jc-red transition-colors p-5 flex flex-col items-center text-center group cursor-pointer"
+              >
+                <div className="w-16 h-16 bg-jc-gray rounded-sm mb-3 flex items-center justify-center group-hover:bg-jc-red/10 transition-colors flex-shrink-0 overflow-hidden">
+                  <Image src={partner.logo} alt={partner.name} width={56} height={56} className="object-contain" />
+                </div>
+                <div className="text-jc-black font-black text-sm leading-tight mb-1 group-hover:text-jc-red transition-colors">
+                  {partner.name}
+                </div>
+                <div className="text-jc-red text-xs font-semibold uppercase tracking-wide">
+                  {partner.category}
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
