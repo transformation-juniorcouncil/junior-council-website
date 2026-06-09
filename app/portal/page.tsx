@@ -330,11 +330,12 @@ export default function PortalPage() {
     supabase.rpc('get_my_role').then(({ data }) => {
       if (data) setMyRole(data as 'member'|'board'|'admin')
     })
-    supabase.from('profiles').select('dues_paid, board_title, pronouns, avatar_url, bio, job_title, company, college, degree, grad_year, neighborhood, linkedin, instagram, why_joined, fun_fact, interests').eq('id', user.id).single().then(({ data }) => {
+    supabase.from('profiles').select('full_name, dues_paid, board_title, pronouns, avatar_url, bio, job_title, company, college, degree, grad_year, neighborhood, linkedin, instagram, why_joined, fun_fact, interests').eq('id', user.id).single().then(({ data }) => {
       if (data) {
         setDuesPaid(data.dues_paid)
         setBoardTitle(data.board_title || '')
         const loaded: Partial<Profile> = {
+          name:         data.full_name   || '',
           pronouns:     data.pronouns     || '',
           avatar:       data.avatar_url   || null,
           bio:          data.bio          || '',
@@ -557,6 +558,7 @@ export default function PortalPage() {
     if (!user) return
     const supabase = createClient()
     const { error } = await supabase.from('profiles').update({
+      full_name:    profileDraft.name,
       pronouns:     profileDraft.pronouns,
       avatar_url:   profileDraft.avatar   || '',
       bio:          profileDraft.bio,
