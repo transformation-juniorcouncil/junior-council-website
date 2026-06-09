@@ -962,30 +962,6 @@ export default function PortalPage() {
               ))}
             </div>
 
-            {/* Outreach tracker — coming soon */}
-            <div className="bg-white border border-jc-gray-mid p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <div className="flex items-center gap-3 mb-1">
-                    <div className="w-6 h-0.5 bg-jc-red" aria-hidden="true"/>
-                    <span className="text-jc-red text-xs font-bold tracking-widest uppercase">Coming Soon</span>
-                  </div>
-                  <h3 className="text-jc-black font-black text-xl">Outreach Tracker</h3>
-                </div>
-                <span className="text-xs font-bold uppercase tracking-widest bg-jc-gray text-jc-gray-dark px-3 py-1.5">In Development</span>
-              </div>
-              <p className="text-jc-gray-dark leading-relaxed mb-4">
-                Track your corporate, hospitality, and silent auction outreaches — see what&apos;s in progress, what&apos;s been secured, and what still needs follow-up.
-              </p>
-              <div className="grid sm:grid-cols-3 gap-3">
-                {['Corporate Outreach','Hospitality Outreach','Silent Auction Outreach'].map(item=>(
-                  <div key={item} className="bg-jc-gray border border-jc-gray-mid p-4 text-center opacity-60">
-                    <div className="text-jc-black font-bold text-sm">{item}</div>
-                    <div className="text-jc-gray-dark text-xs mt-1">Tracker coming soon</div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         )}
 
