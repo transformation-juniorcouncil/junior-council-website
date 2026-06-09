@@ -55,7 +55,7 @@ const upcomingEvents: Event[] = [
   {
     title: 'JC Palooza',
     date: 'August 14, 2026',
-    location: 'Chicago, IL',
+    location: "Joe's on Weed Street, Chicago, IL",
     type: 'Member Event',
     description: 'Come celebrate Lollapalooza with Junior Council! More details to come.',
     cta: null,
