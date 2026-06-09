@@ -330,8 +330,29 @@ export default function PortalPage() {
     supabase.rpc('get_my_role').then(({ data }) => {
       if (data) setMyRole(data as 'member'|'board'|'admin')
     })
-    supabase.from('profiles').select('dues_paid, board_title').eq('id', user.id).single().then(({ data }) => {
-      if (data) { setDuesPaid(data.dues_paid); setBoardTitle(data.board_title || '') }
+    supabase.from('profiles').select('dues_paid, board_title, pronouns, avatar_url, bio, job_title, company, college, degree, grad_year, neighborhood, linkedin, instagram, why_joined, fun_fact, interests').eq('id', user.id).single().then(({ data }) => {
+      if (data) {
+        setDuesPaid(data.dues_paid)
+        setBoardTitle(data.board_title || '')
+        const loaded: Partial<Profile> = {
+          pronouns:     data.pronouns     || '',
+          avatar:       data.avatar_url   || null,
+          bio:          data.bio          || '',
+          jobTitle:     data.job_title    || '',
+          company:      data.company      || '',
+          college:      data.college      || '',
+          degree:       data.degree       || '',
+          gradYear:     data.grad_year    || '',
+          neighborhood: data.neighborhood || '',
+          linkedin:     data.linkedin     || '',
+          instagram:    data.instagram    || '',
+          whyJoined:    data.why_joined   || '',
+          funFact:      data.fun_fact     || '',
+          interests:    data.interests    || [],
+        }
+        setProfile(p => ({ ...p, ...loaded }))
+        setProfileDraft(p => ({ ...p, ...loaded }))
+      }
     })
   }, [user])
 
@@ -532,7 +553,32 @@ export default function PortalPage() {
     (profileFields.length + 3) * 100
   )
 
-  const saveProfile = () => { setProfile(profileDraft); setEditingProfile(false) }
+  const saveProfile = async () => {
+    if (!user) return
+    const supabase = createClient()
+    const { error } = await supabase.from('profiles').update({
+      pronouns:     profileDraft.pronouns,
+      avatar_url:   profileDraft.avatar   || '',
+      bio:          profileDraft.bio,
+      job_title:    profileDraft.jobTitle,
+      company:      profileDraft.company,
+      college:      profileDraft.college,
+      degree:       profileDraft.degree,
+      grad_year:    profileDraft.gradYear,
+      neighborhood: profileDraft.neighborhood,
+      linkedin:     profileDraft.linkedin,
+      instagram:    profileDraft.instagram,
+      why_joined:   profileDraft.whyJoined,
+      fun_fact:     profileDraft.funFact,
+      interests:    profileDraft.interests,
+    }).eq('id', user.id)
+    if (!error) {
+      setProfile(profileDraft)
+      setEditingProfile(false)
+    } else {
+      console.error('Profile save error:', error)
+    }
+  }
   const cancelEdit  = () => { setProfileDraft(profile); setEditingProfile(false) }
 
   // Greeting — computed at component level so the hero renders on every tab
