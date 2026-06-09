@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/server'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 const routingMap: Record<string, { label: string; emails: string[] }> = {
-  corporate:   { label: 'Corporate Sponsor',   emails: ['corporate@juniorcouncil.org'] },
+  corporate:   { label: 'Corporate Sponsor',   emails: ['transformation@juniorcouncil.org'] },
   auction:     { label: 'Silent Auction Item', emails: ['silentauction@juniorcouncil.org'] },
   hospitality: { label: 'Hospitality Partner', emails: ['hospitality@juniorcouncil.org'] },
 }
