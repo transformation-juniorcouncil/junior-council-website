@@ -104,7 +104,8 @@ const packetPdfs = [
 ]
 
 const memberDocs = [
-  { label:'Code of Conduct', link:'https://docs.google.com/document/d/1kKHYT96UCOwcvf5mCN_fCNzqNrV_4kM5soJ70DdaOFQ/edit?tab=t.0' },
+  { label:'Code of Conduct',   link:'https://docs.google.com/document/d/1kKHYT96UCOwcvf5mCN_fCNzqNrV_4kM5soJ70DdaOFQ/edit?tab=t.0' },
+  { label:'Member Directory',  link:'https://docs.google.com/presentation/d/1uwQC91Bzo-4ZcA3m9Di0XOUXjxzUXs3qToK0FoR_GAI/edit?slide=id.p#slide=id.p' },
 ]
 
 const outreachTemplates = [
