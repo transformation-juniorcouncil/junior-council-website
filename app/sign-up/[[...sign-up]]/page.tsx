@@ -164,9 +164,9 @@ export default function SignUpPage() {
             </form>
           </div>
 
-          <p className="text-white/20 text-xs text-center mt-6">
-            Need help?{' '}
-            <a href="mailto:transformation@juniorcouncil.org" className="text-white/40 hover:text-white transition-colors">
+          <p className="text-white/40 text-xs text-center mt-6">
+            Need help? No email app? Reach us at{' '}
+            <a href="mailto:transformation@juniorcouncil.org" className="text-white/70 hover:text-white underline transition-colors">
               transformation@juniorcouncil.org
             </a>
           </p>
