@@ -113,7 +113,7 @@ export default function Navigation() {
                 alt="Junior Council"
                 width={130}
                 height={34}
-                className="h-7 w-auto group-hover:opacity-90 transition-opacity"
+                className="h-5 sm:h-7 w-auto group-hover:opacity-90 transition-opacity"
                 priority
               />
             </div>
@@ -219,7 +219,7 @@ export default function Navigation() {
             </a>
             <Link
               href="https://my.onecause.com/fundraiser/organizations/sf-001C0000018LfpcIAC/fundraisers/fundraiser:4f72a4df-6a73-4d3c-b436-c3350aba4f3b/friendly" target="_blank" rel="noopener noreferrer"
-              className="bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-5 py-2.5 transition-colors focus:outline-none focus:ring-2 focus:ring-jc-red focus:ring-offset-2 focus:ring-offset-jc-black"
+              className="bg-jc-red hover:bg-jc-red-dark text-white font-black text-xs sm:text-sm tracking-widest uppercase px-3 sm:px-5 py-2 sm:py-2.5 transition-colors focus:outline-none focus:ring-2 focus:ring-jc-red focus:ring-offset-2 focus:ring-offset-jc-black"
             >
               Donate
             </Link>

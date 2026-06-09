@@ -68,7 +68,7 @@ export default function AccessibilityWidget() {
         onClick={() => setOpen(o => !o)}
         aria-label="Open accessibility menu"
         aria-expanded={open}
-        className="fixed top-4 right-4 z-50 w-10 h-10 rounded-full bg-white hover:bg-jc-gray text-jc-red flex items-center justify-center shadow-lg transition-colors focus:outline-none focus:ring-2 focus:ring-jc-red focus:ring-offset-2"
+        className="fixed bottom-4 right-4 sm:bottom-auto sm:top-4 z-50 w-10 h-10 rounded-full bg-white hover:bg-jc-gray text-jc-red flex items-center justify-center shadow-lg transition-colors focus:outline-none focus:ring-2 focus:ring-jc-red focus:ring-offset-2"
       >
         {anyActive && (
           <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full" aria-hidden="true" />
@@ -87,7 +87,7 @@ export default function AccessibilityWidget() {
           role="dialog"
           aria-label="Accessibility options"
           aria-modal="false"
-          className="fixed top-16 right-4 z-50 w-72 bg-white border border-jc-gray-mid shadow-2xl"
+          className="fixed bottom-16 right-4 sm:bottom-auto sm:top-16 z-50 w-72 bg-white border border-jc-gray-mid shadow-2xl"
         >
           {/* Header */}
           <div className="bg-jc-black px-5 py-4 flex items-center justify-between">
