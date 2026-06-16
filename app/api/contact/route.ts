@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 // Routing map — some reasons go to multiple recipients
 const routingMap: Record<string, string[]> = {
   membership:  ['membership@juniorcouncil.org'],
@@ -53,6 +51,13 @@ export async function POST(req: Request) {
   }
 
   const reasonLabel = reasonLabels[reason] ?? reason
+
+  if (!process.env.RESEND_API_KEY) {
+    console.error('RESEND_API_KEY is not set')
+    return NextResponse.json({ error: 'Email service not configured' }, { status: 500 })
+  }
+
+  const resend = new Resend(process.env.RESEND_API_KEY)
 
   const { error } = await resend.emails.send({
     from: 'Junior Council Website <noreply@juniorcouncil.org>',

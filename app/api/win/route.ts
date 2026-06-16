@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { createClient } from '@/lib/supabase/server'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 const routingMap: Record<string, { label: string; emails: string[] }> = {
   corporate:   { label: 'Corporate Sponsor',   emails: ['corporate@juniorcouncil.org'] },
   auction:     { label: 'Silent Auction Item', emails: ['silentauction@juniorcouncil.org'] },
@@ -35,6 +33,13 @@ export async function POST(req: Request) {
 
   const route = routingMap[type]
   if (!route) return NextResponse.json({ error: 'Unknown donation type' }, { status: 400 })
+
+  if (!process.env.RESEND_API_KEY) {
+    console.error('RESEND_API_KEY is not set')
+    return NextResponse.json({ error: 'Email service not configured' }, { status: 500 })
+  }
+
+  const resend = new Resend(process.env.RESEND_API_KEY)
 
   const { error } = await resend.emails.send({
     from: 'Junior Council Portal <noreply@juniorcouncil.org>',
