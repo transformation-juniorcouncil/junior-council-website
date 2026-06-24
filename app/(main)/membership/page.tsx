@@ -9,34 +9,44 @@ export const metadata: Metadata = {
 
 const committees = [
   {
-    name: 'Events Committee',
+    name: 'Snowball Committee',
     description:
-      'Plan and execute Junior Council\'s signature events, including the Annual Snowball Gala and smaller community gatherings.',
+      'Plan and execute Junior Council\'s flagship Annual Snowball Gala — from venue and entertainment to ticketing, logistics, and night-of operations.',
+  },
+  {
+    name: 'Corporate Committee',
+    description:
+      'Identify and secure corporate sponsorships, manage partner relationships, and develop packages that align businesses with our mission.',
   },
   {
     name: 'Fundraising Committee',
     description:
-      'Develop fundraising strategies, manage donor relationships, and identify new corporate partnership opportunities.',
+      'Drive individual and peer-to-peer fundraising efforts, manage donor outreach, and support the Wellness for a Cause and Silent Auction programs.',
   },
   {
-    name: 'Marketing & Communications',
+    name: 'Hospitality Committee',
     description:
-      'Manage JC\'s brand, social media presence, email communications, and public outreach.',
+      'Source and steward hospitality partnerships — restaurants, bars, and beverage sponsors who support JC events with in-kind donations and venue contributions.',
   },
   {
     name: 'Membership Committee',
     description:
-      'Recruit and retain members, onboard new members, and cultivate a strong JC community.',
+      'Recruit and retain members, welcome new joiners, and build the programming and connections that make JC a community worth being part of.',
   },
   {
-    name: 'Sponsorship Committee',
+    name: 'Education & DEI Committee',
     description:
-      'Identify, engage, and steward corporate and individual sponsors for JC events and initiatives.',
+      'Lead member education on HIV/AIDS awareness and advance diversity, equity, and inclusion across all JC programming and organizational practices.',
   },
   {
-    name: 'DEI Committee',
+    name: 'Marketing Committee',
     description:
-      'Advance diversity, equity, and inclusion initiatives across all JC programming and organizational practices.',
+      'Manage JC\'s brand, social media presence, email communications, and digital content — telling our story in a way that drives engagement and awareness.',
+  },
+  {
+    name: 'PR Committee',
+    description:
+      'Build media relationships, secure press coverage, and amplify Junior Council\'s mission across Chicago\'s nonprofit and professional communities.',
   },
 ]
 
@@ -100,7 +110,7 @@ export default function MembershipPage() {
                 href="/contact"
                 className="inline-flex items-center bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-8 py-4 transition-colors"
               >
-                Apply for Membership
+                Join the Team
               </Link>
             </div>
             <div className="bg-jc-black p-10">
@@ -139,38 +149,77 @@ export default function MembershipPage() {
         </div>
       </section>
 
-      {/* Life in JC */}
-      <section id="life" className="bg-jc-gray py-20 scroll-mt-16">
+      {/* Monthly Meetings */}
+      <section className="bg-jc-black py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-jc-black font-black text-3xl sm:text-4xl mb-4 tracking-tight">
-            Life in <span className="text-jc-red">JC</span>
-          </h2>
-          <p className="text-jc-gray-dark text-lg max-w-3xl mb-12">
-            Junior Council is a community first. Members engage year-round
-            through committee work, social events, volunteer days, and our
-            signature Annual Snowball Gala. Here&apos;s what being a part of JC
-            looks like.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Community Events',
-                desc: 'Regular social gatherings, happy hours, and volunteer days to connect with fellow members.',
-              },
-              {
-                title: 'Annual Gala',
-                desc: 'Our flagship Snowball Gala is Chicago\'s premier nonprofit fundraising event — members are at the heart of it.',
-              },
-              {
-                title: 'Advocacy & Impact',
-                desc: 'Members participate in awareness campaigns and directly advocate for the adolescents we serve.',
-              },
-            ].map((item, i) => (
-              <div key={i} className="bg-white p-8 border-t-4 border-jc-red">
-                <h3 className="text-jc-black font-black text-xl mb-3">{item.title}</h3>
-                <p className="text-jc-gray-dark text-sm leading-relaxed">{item.desc}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
+                <span className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase">Monthly Meetings</span>
               </div>
-            ))}
+              <h2 className="text-white font-black text-3xl sm:text-4xl tracking-tight mb-5">
+                Come See What We&apos;re About.
+              </h2>
+              <p className="text-white/60 text-lg leading-relaxed mb-6">
+                Not sure if JC is right for you? Come to a meeting first. Every month, Junior Council members gather to connect, plan, and move our mission forward. Guests are always welcome — it&apos;s the best way to get a real feel for our community before committing.
+              </p>
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-jc-red flex-shrink-0 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-white/40 text-xs uppercase tracking-widest mb-0.5">When</div>
+                    <div className="text-white font-bold">Second Wednesday of Every Month · 7:00 PM</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-jc-red flex-shrink-0 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-white/40 text-xs uppercase tracking-widest mb-0.5">Where</div>
+                    <div className="text-white font-bold">Two Thirty Co-Working · 230 W Superior St, Chicago, IL 60654</div>
+                  </div>
+                </div>
+              </div>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=230+W+Superior+St+Chicago+IL+60654"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-white/20 hover:border-white/50 text-white/70 hover:text-white font-black text-xs tracking-widest uppercase px-6 py-3 transition-colors"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                Get Directions
+              </a>
+            </div>
+            <div className="border border-white/10 p-8">
+              <div className="text-white/40 text-xs font-bold uppercase tracking-widest mb-4">About the Space</div>
+              <h3 className="text-white font-black text-xl mb-3">Two Thirty Co-Working</h3>
+              <p className="text-white/60 text-sm leading-relaxed mb-6">
+                A modern co-working space in Chicago&apos;s River North neighborhood — the perfect home base for our monthly gatherings. Centrally located, easy to get to, and a great setting for connecting with fellow members.
+              </p>
+              <a
+                href="https://www.twothirty.space/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-jc-red hover:text-white font-black text-xs uppercase tracking-widest border-b border-jc-red pb-0.5 transition-colors"
+              >
+                Visit Two Thirty
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -185,9 +234,9 @@ export default function MembershipPage() {
             Members join one or more committees based on their interests and
             skills. Committees are where the real work happens.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
             {committees.map((committee, i) => (
-              <div key={i} className="border border-jc-gray-mid hover:border-jc-red transition-colors p-6">
+              <div key={i} className="border border-jc-gray-mid hover:border-jc-red transition-colors p-6 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
                 <h3 className="text-jc-black font-black text-lg mb-3">
                   {committee.name}
                 </h3>
