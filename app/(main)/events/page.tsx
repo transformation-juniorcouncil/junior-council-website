@@ -19,14 +19,6 @@ type Event = {
 
 const upcomingEvents: Event[] = [
   {
-    title: 'Cycling at Equinox',
-    date: 'July 2026 — Date TBD',
-    location: 'Equinox, Chicago',
-    type: 'Wellness for a Cause',
-    description: 'A Sunday morning cycling class with JC members. All levels welcome — show up, sweat, connect. Date in July TBD.',
-    cta: null,
-  },
-  {
     title: 'Wellness for a Cause: Barre3',
     date: 'June 29, 2026',
     time: '7:30 PM',
@@ -79,6 +71,15 @@ const upcomingEvents: Event[] = [
 ]
 
 const pastEvents: Event[] = [
+  {
+    title: 'World Cup Watch Party',
+    date: 'June 13, 2026',
+    time: '1:30 PM',
+    location: 'Happy Camper, Chicago',
+    type: 'Member Event',
+    description: 'JC members gathered at Happy Camper to watch the World Cup together. Good food, great company, and a whole lot of soccer.',
+    cta: null,
+  },
   {
     title: 'Chicago Pride Fest',
     date: 'June 20 – 21, 2026',
