@@ -160,35 +160,39 @@ export default function GalleryPage() {
               </button>
             ))}
           </div>
-          {/* Life in JC sub-tabs */}
-          {activeEvent === 'life-in-jc' && lifeInJcSubEvents.length > 1 && (
-            <div className="bg-white flex items-center gap-1 overflow-x-auto px-0 py-2 scrollbar-hide border-t border-jc-gray-mid">
-              <button
-                onClick={() => setActiveSubEvent('all')}
-                className={`flex-shrink-0 px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none ${
-                  activeSubEvent === 'all'
-                    ? 'text-jc-black border-b-2 border-jc-red'
-                    : 'text-jc-gray-dark hover:text-jc-black'
-                }`}
-              >
-                All
-              </button>
-              {lifeInJcSubEvents.map((sub) => (
+        </div>
+        {/* Life in JC sub-tabs — full width white bar */}
+        {activeEvent === 'life-in-jc' && lifeInJcSubEvents.length > 1 && (
+          <div className="bg-white border-t border-jc-gray-mid">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide">
                 <button
-                  key={sub.id}
-                  onClick={() => setActiveSubEvent(sub.id)}
-                  className={`flex-shrink-0 px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none ${
-                    activeSubEvent === sub.id
+                  onClick={() => setActiveSubEvent('all')}
+                  className={`flex-shrink-0 px-5 py-2.5 text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none ${
+                    activeSubEvent === 'all'
                       ? 'text-jc-black border-b-2 border-jc-red'
                       : 'text-jc-gray-dark hover:text-jc-black'
                   }`}
                 >
-                  {sub.label}
+                  All
                 </button>
-              ))}
+                {lifeInJcSubEvents.map((sub) => (
+                  <button
+                    key={sub.id}
+                    onClick={() => setActiveSubEvent(sub.id)}
+                    className={`flex-shrink-0 px-5 py-2.5 text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none ${
+                      activeSubEvent === sub.id
+                        ? 'text-jc-black border-b-2 border-jc-red'
+                        : 'text-jc-gray-dark hover:text-jc-black'
+                    }`}
+                  >
+                    {sub.label}
+                  </button>
+                ))}
+              </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </section>
 
       {/* Gallery Grid */}
