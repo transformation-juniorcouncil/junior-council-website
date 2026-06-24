@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 
 const events = [
@@ -109,9 +108,10 @@ export default function GalleryPage() {
       ? filteredLifeInJc
       : photos.filter((p) => p.event === activeEvent)
 
-  // Group by event label + year for the "All" view
+  // Group by sub-event label (if present) or event label + year for the "All" view
   const grouped = (activeEvent === 'all' ? photos : filtered).reduce<Record<string, Photo[]>>((acc, photo) => {
-    const key = `${photo.eventLabel} — ${photo.year}`
+    const label = photo.subEventLabel || photo.eventLabel
+    const key = `${label} — ${photo.year}`
     if (!acc[key]) acc[key] = []
     acc[key].push(photo)
     return acc
@@ -162,13 +162,13 @@ export default function GalleryPage() {
           </div>
           {/* Life in JC sub-tabs */}
           {activeEvent === 'life-in-jc' && lifeInJcSubEvents.length > 1 && (
-            <div className="flex items-center gap-1 overflow-x-auto pb-3 scrollbar-hide border-t border-white/10 pt-2">
+            <div className="bg-white flex items-center gap-1 overflow-x-auto px-0 py-2 scrollbar-hide border-t border-jc-gray-mid">
               <button
                 onClick={() => setActiveSubEvent('all')}
-                className={`flex-shrink-0 px-4 py-1.5 text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none ${
+                className={`flex-shrink-0 px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none ${
                   activeSubEvent === 'all'
-                    ? 'text-white border-b-2 border-jc-red'
-                    : 'text-white/40 hover:text-white/70'
+                    ? 'text-jc-black border-b-2 border-jc-red'
+                    : 'text-jc-gray-dark hover:text-jc-black'
                 }`}
               >
                 All
@@ -177,10 +177,10 @@ export default function GalleryPage() {
                 <button
                   key={sub.id}
                   onClick={() => setActiveSubEvent(sub.id)}
-                  className={`flex-shrink-0 px-4 py-1.5 text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none ${
+                  className={`flex-shrink-0 px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none ${
                     activeSubEvent === sub.id
-                      ? 'text-white border-b-2 border-jc-red'
-                      : 'text-white/40 hover:text-white/70'
+                      ? 'text-jc-black border-b-2 border-jc-red'
+                      : 'text-jc-gray-dark hover:text-jc-black'
                   }`}
                 >
                   {sub.label}
@@ -231,20 +231,6 @@ export default function GalleryPage() {
             </div>
           )}
 
-          {/* Upload CTA for admins */}
-          <div className="mt-16 border-2 border-dashed border-jc-gray-mid p-10 text-center">
-            <p className="text-jc-gray-dark text-sm mb-2 font-semibold uppercase tracking-wide">
-              Photos Coming Soon
-            </p>
-            <p className="text-jc-gray-dark text-sm">
-              Real photos will be added here. Each placeholder above represents
-              one image slot ready to go.{' '}
-              <Link href="/contact" className="text-jc-red font-bold hover:underline">
-                Contact us
-              </Link>{' '}
-              to submit photos.
-            </p>
-          </div>
         </div>
       </section>
 
