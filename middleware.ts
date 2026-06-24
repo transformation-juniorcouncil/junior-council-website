@@ -2,6 +2,13 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  // Only run Supabase auth check on protected routes
+  if (!pathname.startsWith('/portal')) {
+    return NextResponse.next({ request })
+  }
+
   let supabaseResponse = NextResponse.next({ request })
 
   const supabase = createServerClient(
@@ -31,7 +38,7 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   // Protect /portal — redirect to /login if not authenticated
-  if (!user && request.nextUrl.pathname.startsWith('/portal')) {
+  if (!user) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
