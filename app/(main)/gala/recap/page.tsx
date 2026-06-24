@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const stats2026 = [
-  { value: '$242,000', label: 'Total Raised' },
+  { value: '$252,000', label: 'Total Raised' },
   { value: '900+',     label: 'Attendees' },
   { value: '30+',      label: 'Corporate Sponsors' },
   { value: '50+',      label: 'Silent Auction Items' },
@@ -88,7 +88,7 @@ export default function RecapPage() {
               <p className="text-jc-gray-dark text-lg leading-relaxed mb-5">
                 Snowball 2026 was our most successful gala to date. Thanks to
                 the generosity of our guests, sponsors, and partners, Junior
-                Council raised <strong className="text-jc-black">$242,000</strong> — nearly meeting our
+                Council raised <strong className="text-jc-black">$252,000</strong> — nearly meeting our
                 $250,000 goal and setting a new benchmark for the organization.
               </p>
               <p className="text-jc-gray-dark leading-relaxed">

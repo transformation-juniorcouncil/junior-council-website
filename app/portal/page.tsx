@@ -31,7 +31,7 @@ type Profile = {
 const seedPosts: Post[] = [
   {
     id: 1, author: 'Eve Voci', initials: 'EV', time: '2h ago',
-    text: 'So proud of everything this team accomplished at Snowball 2026. $242,000 raised — you all are incredible. Cannot wait to top it next year!',
+    text: 'So proud of everything this team accomplished at Snowball 2026. $252,000 raised — you all are incredible. Cannot wait to top it next year!',
     likes: 14, liked: false, comments: [
       { id: 1, author: 'Hailie Schroll', text: "Best night of the year, every year. Let's go 2027!", time: '1h ago' },
       { id: 2, author: 'Catie Hinton',   text: 'So grateful to be part of this team.',               time: '45m ago' },

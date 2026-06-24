@@ -358,7 +358,7 @@ export default function HomePage() {
                       <div className="text-white/50 text-xs mt-1">Attendees</div>
                     </div>
                     <div className="bg-jc-charcoal p-4">
-                      <div className="text-jc-red font-black text-2xl">$242K+</div>
+                      <div className="text-jc-red font-black text-2xl">$252K+</div>
                       <div className="text-white/50 text-xs mt-1">Per Event</div>
                     </div>
                   </div>
