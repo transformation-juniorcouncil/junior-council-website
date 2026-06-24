@@ -834,6 +834,15 @@ export default function PortalPage() {
                             </svg>
                             <p className="text-jc-gray-dark text-sm">{nextEvent.time}</p>
                           </div>
+                          {nextEvent.location && (
+                            <div className="flex items-center gap-2">
+                              <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                              </svg>
+                              <p className="text-jc-gray-dark text-sm">{nextEvent.location}</p>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -845,34 +854,6 @@ export default function PortalPage() {
                 )}
               </div>
 
-              {/* ── Upcoming events list ── */}
-              {(() => {
-                const todayStr2 = `${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`
-                const rest = upcomingEvents.filter(e => e.dateKey >= todayStr2).slice(0, 6)
-                if (rest.length === 0) return null
-                return (
-                  <div className="bg-white border border-jc-gray-mid mt-5">
-                    <div className="px-6 py-3 border-b border-jc-gray-mid">
-                      <span className="text-jc-red text-xs font-black uppercase tracking-[0.2em]">Upcoming</span>
-                    </div>
-                    <ul className="divide-y divide-jc-gray-mid">
-                      {rest.map(e => (
-                        <li key={e.id} className="flex items-center gap-4 px-6 py-4">
-                          <div className="w-12 text-center flex-shrink-0">
-                            <p className="text-jc-red text-[10px] font-black uppercase tracking-widest">{e.date.split(' ')[0].slice(0,3).toUpperCase()}</p>
-                            <p className="text-jc-black font-black text-xl leading-none">{parseInt(e.dateKey.slice(8,10))}</p>
-                          </div>
-                          <div className="flex-grow min-w-0">
-                            <p className="text-jc-black font-black text-sm truncate">{e.title}</p>
-                            <p className="text-jc-gray-dark text-xs mt-0.5">{e.time}{e.location ? ` · ${e.location}` : ''}</p>
-                          </div>
-                          <span className={`text-xs font-bold px-2 py-0.5 flex-shrink-0 ${eventTypeColors[e.type] ?? 'bg-gray-100 text-gray-600'}`}>{e.type}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )
-              })()}
             </div>
           )
         })()}
