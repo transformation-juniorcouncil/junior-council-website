@@ -375,16 +375,6 @@ export default function PortalPage() {
     setDuesToggling(null)
   }
 
-  // Fetch org events from Google Calendar
-  useEffect(() => {
-    if (!user) return
-    fetch('/api/calendar')
-      .then(r => r.json())
-      .then(({ events }) => {
-        if (!events) return
-        setOrgEvents(events)
-      })
-  }, [user])
 
   // Fetch RSVPs
   useEffect(() => {
@@ -526,13 +516,8 @@ export default function PortalPage() {
     return null
   })()
 
-  // Merge: next member meeting + Google Calendar events, deduplicate, sort
-  const meetingArr = nextMemberMeeting ? [nextMemberMeeting] : []
-  const allOrgEvents = [...meetingArr, ...orgEvents].filter((e, idx, arr) =>
-    arr.findIndex(x => x.dateKey === e.dateKey && x.title === e.title) === idx
-  )
-  const upcomingEvents = allOrgEvents.sort((a, b) => a.dateKey.localeCompare(b.dateKey))
-  const combinedEvents = [...allOrgEvents, ...personalEvents]
+  const upcomingEvents = nextMemberMeeting ? [nextMemberMeeting] : []
+  const combinedEvents = [...upcomingEvents, ...personalEvents]
   const eventsOnDay = (day:number) => { const k=`${calYear}-${pad(calMonth+1)}-${pad(day)}`; return combinedEvents.filter(e=>e.dateKey===k) }
   const selectedEvents = selectedDay ? combinedEvents.filter(e=>e.dateKey===selectedDay) : []
 
