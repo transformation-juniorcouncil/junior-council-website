@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const events = [
   {
@@ -26,39 +27,40 @@ const events = [
   },
 ]
 
-// Placeholder photos — replace src with real image paths when ready
-// e.g. src: '/images/gallery/snowball-2024-01.jpg'
 const photos = [
-  // Snowball Gala
-  { id: 1, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024' },
-  { id: 2, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024' },
-  { id: 3, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024' },
-  { id: 4, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024' },
-  { id: 5, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024' },
-  { id: 6, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024' },
-  { id: 7, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2023', caption: 'Snowball Gala 2023' },
-  { id: 8, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2023', caption: 'Snowball Gala 2023' },
-  { id: 9, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2023', caption: 'Snowball Gala 2023' },
-  { id: 10, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2023', caption: 'Snowball Gala 2023' },
-  // Golf Outing
-  { id: 11, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2024', caption: 'Golf Outing 2024' },
-  { id: 12, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2024', caption: 'Golf Outing 2024' },
-  { id: 13, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2024', caption: 'Golf Outing 2024' },
-  { id: 14, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2024', caption: 'Golf Outing 2024' },
-  { id: 15, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2023', caption: 'Golf Outing 2023' },
-  { id: 16, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2023', caption: 'Golf Outing 2023' },
-  // Life in JC
-  { id: 17, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2024', caption: 'Member Happy Hour 2024' },
-  { id: 18, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2024', caption: 'Member Happy Hour 2024' },
-  { id: 19, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2024', caption: 'Board Meeting 2024' },
-  { id: 20, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2024', caption: 'Community Event 2024' },
-  { id: 21, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2023', caption: 'Member Social 2023' },
-  { id: 22, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2023', caption: 'Annual Meeting 2023' },
-  // Volunteer Days
-  { id: 23, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024' },
-  { id: 24, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024' },
-  { id: 25, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024' },
-  { id: 26, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2023', caption: 'Volunteer Day 2023' },
+  // Snowball Gala — placeholder slots until real photos are added
+  { id: 1, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024', src: '' },
+  { id: 2, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024', src: '' },
+  { id: 3, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024', src: '' },
+  { id: 4, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024', src: '' },
+  { id: 5, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024', src: '' },
+  { id: 6, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024', src: '' },
+  { id: 7, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2023', caption: 'Snowball Gala 2023', src: '' },
+  { id: 8, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2023', caption: 'Snowball Gala 2023', src: '' },
+  { id: 9, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2023', caption: 'Snowball Gala 2023', src: '' },
+  { id: 10, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2023', caption: 'Snowball Gala 2023', src: '' },
+  // Golf Outing — placeholder slots
+  { id: 11, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2024', caption: 'Golf Outing 2024', src: '' },
+  { id: 12, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2024', caption: 'Golf Outing 2024', src: '' },
+  { id: 13, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2024', caption: 'Golf Outing 2024', src: '' },
+  { id: 14, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2024', caption: 'Golf Outing 2024', src: '' },
+  { id: 15, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2023', caption: 'Golf Outing 2023', src: '' },
+  { id: 16, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2023', caption: 'Golf Outing 2023', src: '' },
+  // Life in JC — 2025 Derby
+  { id: 17, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09313.JPG' },
+  { id: 18, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09314.JPG' },
+  { id: 19, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09676.JPG' },
+  { id: 20, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09708.JPG' },
+  { id: 21, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09739.JPG' },
+  { id: 22, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09786.JPG' },
+  { id: 23, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09801.JPG' },
+  { id: 24, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09821.JPG' },
+  { id: 25, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09826.JPG' },
+  // Volunteer Days — placeholder slots
+  { id: 26, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024', src: '' },
+  { id: 27, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024', src: '' },
+  { id: 28, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024', src: '' },
+  { id: 29, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2023', caption: 'Volunteer Day 2023', src: '' },
 ]
 
 type Photo = typeof photos[0]
@@ -203,13 +205,24 @@ export default function GalleryPage() {
             className="max-w-4xl w-full"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Photo placeholder — swap for real <Image> when photos are ready */}
-            <div className="bg-jc-charcoal aspect-video w-full flex flex-col items-center justify-center">
-              <svg className="w-16 h-16 text-white/20 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <p className="text-white/30 text-sm">Photo placeholder</p>
-            </div>
+            {lightbox.src ? (
+              <div className="relative w-full aspect-[4/3]">
+                <Image
+                  src={lightbox.src}
+                  alt={lightbox.caption}
+                  fill
+                  className="object-contain"
+                  sizes="100vw"
+                />
+              </div>
+            ) : (
+              <div className="bg-jc-charcoal aspect-video w-full flex flex-col items-center justify-center">
+                <svg className="w-16 h-16 text-white/20 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <p className="text-white/30 text-sm">Photo placeholder</p>
+              </div>
+            )}
             <div className="mt-3 flex items-center justify-between">
               <p className="text-white font-semibold">{lightbox.caption}</p>
               <span className="text-white/40 text-xs uppercase tracking-widest">
@@ -239,14 +252,22 @@ function PhotoGrid({
           className="group relative bg-jc-gray aspect-square overflow-hidden focus:outline-none focus:ring-2 focus:ring-jc-red focus:ring-offset-2"
           aria-label={`View photo: ${photo.caption}`}
         >
-          {/* Placeholder — replace with Next.js <Image> when real photos available */}
-          <div className="w-full h-full flex items-center justify-center bg-jc-gray group-hover:bg-jc-gray-mid transition-colors">
-            <svg className="w-10 h-10 text-jc-gray-mid group-hover:text-jc-gray-dark transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-          {/* Hover overlay */}
-          <div className="absolute inset-0 bg-jc-black/0 group-hover:bg-jc-black/50 transition-colors flex items-end p-3 opacity-0 group-hover:opacity-100">
+          {photo.src ? (
+            <Image
+              src={photo.src}
+              alt={photo.caption}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-jc-gray group-hover:bg-jc-gray-mid transition-colors">
+              <svg className="w-10 h-10 text-jc-gray-mid group-hover:text-jc-gray-dark transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+          )}
+          <div className="absolute inset-0 bg-jc-black/0 group-hover:bg-jc-black/40 transition-colors flex items-end p-3 opacity-0 group-hover:opacity-100">
             <p className="text-white text-xs font-semibold leading-tight">
               {photo.caption}
             </p>
