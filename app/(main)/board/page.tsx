@@ -18,6 +18,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Eve Voci',
     title: 'President',
+    photo: '/eve.JPEG',
     jobTitle: 'Corporate Retail Buyer, Apparel & Accessories and Crafting',
     company: 'Barnes & Noble / Paper Source',
     bio: 'Eve Voci is a corporate retail Buyer in the Apparel & Accessories and Crafting divisions at Barnes & Noble and Paper Source stores. Originally from Grosse Pointe Park, Michigan, Eve is also an alum of the Eli Broad Business School at Michigan State. Passionate about community impact and industry innovation, Eve is actively involved in organizations supporting healthcare philanthropy and the fashion industry. She enjoys her free time dog sitting, needlepointing, and traveling!',
@@ -26,6 +27,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Gabe Spach',
     title: 'Vice President',
+    photo: '/gabe.JPEG',
     jobTitle: 'Director of Partnerships',
     company: 'Sawmill Sports Hub',
     memberSince: 'March 2025',
@@ -34,6 +36,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Charlie Nash',
     title: 'Treasurer',
+    photo: '/charlie.JPEG',
     jobTitle: 'Lead Data Engineer',
     company: 'United Center',
     memberSince: 'December 2024',
@@ -43,6 +46,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Hailie Schroll',
     title: 'Snowball Director',
+    photo: '/haille.JPEG',
     jobTitle: 'Event Coordinator',
     company: 'Shore Capital Partners',
     memberSince: '2024',
@@ -52,6 +56,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'KK Begley',
     title: 'Secretary',
+    photo: '/kk.JPEG',
     jobTitle: 'Healthcare Administrator',
     company: 'Rush University Medical Center',
     memberSince: 'February 2026',
@@ -60,6 +65,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Thomas Ware',
     title: 'Engagement Director',
+    photo: '/thomas.JPEG',
     jobTitle: 'Associate Marketing Manager',
     company: 'PepsiCo',
     bio: 'Thomas Ware is an Associate Marketing Manager for Gatorade at PepsiCo. An alum of Dartmouth College and the University of Chicago Booth School of Business, Thomas is originally from Wisconsin. In his spare time he enjoys marathon training, playing and watching baseball, and political comedy.',
@@ -68,6 +74,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Danielle Imbrigiotta',
     title: 'Recruitment Director',
+    photo: '/danielle.JPEG',
     jobTitle: 'Management Consultant',
     company: 'BDO',
     bio: 'Danielle Imbrigiotta is a Florida native and a double Gator from the University of Florida, where she earned a Master\'s in International Business and a Bachelor of Business Administration. She moved to Chicago to begin her career as a consultant with BDO\'s Management Consulting group, where she has worked for the past three and a half years. Danielle enjoys exploring the city, traveling, reading, and participating in outdoor activities. She is especially grateful that Junior Council has introduced her to so many great friends.',
@@ -76,6 +83,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Caroline Cheung',
     title: 'Education Director',
+    photo: '/caroline.JPEG',
     jobTitle: 'Underwriting Operations Specialist',
     company: 'Travelers Insurance',
     memberSince: 'August 2024',
@@ -85,6 +93,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Erin Bylina',
     title: 'Silent Auction Director',
+    photo: '/erin.JPEG',
     jobTitle: 'Special Education Teacher',
     memberSince: 'October 2023',
     bio: 'Erin Bylina graduated from Bradley University with degrees in Special Education and Elementary Education, and completed her graduate degree from UIC in Behavior Intervention and Curriculum Adaptation. She currently teaches kindergarten at a therapeutic practice in Chicago and tutors students of all ages. Erin has been a JC member since October 2023 and has previously served as Snowball Committee Lead and Hospitality Director. In her free time, she enjoys spending time with family and friends and exploring Chicago\'s restaurants and events.',
@@ -92,6 +101,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Isabella Del Muro',
     title: 'W4AC / Fundraising Director',
+    photo: '/isabella.JPEG',
     jobTitle: 'Clinical Research Coordinator',
     company: 'Rush University Medical Center',
     bio: 'Isabella del Muro is a Chicago native and public health graduate student at DePaul University, as well as a Clinical Research Coordinator at Rush University Medical Center. She graduated from the University of Kansas with a degree in Molecular Cellular Developmental Biology and a minor in Astrobiology. Isabella is also a [solidcore] coach with a passion for community engagement, wellness, and philanthropy. She joined Junior Council to combine her interests in healthcare advocacy and fundraising in support of Lurie Children\'s. In her free time, she enjoys marathon running, fitness, traveling, concerts, motorsports, and exploring Chicago\'s restaurant scene.',
@@ -100,6 +110,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Marisa Stefani',
     title: 'Corporate Co-Chair',
+    photo: '/marissa.JPEG',
     jobTitle: 'Manager, Accounting & Projects',
     company: 'CF Industries',
     bio: 'Marisa Stefani holds a Master\'s in Accounting from the University of Illinois Urbana-Champaign and is a CPA and Manager of Accounting & Projects at CF Industries, the world\'s largest ammonia producer. In her third year as a Junior Council member, Marisa is thrilled to serve on the board as Corporate Co-Chair. A committed fitness enthusiast with over 1,400 barre classes completed, she also ran the 2014 Chicago Marathon and studied abroad in Belgium. In her free time, Marisa enjoys golfing, traveling, trying new restaurants, and spending time with friends and family.',
@@ -108,6 +119,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Jessica Linley',
     title: 'Corporate Co-Chair',
+    photo: '/jessica.JPEG',
     jobTitle: 'Epidemiological Research Assistant',
     company: 'Rush Alzheimer\'s Disease Center',
     memberSince: 'March 2025',
@@ -117,6 +129,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Brooklyn Mychalowych',
     title: 'Creative Director',
+    photo: '/brooklyn.JPEG',
     jobTitle: 'Lawyer Support Assistant',
     company: 'Jenner & Block',
     bio: 'Brooklyn Mychalowych is a Michigan native and graduate of Michigan State University, where she earned a degree in English. She currently works as a Lawyer Support Assistant at Jenner & Block. In her free time, Brooklyn enjoys exploring both new and longtime hobbies, including sailing, DJing, mosaics, embroidery, travel, fashion, and other creative pursuits.',
@@ -125,12 +138,14 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Catie Hinton',
     title: 'PR Director',
+    photo: '/catie.JPEG',
     bio: 'Catie Hinton was born and raised in Seattle, Washington, and moved to Chicago after graduating from Washington State University to begin her career. She spent several months living in Paris while attending EM Normandie Business School\'s Marketing and Digital in Luxury & Lifestyle Program. In her free time she enjoys sailing, golfing, cooking, and traveling. She is excited to continue exploring Chicago and being part of the Junior Council.',
     linkedin: 'https://www.linkedin.com/in/catiehinton/',
   },
   {
     name: 'Emily Splinter',
     title: 'Hospitality Director',
+    photo: '/emily.JPEG',
     jobTitle: 'Administrative Assistant',
     company: 'BDO',
     memberSince: '2025',
@@ -140,7 +155,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Diana Wolf',
     title: 'Transformation Director',
-    photo: '/diana-wolf.jpg',
+    photo: '/diana.PNG',
     jobTitle: 'Financial Tech Consultant',
     company: 'Cognizant',
     memberSince: 'November 2025',
@@ -261,22 +276,20 @@ export default function BoardPage() {
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2">
                   {/* Photo */}
-                  <div className="relative aspect-square bg-jc-gray flex items-center justify-center p-3">
+                  <div className="bg-white flex items-center justify-center p-8 min-h-[300px]">
                     {selected.photo ? (
-                      <div className="relative w-full h-full overflow-hidden">
+                      <div className="relative aspect-[3/4] w-full max-w-[260px]">
                         <Image
                           src={selected.photo}
                           alt={selected.name}
                           fill
-                          className="object-contain object-center"
+                          className="object-cover object-top"
                         />
                       </div>
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <svg className="w-20 h-20 text-jc-gray-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                      </div>
+                      <svg className="w-20 h-20 text-jc-gray-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
                     )}
                   </div>
 
