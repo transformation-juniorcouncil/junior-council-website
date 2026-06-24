@@ -497,36 +497,38 @@ export default function PortalPage() {
     setOrgEvents(p => p.filter(e => e.id !== id))
   }
 
-  // Generate next 12 monthly member meetings (2nd Wednesday of each month)
-  const memberMeetings: CalEvent[] = (() => {
-    const meetings: CalEvent[] = []
+  // Generate only the single next monthly member meeting (2nd Wednesday of the month)
+  const nextMemberMeeting: CalEvent | null = (() => {
     const todayD = new Date()
+    const todayStr = `${todayD.getFullYear()}-${pad(todayD.getMonth()+1)}-${pad(todayD.getDate())}`
     let year = todayD.getFullYear()
-    let month = todayD.getMonth() // 0-indexed
-    for (let i = 0; i < 12; i++) {
-      // Find second Wednesday of this month
-      const firstDay = new Date(year, month, 1).getDay() // 0=Sun
+    let month = todayD.getMonth()
+    for (let i = 0; i < 3; i++) {
+      const firstDay = new Date(year, month, 1).getDay()
       const firstWed = firstDay <= 3 ? 4 - firstDay : 11 - firstDay
       const secondWed = firstWed + 7
       const dateKey = `${year}-${pad(month + 1)}-${pad(secondWed)}`
-      const dateLabel = new Date(year, month, secondWed).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
-      meetings.push({
-        id: `member-meeting-${dateKey}`,
-        title: 'Monthly Member Meeting',
-        dateKey,
-        date: dateLabel,
-        time: '7:00 PM – 8:30 PM',
-        location: 'Two Thirty — 230 W Superior Street, Chicago, IL 60654',
-        type: 'Meeting',
-      })
+      if (dateKey >= todayStr) {
+        const dateLabel = new Date(year, month, secondWed).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+        return {
+          id: `member-meeting-${dateKey}`,
+          title: 'Monthly Member Meeting',
+          dateKey,
+          date: dateLabel,
+          time: '7:00 PM – 8:30 PM',
+          location: 'Two Thirty — 230 W Superior Street, Chicago, IL 60654',
+          type: 'Meeting',
+        }
+      }
       month++
       if (month > 11) { month = 0; year++ }
     }
-    return meetings
+    return null
   })()
 
-  // Merge Google Calendar events with member meetings, deduplicate by dateKey+title, sort by date
-  const allOrgEvents = [...memberMeetings, ...orgEvents].filter((e, idx, arr) =>
+  // Merge: next member meeting + Google Calendar events, deduplicate, sort
+  const meetingArr = nextMemberMeeting ? [nextMemberMeeting] : []
+  const allOrgEvents = [...meetingArr, ...orgEvents].filter((e, idx, arr) =>
     arr.findIndex(x => x.dateKey === e.dateKey && x.title === e.title) === idx
   )
   const upcomingEvents = allOrgEvents.sort((a, b) => a.dateKey.localeCompare(b.dateKey))
