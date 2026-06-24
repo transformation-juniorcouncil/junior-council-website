@@ -46,11 +46,11 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Hailie Schroll',
     title: 'Snowball Director',
-    photo: '/haille.JPEG',
+    photo: '/haille-new.jpg',
     jobTitle: 'Event Coordinator',
     company: 'Shore Capital Partners',
     memberSince: '2024',
-    bio: 'Hailie Schroll graduated from Indiana University with a B.S. in Tourism, Hospitality and Event Management. She currently works as an Event Coordinator at Shore Capital Partners, where she manages corporate events, meetings, and travel logistics. Hailie joined Junior Council in 2024 and previously served as Hospitality Director. Now in her second year as Snowball Director, she is excited to continue supporting Junior Council\'s mission through fundraising and event planning. When she\'s not planning events, Hailie enjoys exploring Chicago, traveling, hosting friends, and spending time with her cats, Parker and Pippa.',
+    bio: 'Hailie Schroll graduated from Indiana University with a B.S. in Tourism, Hospitality and Event Management. She currently works as an Event Coordinator at Shore Capital Partners, where she manages corporate events, meetings, and travel logistics. Hailie joined Junior Council in 2024 and joined the board in 2025 as Snowball Director, where she leads all planning and execution of the Annual Snowball Gala. When she\'s not planning events, Hailie enjoys exploring Chicago, traveling, hosting friends, and spending time with her cats, Parker and Pippa.',
     linkedin: 'https://www.linkedin.com/in/hailie-schroll/',
   },
   {
