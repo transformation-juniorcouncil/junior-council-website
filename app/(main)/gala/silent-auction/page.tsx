@@ -40,7 +40,7 @@ export default function SilentAuctionPage() {
       <section className="bg-jc-red py-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-white font-bold text-sm tracking-wide">
-            Preview items below — official bidding opens at Snowball on February 27, 2027!
+            Auction items will be announced as they are secured — check back as we get closer to Snowball 2027!
           </p>
         </div>
       </section>
@@ -60,7 +60,7 @@ export default function SilentAuctionPage() {
               Auction <span className="text-jc-red">Items</span>
             </h2>
             <p className="text-jc-gray-dark text-lg mt-4">
-              Click any item to see full details, estimated value, and current bid. New items added as they are secured.
+              Items will be posted here as they are confirmed. Check back as we get closer to Snowball 2027.
             </p>
           </div>
           <AuctionItems />
