@@ -48,16 +48,16 @@ const photos = [
   { id: 16, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2025', caption: '2025 Golf Outing', src: '/images/gallery/golf-outing/IMG_1688.JPG' },
   { id: 17, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2025', caption: '2025 Golf Outing', src: '/images/gallery/golf-outing/IMG_1703.JPG' },
   { id: 18, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2025', caption: '2025 Golf Outing', src: '/images/gallery/golf-outing/IMG_1719.JPG' },
-  // Life in JC — 2025 Derby
-  { id: 19, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09313.JPG' },
-  { id: 20, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09314.JPG' },
-  { id: 21, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09676.JPG' },
-  { id: 22, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09708.JPG' },
-  { id: 23, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09739.JPG' },
-  { id: 24, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09786.JPG' },
-  { id: 25, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09801.JPG' },
-  { id: 26, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09821.JPG' },
-  { id: 27, event: 'life-in-jc', eventLabel: 'Life in JC', year: '2025', caption: '2025 Derby', src: '/images/gallery/life-in-jc/DSC09826.JPG' },
+  // Life in JC — 2025 Derby Party
+  { id: 19, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09313.JPG' },
+  { id: 20, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09314.JPG' },
+  { id: 21, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09676.JPG' },
+  { id: 22, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09708.JPG' },
+  { id: 23, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09739.JPG' },
+  { id: 24, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09786.JPG' },
+  { id: 25, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09801.JPG' },
+  { id: 26, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09821.JPG' },
+  { id: 27, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09826.JPG' },
   // Volunteer Days — placeholder slots
   { id: 28, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024', src: '' },
   { id: 29, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024', src: '' },
@@ -67,17 +67,40 @@ const photos = [
 
 type Photo = typeof photos[0]
 
+// Derive sub-tabs for Life in JC from the photos array
+const lifeInJcSubEvents = Array.from(
+  new Map(
+    photos
+      .filter((p) => p.event === 'life-in-jc' && p.subEvent)
+      .map((p) => [p.subEvent, { id: p.subEvent!, label: p.subEventLabel! }])
+  ).values()
+)
+
 export default function GalleryPage() {
   const [activeEvent, setActiveEvent] = useState('all')
+  const [activeSubEvent, setActiveSubEvent] = useState('all')
   const [lightbox, setLightbox] = useState<Photo | null>(null)
+
+  const handleEventChange = (eventId: string) => {
+    setActiveEvent(eventId)
+    setActiveSubEvent('all')
+  }
+
+  const lifeInJcPhotos = photos.filter((p) => p.event === 'life-in-jc')
+  const filteredLifeInJc =
+    activeSubEvent === 'all'
+      ? lifeInJcPhotos
+      : lifeInJcPhotos.filter((p) => p.subEvent === activeSubEvent)
 
   const filtered =
     activeEvent === 'all'
       ? photos
+      : activeEvent === 'life-in-jc'
+      ? filteredLifeInJc
       : photos.filter((p) => p.event === activeEvent)
 
   // Group by event label + year for the "All" view
-  const grouped = filtered.reduce<Record<string, Photo[]>>((acc, photo) => {
+  const grouped = (activeEvent === 'all' ? photos : filtered).reduce<Record<string, Photo[]>>((acc, photo) => {
     const key = `${photo.eventLabel} — ${photo.year}`
     if (!acc[key]) acc[key] = []
     acc[key].push(photo)
@@ -116,7 +139,7 @@ export default function GalleryPage() {
             {events.map((ev) => (
               <button
                 key={ev.id}
-                onClick={() => setActiveEvent(ev.id)}
+                onClick={() => handleEventChange(ev.id)}
                 className={`flex-shrink-0 px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none ${
                   activeEvent === ev.id
                     ? 'bg-jc-red text-white'
@@ -127,6 +150,34 @@ export default function GalleryPage() {
               </button>
             ))}
           </div>
+          {/* Life in JC sub-tabs */}
+          {activeEvent === 'life-in-jc' && lifeInJcSubEvents.length > 1 && (
+            <div className="flex items-center gap-1 overflow-x-auto pb-3 scrollbar-hide border-t border-white/10 pt-2">
+              <button
+                onClick={() => setActiveSubEvent('all')}
+                className={`flex-shrink-0 px-4 py-1.5 text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none ${
+                  activeSubEvent === 'all'
+                    ? 'text-white border-b-2 border-jc-red'
+                    : 'text-white/40 hover:text-white/70'
+                }`}
+              >
+                All
+              </button>
+              {lifeInJcSubEvents.map((sub) => (
+                <button
+                  key={sub.id}
+                  onClick={() => setActiveSubEvent(sub.id)}
+                  className={`flex-shrink-0 px-4 py-1.5 text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none ${
+                    activeSubEvent === sub.id
+                      ? 'text-white border-b-2 border-jc-red'
+                      : 'text-white/40 hover:text-white/70'
+                  }`}
+                >
+                  {sub.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -157,7 +208,9 @@ export default function GalleryPage() {
             <div>
               <div className="flex items-center gap-4 mb-10">
                 <h2 className="text-jc-black font-black text-2xl tracking-tight">
-                  {events.find((e) => e.id === activeEvent)?.label}
+                  {activeEvent === 'life-in-jc' && activeSubEvent !== 'all'
+                    ? lifeInJcSubEvents.find((s) => s.id === activeSubEvent)?.label
+                    : events.find((e) => e.id === activeEvent)?.label}
                 </h2>
                 <div className="flex-1 h-px bg-jc-gray-mid" aria-hidden="true" />
                 <span className="text-jc-gray-dark text-xs uppercase tracking-widest">
