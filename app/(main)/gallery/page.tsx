@@ -143,7 +143,7 @@ export default function GalleryPage() {
       </section>
 
       {/* Filter Tabs */}
-      <section className="bg-jc-charcoal sticky top-16 z-40 border-b border-white/10">
+      <section className="bg-jc-charcoal sticky top-16 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-1 overflow-x-auto py-3 scrollbar-hide">
             {events.map((ev) => (
