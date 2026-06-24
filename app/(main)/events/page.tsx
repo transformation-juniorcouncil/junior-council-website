@@ -19,14 +19,6 @@ type Event = {
 
 const upcomingEvents: Event[] = [
   {
-    title: 'Chicago Pride Fest',
-    date: 'June 20 – 21, 2026',
-    location: 'Halsted Street, Chicago',
-    type: 'Volunteer',
-    description: 'Celebrate Pride with the JC community at one of Chicago\'s most vibrant summer traditions. Join us for a JC Post-Pride event on Saturday, June 20 at 9:30 PM at Dad\'s Place.',
-    cta: { label: 'Event Info', href: 'https://northalsted.com/main-events/chicago-pride-fest/', external: true },
-  },
-  {
     title: 'Cycling at Equinox',
     date: 'July 2026 — Date TBD',
     location: 'Equinox, Chicago',
@@ -87,6 +79,14 @@ const upcomingEvents: Event[] = [
 ]
 
 const pastEvents: Event[] = [
+  {
+    title: 'Chicago Pride Fest',
+    date: 'June 20 – 21, 2026',
+    location: 'Halsted Street, Chicago',
+    type: 'Volunteer',
+    description: 'Celebrated Pride with the JC community at one of Chicago\'s most vibrant summer traditions. JC members joined a Post-Pride event on Saturday, June 20 at 9:30 PM at Dad\'s Place.',
+    cta: { label: 'Event Info', href: 'https://northalsted.com/main-events/chicago-pride-fest/', external: true },
+  },
   {
     title: 'VinHausa at Soldier Field',
     date: 'June 11, 2026',
