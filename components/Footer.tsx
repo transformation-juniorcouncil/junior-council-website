@@ -2,15 +2,15 @@ import Link from 'next/link'
 
 const footerLinks = {
   'About': [
-    { href: '/about#our-cause', label: 'Our Cause' },
-    { href: '/membership#board', label: 'Board of Directors' },
+    { href: '/about', label: 'Our Cause' },
+    { href: '/board', label: 'Board of Directors' },
     { href: '/about/dei', label: 'DEI Commitment' },
     { href: '/about/faq', label: 'FAQ' },
   ],
   'Get Involved': [
     { href: '/membership#join', label: 'Become a Member' },
     { href: '/membership#committees', label: 'Committees' },
-    { href: '/membership#life', label: 'Life in JC' },
+    { href: '/gallery', label: 'Life in JC' },
     { href: '/membership#dues', label: 'Membership Dues' },
   ],
   'Support': [
