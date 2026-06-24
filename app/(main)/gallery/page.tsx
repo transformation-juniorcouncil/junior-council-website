@@ -4,40 +4,32 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 const events = [
-  {
-    id: 'all',
-    label: 'All Photos',
-  },
-  {
-    id: 'snowball-gala',
-    label: 'Snowball Gala',
-  },
-  {
-    id: 'golf-outing',
-    label: 'Golf Outing',
-  },
-  {
-    id: 'life-in-jc',
-    label: 'Life in JC',
-  },
-  {
-    id: 'volunteer',
-    label: 'Volunteer Days',
-  },
+  { id: 'all',          label: 'All Photos' },
+  { id: 'snowball-gala', label: 'Snowball Gala' },
+  { id: 'golf-outing',  label: 'Golf Outing' },
+  { id: 'life-in-jc',  label: 'Life in JC' },
+  { id: 'volunteer',   label: 'Volunteer Days' },
 ]
 
 const photos = [
-  // Snowball Gala — placeholder slots until real photos are added
-  { id: 1, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024', src: '' },
-  { id: 2, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024', src: '' },
-  { id: 3, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024', src: '' },
-  { id: 4, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024', src: '' },
-  { id: 5, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024', src: '' },
-  { id: 6, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2024', caption: 'Snowball Gala 2024', src: '' },
-  { id: 7, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2023', caption: 'Snowball Gala 2023', src: '' },
-  { id: 8, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2023', caption: 'Snowball Gala 2023', src: '' },
-  { id: 9, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2023', caption: 'Snowball Gala 2023', src: '' },
-  { id: 10, event: 'snowball-gala', eventLabel: 'Snowball Gala', year: '2023', caption: 'Snowball Gala 2023', src: '' },
+  // Snowball Gala — placeholder slots (no real photos yet)
+  { id: 1,  event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2024', caption: 'Snowball Gala 2024',    src: '' },
+  { id: 2,  event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2024', caption: 'Snowball Gala 2024',    src: '' },
+  { id: 3,  event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2024', caption: 'Snowball Gala 2024',    src: '' },
+  { id: 4,  event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2024', caption: 'Snowball Gala 2024',    src: '' },
+  { id: 5,  event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2023', caption: 'Snowball Gala 2023',    src: '' },
+  { id: 6,  event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2023', caption: 'Snowball Gala 2023',    src: '' },
+  { id: 7,  event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2023', caption: 'Snowball Gala 2023',    src: '' },
+  // Snowball Gala — 2025 Kickoff
+  { id: 32, event: 'snowball-gala', subEvent: 'snowball-kickoff',   eventLabel: 'Snowball Gala', subEventLabel: 'Snowball Kickoff',  year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/img_5680--1-.jpg' },
+  { id: 33, event: 'snowball-gala', subEvent: 'snowball-kickoff',   eventLabel: 'Snowball Gala', subEventLabel: 'Snowball Kickoff',  year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-001.jpg' },
+  { id: 34, event: 'snowball-gala', subEvent: 'snowball-kickoff',   eventLabel: 'Snowball Gala', subEventLabel: 'Snowball Kickoff',  year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-011.jpg' },
+  { id: 35, event: 'snowball-gala', subEvent: 'snowball-kickoff',   eventLabel: 'Snowball Gala', subEventLabel: 'Snowball Kickoff',  year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-019.jpg' },
+  { id: 36, event: 'snowball-gala', subEvent: 'snowball-kickoff',   eventLabel: 'Snowball Gala', subEventLabel: 'Snowball Kickoff',  year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-023--2-.jpg' },
+  { id: 37, event: 'snowball-gala', subEvent: 'snowball-kickoff',   eventLabel: 'Snowball Gala', subEventLabel: 'Snowball Kickoff',  year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-043.jpg' },
+  { id: 38, event: 'snowball-gala', subEvent: 'snowball-kickoff',   eventLabel: 'Snowball Gala', subEventLabel: 'Snowball Kickoff',  year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-045--1-.jpg' },
+  { id: 39, event: 'snowball-gala', subEvent: 'snowball-kickoff',   eventLabel: 'Snowball Gala', subEventLabel: 'Snowball Kickoff',  year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-057.jpg' },
+  { id: 40, event: 'snowball-gala', subEvent: 'snowball-kickoff',   eventLabel: 'Snowball Gala', subEventLabel: 'Snowball Kickoff',  year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-091--1-.jpg' },
   // Golf Outing — 2025
   { id: 11, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2025', caption: '2025 Golf Outing', src: '/images/gallery/golf-outing/IMG_1553.JPG' },
   { id: 12, event: 'golf-outing', eventLabel: 'Golf Outing', year: '2025', caption: '2025 Golf Outing', src: '/images/gallery/golf-outing/IMG_1564.JPG' },
@@ -57,16 +49,6 @@ const photos = [
   { id: 25, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09801.JPG' },
   { id: 26, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09821.JPG' },
   { id: 27, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09826.JPG' },
-  // Life in JC — 2025 Snowball Kickoff
-  { id: 32, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/img_5680--1-.jpg' },
-  { id: 33, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-001.jpg' },
-  { id: 34, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-011.jpg' },
-  { id: 35, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-019.jpg' },
-  { id: 36, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-023--2-.jpg' },
-  { id: 37, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-043.jpg' },
-  { id: 38, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-045--1-.jpg' },
-  { id: 39, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-057.jpg' },
-  { id: 40, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-091--1-.jpg' },
   // Volunteer Days — placeholder slots
   { id: 28, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024', src: '' },
   { id: 29, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024', src: '' },
@@ -76,14 +58,16 @@ const photos = [
 
 type Photo = typeof photos[0]
 
-// Derive sub-tabs for Life in JC from the photos array
-const lifeInJcSubEvents = Array.from(
-  new Map(
-    photos
-      .filter((p) => p.event === 'life-in-jc' && p.subEvent)
-      .map((p) => [p.subEvent, { id: p.subEvent!, label: p.subEventLabel! }])
-  ).values()
-)
+// Returns unique sub-tabs for a given event id, in order of first appearance
+function getSubEvents(eventId: string) {
+  return Array.from(
+    new Map(
+      photos
+        .filter((p) => p.event === eventId && p.subEvent)
+        .map((p) => [p.subEvent, { id: p.subEvent!, label: p.subEventLabel! }])
+    ).values()
+  )
+}
 
 export default function GalleryPage() {
   const [activeEvent, setActiveEvent] = useState('all')
@@ -95,21 +79,18 @@ export default function GalleryPage() {
     setActiveSubEvent('all')
   }
 
-  const lifeInJcPhotos = photos.filter((p) => p.event === 'life-in-jc')
-  const filteredLifeInJc =
-    activeSubEvent === 'all'
-      ? lifeInJcPhotos
-      : lifeInJcPhotos.filter((p) => p.subEvent === activeSubEvent)
+  const subEvents = getSubEvents(activeEvent)
 
+  const eventPhotos = photos.filter((p) => p.event === activeEvent)
   const filtered =
     activeEvent === 'all'
       ? photos
-      : activeEvent === 'life-in-jc'
-      ? filteredLifeInJc
-      : photos.filter((p) => p.event === activeEvent)
+      : activeSubEvent === 'all'
+      ? eventPhotos
+      : eventPhotos.filter((p) => p.subEvent === activeSubEvent)
 
-  // Group by sub-event label (if present) or event label + year for the "All" view
-  const grouped = (activeEvent === 'all' ? photos : filtered).reduce<Record<string, Photo[]>>((acc, photo) => {
+  // Group by sub-event label (if present) or event label + year
+  const grouped = photos.reduce<Record<string, Photo[]>>((acc, photo) => {
     const label = photo.subEventLabel || photo.eventLabel
     const key = `${label} — ${photo.year}`
     if (!acc[key]) acc[key] = []
@@ -121,7 +102,6 @@ export default function GalleryPage() {
     <div className="pt-16">
       {/* Page Header */}
       <section className="bg-jc-black py-24 relative overflow-hidden">
-        
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
           <div className="absolute -right-24 top-0 w-2/5 h-full bg-jc-red/8 transform skew-x-[-8deg]" />
         </div>
@@ -161,8 +141,8 @@ export default function GalleryPage() {
             ))}
           </div>
         </div>
-        {/* Life in JC sub-tabs — full width white bar */}
-        {activeEvent === 'life-in-jc' && lifeInJcSubEvents.length > 1 && (
+        {/* Sub-tabs — full width white bar, shown when active event has sub-events */}
+        {subEvents.length > 1 && (
           <div className="bg-white border-t border-jc-gray-mid">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide">
@@ -176,7 +156,7 @@ export default function GalleryPage() {
                 >
                   All
                 </button>
-                {lifeInJcSubEvents.map((sub) => (
+                {subEvents.map((sub) => (
                   <button
                     key={sub.id}
                     onClick={() => setActiveSubEvent(sub.id)}
@@ -199,7 +179,7 @@ export default function GalleryPage() {
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {activeEvent === 'all' ? (
-            // Grouped view — show section headers per event + year
+            // Grouped view
             <div className="space-y-16">
               {Object.entries(grouped).map(([group, groupPhotos]) => (
                 <div key={group}>
@@ -222,8 +202,8 @@ export default function GalleryPage() {
             <div>
               <div className="flex items-center gap-4 mb-10">
                 <h2 className="text-jc-black font-black text-2xl tracking-tight">
-                  {activeEvent === 'life-in-jc' && activeSubEvent !== 'all'
-                    ? lifeInJcSubEvents.find((s) => s.id === activeSubEvent)?.label
+                  {activeSubEvent !== 'all'
+                    ? subEvents.find((s) => s.id === activeSubEvent)?.label
                     : events.find((e) => e.id === activeEvent)?.label}
                 </h2>
                 <div className="flex-1 h-px bg-jc-gray-mid" aria-hidden="true" />
@@ -234,7 +214,6 @@ export default function GalleryPage() {
               <PhotoGrid photos={filtered} onOpen={setLightbox} />
             </div>
           )}
-
         </div>
       </section>
 
@@ -281,7 +260,7 @@ export default function GalleryPage() {
             <div className="mt-3 flex items-center justify-between">
               <p className="text-white font-semibold">{lightbox.caption}</p>
               <span className="text-white/40 text-xs uppercase tracking-widest">
-                {lightbox.eventLabel} · {lightbox.year}
+                {lightbox.subEventLabel || lightbox.eventLabel} · {lightbox.year}
               </span>
             </div>
           </div>
