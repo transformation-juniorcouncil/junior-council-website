@@ -93,9 +93,7 @@ const DONATION_ROUTES: Record<string,string> = {
 
 // ─── Resources ────────────────────────────────────────────────────────────────
 
-const resources = [
-  { title:'JC Google Drive',               desc:'Access shared documents, assets, and files.',            icon:'M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z',                                                                                                                                                                              link:'https://drive.google.com/drive/u/0/folders/0ADATa6NU7efDUk9PVA',                                               tag:'Drive'     },
-]
+const resources: { title: string; desc: string; icon: string; link: string; tag: string }[] = []
 
 const packetPdfs = [
   { label:'Corporate Packet',          link:'/JC-Corporate-Packet.pdf' },
@@ -106,12 +104,6 @@ const packetPdfs = [
 const memberDocs = [
   { label:'Code of Conduct',   link:'https://docs.google.com/document/d/1kKHYT96UCOwcvf5mCN_fCNzqNrV_4kM5soJ70DdaOFQ/edit?tab=t.0' },
   { label:'Member Directory',  link:'https://docs.google.com/presentation/d/1uwQC91Bzo-4ZcA3m9Di0XOUXjxzUXs3qToK0FoR_GAI/edit?slide=id.p#slide=id.p' },
-]
-
-const outreachTemplates = [
-  { label:'Corporate',     link:'https://docs.google.com/document/d/17RBfMO9YAekHxyp8uM09zAP4QGciTpQvsBrbD7vWLzs/edit?tab=t.0' },
-  { label:'Hospitality',   link:'https://docs.google.com/document/d/1S5a3XVijH6tIcnihkDvjLkTNvH6P4x1jGPvCc90VB_U/edit?tab=t.0' },
-  { label:'Silent Auction', link:'' },
 ]
 
 // ─── Profile ─────────────────────────────────────────────────────────────────
@@ -1033,37 +1025,6 @@ export default function PortalPage() {
                     ) : (
                       <div key={d.label} className="flex items-center justify-between px-3 py-2.5 border border-jc-gray-mid opacity-40 cursor-not-allowed">
                         <span className="text-jc-black text-sm font-bold">{d.label}</span>
-                        <span className="text-jc-gray-dark text-xs">Coming soon</span>
-                      </div>
-                    )
-                  ))}
-                </div>
-              </div>
-
-              {/* Outreach Templates — combined card */}
-              <div className="bg-white border border-jc-gray-mid p-6 flex flex-col">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-10 h-10 bg-jc-red/10 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-jc-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                    </svg>
-                  </div>
-                  <span className="text-jc-gray-dark text-xs font-bold uppercase tracking-widest bg-jc-gray px-2 py-1">Templates</span>
-                </div>
-                <h3 className="text-jc-black font-black text-base mb-3">Outreach Email Templates</h3>
-                <div className="flex flex-col gap-2 flex-grow">
-                  {outreachTemplates.map(t=>(
-                    t.link ? (
-                      <a key={t.label} href={t.link} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center justify-between px-3 py-2.5 border border-jc-gray-mid hover:border-jc-red hover:text-jc-red transition-colors group/link">
-                        <span className="text-jc-black group-hover/link:text-jc-red text-sm font-bold transition-colors">{t.label}</span>
-                        <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                        </svg>
-                      </a>
-                    ) : (
-                      <div key={t.label} className="flex items-center justify-between px-3 py-2.5 border border-jc-gray-mid opacity-40 cursor-not-allowed">
-                        <span className="text-jc-black text-sm font-bold">{t.label}</span>
                         <span className="text-jc-gray-dark text-xs">Coming soon</span>
                       </div>
                     )
