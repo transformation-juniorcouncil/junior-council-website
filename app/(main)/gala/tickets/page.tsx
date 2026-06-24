@@ -73,7 +73,7 @@ export default function TicketsPage() {
               { icon: 'M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3', label: 'Live Music & DJ', desc: 'Dance the night away with live entertainment and a full DJ set.' },
               { icon: 'M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7', label: 'Silent Auction', desc: 'Bid on exclusive experiences, luxury items, and one-of-a-kind packages.' },
               { icon: 'M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z', label: 'Open Bar', desc: 'Premium open bar with craft cocktails, beer, wine, and spirits all night.' },
-              { icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z', label: '500+ Attendees', desc: 'Connect with Chicago\'s most engaged young professionals at one event.' },
+              { icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z', label: '900+ Attendees', desc: 'Connect with Chicago\'s most engaged young professionals at one event.' },
             ].map((item) => (
               <div key={item.label} className="border border-white/10 p-6 hover:border-jc-red transition-colors">
                 <div className="w-10 h-10 bg-jc-red/20 flex items-center justify-center mb-4">

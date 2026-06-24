@@ -65,7 +65,7 @@ const upcomingEvents: Event[] = [
     date: 'Winter 2027',
     location: 'Chicago, IL',
     type: 'Signature',
-    description: 'Our flagship black-tie fundraiser. Live entertainment, silent auction, 500+ guests — one shared mission.',
+    description: 'Our flagship black-tie fundraiser. Live entertainment, silent auction, 900+ guests — one shared mission.',
     cta: { label: 'Gala Details', href: '/gala' },
   },
 ]

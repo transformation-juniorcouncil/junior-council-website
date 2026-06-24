@@ -314,7 +314,7 @@ export default function SupportPage() {
               <p className="text-jc-gray-dark leading-relaxed mb-8">
                 Whether you&apos;re a restaurant, caterer, bar, hotel, or event venue,
                 we&apos;d love to explore a partnership. Our Annual Snowball Gala alone
-                draws 500+ attendees and dozens of corporate sponsors.
+                draws 900+ attendees and dozens of corporate sponsors.
               </p>
               <Link
                 href="/contact"
