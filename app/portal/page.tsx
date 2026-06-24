@@ -383,25 +383,14 @@ export default function PortalPage() {
     setDuesToggling(null)
   }
 
-  // Fetch org events
+  // Fetch org events from Google Calendar
   useEffect(() => {
     if (!user) return
-    const supabase = createClient()
-    supabase
-      .from('org_events')
-      .select('id, title, date_key, date_label, time, location, type, created_by')
-      .then(({ data }) => {
-        if (!data) return
-        setOrgEvents(data.map((r: { id: string; title: string; date_key: string; date_label: string; time: string; location: string; type: string; created_by: string | null }) => ({
-          id: r.id,
-          title: r.title,
-          dateKey: r.date_key,
-          date: r.date_label,
-          time: r.time || '',
-          location: r.location || '',
-          type: r.type,
-          createdBy: r.created_by ?? undefined,
-        })))
+    fetch('/api/calendar')
+      .then(r => r.json())
+      .then(({ events }) => {
+        if (!events) return
+        setOrgEvents(events)
       })
   }, [user])
 
