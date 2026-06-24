@@ -497,8 +497,40 @@ export default function PortalPage() {
     setOrgEvents(p => p.filter(e => e.id !== id))
   }
 
-  const upcomingEvents = [...orgEvents].sort((a, b) => a.dateKey.localeCompare(b.dateKey))
-  const combinedEvents = [...orgEvents, ...personalEvents]
+  // Generate next 12 monthly member meetings (2nd Wednesday of each month)
+  const memberMeetings: CalEvent[] = (() => {
+    const meetings: CalEvent[] = []
+    const todayD = new Date()
+    let year = todayD.getFullYear()
+    let month = todayD.getMonth() // 0-indexed
+    for (let i = 0; i < 12; i++) {
+      // Find second Wednesday of this month
+      const firstDay = new Date(year, month, 1).getDay() // 0=Sun
+      const firstWed = firstDay <= 3 ? 4 - firstDay : 11 - firstDay
+      const secondWed = firstWed + 7
+      const dateKey = `${year}-${pad(month + 1)}-${pad(secondWed)}`
+      const dateLabel = new Date(year, month, secondWed).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+      meetings.push({
+        id: `member-meeting-${dateKey}`,
+        title: 'Monthly Member Meeting',
+        dateKey,
+        date: dateLabel,
+        time: '7:00 PM – 8:30 PM',
+        location: 'Two Thirty — 230 W Superior Street, Chicago, IL 60654',
+        type: 'Meeting',
+      })
+      month++
+      if (month > 11) { month = 0; year++ }
+    }
+    return meetings
+  })()
+
+  // Merge Google Calendar events with member meetings, deduplicate by dateKey+title, sort by date
+  const allOrgEvents = [...memberMeetings, ...orgEvents].filter((e, idx, arr) =>
+    arr.findIndex(x => x.dateKey === e.dateKey && x.title === e.title) === idx
+  )
+  const upcomingEvents = allOrgEvents.sort((a, b) => a.dateKey.localeCompare(b.dateKey))
+  const combinedEvents = [...allOrgEvents, ...personalEvents]
   const eventsOnDay = (day:number) => { const k=`${calYear}-${pad(calMonth+1)}-${pad(day)}`; return combinedEvents.filter(e=>e.dateKey===k) }
   const selectedEvents = selectedDay ? combinedEvents.filter(e=>e.dateKey===selectedDay) : []
 
