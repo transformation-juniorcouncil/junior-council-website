@@ -58,6 +58,16 @@ const photos = [
   { id: 25, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09801.JPG' },
   { id: 26, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09821.JPG' },
   { id: 27, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09826.JPG' },
+  // Life in JC — 2025 Snowball Kickoff
+  { id: 32, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/img_5680--1-.jpg' },
+  { id: 33, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-001.jpg' },
+  { id: 34, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-011.jpg' },
+  { id: 35, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-019.jpg' },
+  { id: 36, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-023--2-.jpg' },
+  { id: 37, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-043.jpg' },
+  { id: 38, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-045--1-.jpg' },
+  { id: 39, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-057.jpg' },
+  { id: 40, event: 'life-in-jc', subEvent: 'snowball-kickoff', eventLabel: 'Life in JC', subEventLabel: 'Snowball Kickoff', year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-091--1-.jpg' },
   // Volunteer Days — placeholder slots
   { id: 28, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024', src: '' },
   { id: 29, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024', src: '' },
