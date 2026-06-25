@@ -155,7 +155,7 @@ const boardMembers: BoardMember[] = [
   {
     name: 'Diana Wolf',
     title: 'Transformation Director',
-    photo: '/diana.PNG',
+    photo: '/diana-new.PNG',
     jobTitle: 'Financial Tech Consultant',
     company: 'Cognizant',
     memberSince: 'November 2025',
