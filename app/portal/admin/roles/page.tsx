@@ -17,7 +17,7 @@ type MemberProfile = {
 const BOARD_TITLES = [
   '', 'President', 'Vice President', 'Treasurer', 'Secretary',
   'Snowball', 'Engagement', 'Recruitment', 'Education', 'Silent Auction',
-  'W4AC / Fundraising Pages', 'Corporate Co-Director', 'Creative', 'PR',
+  'W4AC / Fundraising Pages', 'Corporate Director', 'Creative', 'PR',
   'Hospitality', 'Transformation Director',
 ]
 
