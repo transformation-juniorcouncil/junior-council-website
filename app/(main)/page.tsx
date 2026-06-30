@@ -97,13 +97,10 @@ export default function HomePage() {
 
             {/* Subheadline */}
             <p className="text-white/70 text-lg sm:text-xl leading-relaxed mb-10 max-w-2xl">
-              In partnership with{' '}
+              Where Chicago professionals come together to support the Pediatric HIV/AIDS Program at{' '}
               <span className="text-white font-semibold">
-                Ann &amp; Robert H. Lurie Children&apos;s Hospital of Chicago
+                Ann &amp; Robert H. Lurie Children&apos;s Hospital
               </span>
-              , Junior Council raises critical funds for adolescents living with
-              HIV and AIDS — connecting community, purpose, and generosity to
-              change young lives.
             </p>
 
             {/* CTAs */}
