@@ -31,7 +31,14 @@ const navLinks: NavLink[] = [
       { href: '/board', label: 'Board of Directors' },
     ],
   },
-  { href: '/events', label: 'Events' },
+  {
+    href: '/events',
+    label: 'Events',
+    dropdown: [
+      { href: '/events?tab=upcoming', label: 'Upcoming Events' },
+      { href: '/events?tab=past', label: 'Past Events' },
+    ],
+  },
   {
     href: '/gala',
     label: 'Annual Gala',

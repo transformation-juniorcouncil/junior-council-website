@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -128,7 +129,20 @@ const typeStyles: Record<string, { pill: string; accent: string }> = {
 }
 
 export default function EventsPage() {
-  const [tab, setTab] = useState<'upcoming' | 'past'>('upcoming')
+  return <Suspense fallback={null}><EventsPageInner /></Suspense>
+}
+
+function EventsPageInner() {
+  const searchParams = useSearchParams()
+  const [tab, setTab] = useState<'upcoming' | 'past'>(() => {
+    const t = searchParams.get('tab')
+    return t === 'past' ? 'past' : 'upcoming'
+  })
+
+  useEffect(() => {
+    const t = searchParams.get('tab')
+    setTab(t === 'past' ? 'past' : 'upcoming')
+  }, [searchParams])
 
   const featured = null
   const rest = upcomingEvents
