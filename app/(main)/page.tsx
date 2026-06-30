@@ -88,19 +88,22 @@ export default function HomePage() {
 
             {/* Headline */}
             <h1 className="text-white font-black text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] tracking-tight mb-8">
-              Giving Chicago&apos;s
+              Where Chicago
               <br />
-              <span className="text-jc-red">Youth</span> a
+              <span className="text-jc-red">Professionals</span>
               <br />
-              Fighting Chance.
+              Come Together.
             </h1>
 
             {/* Subheadline */}
             <p className="text-white/70 text-lg sm:text-xl leading-relaxed mb-10 max-w-2xl">
-              Where Chicago professionals come together to support the Pediatric HIV/AIDS Program at{' '}
+              In partnership with{' '}
               <span className="text-white font-semibold">
-                Ann &amp; Robert H. Lurie Children&apos;s Hospital
+                Ann &amp; Robert H. Lurie Children&apos;s Hospital of Chicago
               </span>
+              , Junior Council raises critical funds for adolescents living with
+              HIV and AIDS — connecting community, purpose, and generosity to
+              change young lives.
             </p>
 
             {/* CTAs */}
