@@ -186,8 +186,7 @@ export default function BoardPage() {
             Board of Directors
           </h1>
           <p className="text-white/60 text-lg mt-4 max-w-2xl">
-            Meet the 2026 / 2027 Junior Council Board of Directors — Chicago
-            professionals leading the fight for youth with HIV and AIDS.
+            Meet the 2026 / 2027 Junior Council Board of Directors!
           </p>
         </div>
       </section>
