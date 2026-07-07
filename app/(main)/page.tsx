@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -10,6 +11,13 @@ const stats = [
   { value: '$3M+', label: 'Raised for Lurie', description: 'Funding life-saving care' },
   { value: '~2,000', label: 'Lives Impacted', description: 'Patients supported' },
   { value: '40+', label: 'Partners & Sponsors', description: 'Community allies' },
+]
+
+const lifeInJcPhotos = [
+  { src: '/images/gallery/golf-outing/IMG_1608.JPG', alt: 'Junior Council members at the annual golf outing' },
+  { src: '/images/gallery/life-in-jc/DSC09826.JPG', alt: 'Junior Council members at a fundraising event' },
+  { src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-023--2-.jpg', alt: 'Junior Council members at the Snowball kickoff' },
+  { src: '/images/gallery/life-in-jc/DSC09739.JPG', alt: 'Junior Council members celebrating together' },
 ]
 
 const involvementCards = [
@@ -164,6 +172,45 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── LIFE IN JC ────────────────────────────────────────────────── */}
+      <section className="bg-jc-black py-24 lg:py-32" aria-label="Life in Junior Council">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
+                <span className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase">Life in JC</span>
+              </div>
+              <h2 className="text-white font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight max-w-xl">
+                A Community That Shows Up For Each Other — and the Cause.
+              </h2>
+            </div>
+            <Link
+              href="/gallery"
+              className="inline-flex items-center text-white font-bold text-sm uppercase tracking-widest border-b-2 border-jc-red hover:text-jc-red transition-colors pb-1 flex-shrink-0"
+            >
+              See More Photos
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {lifeInJcPhotos.map((photo, i) => (
+              <div key={i} className="group relative aspect-square overflow-hidden bg-jc-charcoal">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 25vw"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── WHO WE ARE + LURIE PARTNERSHIP (merged) ──────────────────── */}
       <section className="bg-white py-24 lg:py-32" aria-label="Who we are and our partner">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -249,17 +296,14 @@ export default function HomePage() {
                   ))}
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-4">
-                {[
-                  { value: '160+', label: 'Members' },
-                  { value: '$3M+', label: 'Raised for Lurie' },
-                  { value: '100%', label: 'To patient care' },
-                ].map((s, i) => (
-                  <div key={i} className="bg-jc-gray border border-jc-gray-mid p-5 text-center">
-                    <div className="text-jc-red font-black text-2xl">{s.value}</div>
-                    <div className="text-jc-gray-dark text-xs mt-1 uppercase tracking-wide">{s.label}</div>
-                  </div>
-                ))}
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src="/group-pic.JPG"
+                  alt="Junior Council members together at an event"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               </div>
             </div>
           </div>
