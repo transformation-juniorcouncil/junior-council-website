@@ -177,13 +177,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
             <div>
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-3">
                 <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
                 <span className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase">Life in JC</span>
               </div>
-              <h2 className="text-white font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight max-w-xl">
-                A Community That Shows Up For Each Other — and the Cause.
-              </h2>
             </div>
             <Link
               href="/gallery"
