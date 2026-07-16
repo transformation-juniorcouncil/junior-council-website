@@ -170,7 +170,7 @@ export default function BoardPage() {
   return (
     <div className="pt-16">
       {/* Page Header */}
-      <section className="bg-jc-black pt-44 pb-20 relative overflow-hidden">
+      <section className="bg-jc-black pt-56 pb-8 relative overflow-hidden">
 
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
           <Image
