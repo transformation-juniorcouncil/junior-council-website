@@ -170,7 +170,7 @@ export default function BoardPage() {
   return (
     <div className="pt-16">
       {/* Page Header */}
-      <section className="bg-jc-black py-24 relative overflow-hidden">
+      <section className="bg-jc-black pt-24 pb-40 relative overflow-hidden">
 
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
           <Image
@@ -178,7 +178,7 @@ export default function BoardPage() {
             alt=""
             fill
             priority
-            className="object-cover object-[35%_18%]"
+            className="object-cover object-center"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-jc-black/70" />
