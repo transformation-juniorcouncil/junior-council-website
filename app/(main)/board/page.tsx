@@ -171,9 +171,17 @@ export default function BoardPage() {
     <div className="pt-16">
       {/* Page Header */}
       <section className="bg-jc-black py-24 relative overflow-hidden">
-        
+
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-          <div className="absolute -right-24 top-0 w-2/5 h-full bg-jc-red/8 transform skew-x-[-8deg]" />
+          <Image
+            src="/group-pic.JPG"
+            alt=""
+            fill
+            priority
+            className="object-cover object-[35%_65%]"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-jc-black/70" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 mb-4">

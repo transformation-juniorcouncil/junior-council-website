@@ -71,8 +71,6 @@ export default function HomePage() {
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
           {/* Large subtle red diagonal block */}
           <div className="absolute -right-24 top-0 w-2/5 h-full bg-jc-red/8 transform skew-x-[-8deg]" />
-          {/* Red accent stripe */}
-          
           {/* Subtle grid texture */}
           <div
             className="absolute inset-0 opacity-[0.03]"
@@ -173,15 +171,9 @@ export default function HomePage() {
       </section>
 
       {/* ─── LIFE IN JC ────────────────────────────────────────────────── */}
-      <section className="bg-jc-black py-24 lg:py-32" aria-label="Life in Junior Council">
+      <section className="bg-jc-black pt-10 pb-24 lg:pt-14 lg:pb-32" aria-label="Life in Junior Council">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
-            <div>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
-                <span className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase">Life in JC</span>
-              </div>
-            </div>
+          <div className="flex justify-end mb-6">
             <Link
               href="/gallery"
               className="inline-flex items-center text-white font-bold text-sm uppercase tracking-widest border-b-2 border-jc-red hover:text-jc-red transition-colors pb-1 flex-shrink-0"
@@ -293,18 +285,18 @@ export default function HomePage() {
                   ))}
                 </div>
               </div>
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <Image
-                  src="/group-pic.JPG"
-                  alt="Junior Council members together at an event"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
             </div>
           </div>
 
+          <div className="relative aspect-[21/9] overflow-hidden mt-16">
+            <Image
+              src="/group-pic.JPG"
+              alt="Junior Council members together at an event"
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
         </div>
       </section>
 
