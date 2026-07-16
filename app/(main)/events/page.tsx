@@ -37,10 +37,11 @@ const upcomingEvents: Event[] = [
   },
   {
     title: 'Annual Golf Outing',
-    date: 'Date & Location TBD',
-    location: 'Chicago, IL',
+    date: 'September 13, 2026',
+    time: '1:00 PM',
+    location: 'Indian Boundary Golf Course',
     type: 'Fundraiser',
-    description: 'Join Junior Council and our corporate sponsors for a day on the course raising funds for our mission. Details coming soon.',
+    description: 'Join Junior Council and our corporate sponsors for a day on the green for the kids.',
     cta: null,
   },
   {
