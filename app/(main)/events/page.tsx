@@ -20,12 +20,13 @@ type Event = {
 
 const upcomingEvents: Event[] = [
   {
-    title: 'JC Palooza',
+    title: 'JC-Palooza 2026',
     date: 'August 14, 2026',
-    location: "Joe's on Weed Street, Chicago, IL",
-    type: 'Member Event',
-    description: 'Come celebrate Lollapalooza with Junior Council! More details to come.',
-    cta: null,
+    time: '7:30 PM – 11:59 PM',
+    location: "Joe's on Weed, Chicago",
+    type: 'Fundraiser',
+    description: "Couldn't snag a Lollapalooza ticket in time? Join Junior Council for an evening of live music! Our first ever JC-Palooza will be a night to remember — local bands and DJs playing live, fun raffles, and a chance to win tickets to upcoming events! Open to everyone, so bring your friends, family, and co-workers. Early Bird Tickets on sale through 7/22. A limited quantity of tickets will be available at the door via cash, Venmo, or Zelle.",
+    cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:53a548a2-744d-48b1-9045-0b114349a64e/home/story', external: true },
   },
   {
     title: 'Northalsted Market Days',
