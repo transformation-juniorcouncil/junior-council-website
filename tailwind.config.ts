@@ -9,9 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'jc-red': '#C8102E',
-        'jc-red-dark': '#A00C24',
-        'jc-red-light': '#E8102E',
+        'jc-red': '#C61F4B',
+        'jc-red-dark': '#9E193C',
+        'jc-red-light': '#E61F4B',
         'jc-black': '#0A0A0A',
         'jc-charcoal': '#1A1A1A',
         'jc-gray': '#F7F7F7',
