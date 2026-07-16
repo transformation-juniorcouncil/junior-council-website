@@ -13,13 +13,6 @@ const stats = [
   { value: '40+', label: 'Partners & Sponsors', description: 'Community allies' },
 ]
 
-const lifeInJcPhotos = [
-  { src: '/images/gallery/golf-outing/IMG_1608.JPG', alt: 'Junior Council members at the annual golf outing' },
-  { src: '/images/gallery/life-in-jc/DSC09826.JPG', alt: 'Junior Council members at a fundraising event' },
-  { src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-023--2-.jpg', alt: 'Junior Council members at the Snowball kickoff' },
-  { src: '/images/gallery/life-in-jc/DSC09739.JPG', alt: 'Junior Council members celebrating together' },
-]
-
 const involvementCards = [
   {
     icon: (
@@ -64,11 +57,21 @@ export default function HomePage() {
     <>
       {/* ─── HERO ─────────────────────────────────────────────────────── */}
       <section
-        className="relative min-h-screen bg-jc-black flex items-center overflow-hidden"
+        className="relative min-h-screen bg-jc-black flex items-end overflow-hidden"
         aria-label="Hero"
       >
         {/* Background design elements */}
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+          {/* Faded event photo backdrop */}
+          <Image
+            src="/images/gala-hero.jpg"
+            alt=""
+            fill
+            priority
+            className="object-cover object-[50%_55%]"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-jc-black/75" />
           {/* Large subtle red diagonal block */}
           <div className="absolute -right-24 top-0 w-2/5 h-full bg-jc-red/8 transform skew-x-[-8deg]" />
           {/* Subtle grid texture */}
@@ -82,8 +85,8 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 pt-40">
-          <div className="max-w-4xl">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 pt-40">
+          <div className="max-w-5xl">
             {/* Eyebrow */}
             <div className="flex items-center gap-3 mb-8">
               <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
@@ -93,7 +96,7 @@ export default function HomePage() {
             </div>
 
             {/* Headline */}
-            <h1 className="text-white font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-10 max-w-3xl">
+            <h1 className="text-white font-black text-3xl sm:text-4xl lg:text-5xl leading-[1.15] tracking-tight mb-10 max-w-5xl">
               Where Chicago professionals come together to support the Pediatric HIV/AIDS Program at{' '}
               <span className="text-jc-red">Ann &amp; Robert H. Lurie Children&apos;s Hospital</span>.
             </h1>
@@ -164,36 +167,6 @@ export default function HomePage() {
                   {stat.label}
                 </div>
                 <div className="text-white/40 text-xs">{stat.description}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── LIFE IN JC ────────────────────────────────────────────────── */}
-      <section className="bg-jc-black pt-10 pb-24 lg:pt-14 lg:pb-32" aria-label="Life in Junior Council">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-end mb-6">
-            <Link
-              href="/gallery"
-              className="inline-flex items-center text-white font-bold text-sm uppercase tracking-widest border-b-2 border-jc-red hover:text-jc-red transition-colors pb-1 flex-shrink-0"
-            >
-              See More Photos
-              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {lifeInJcPhotos.map((photo, i) => (
-              <div key={i} className="group relative aspect-square overflow-hidden bg-jc-charcoal">
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 25vw"
-                />
               </div>
             ))}
           </div>
@@ -286,16 +259,6 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="relative aspect-[21/9] overflow-hidden mt-16">
-            <Image
-              src="/group-pic.JPG"
-              alt="Junior Council members together at an event"
-              fill
-              className="object-cover"
-              sizes="100vw"
-            />
           </div>
         </div>
       </section>

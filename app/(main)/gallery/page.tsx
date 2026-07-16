@@ -12,14 +12,11 @@ const events = [
 ]
 
 const photos = [
-  // Snowball Gala — placeholder slots (no real photos yet)
-  { id: 1,  event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2024', caption: 'Snowball Gala 2024',    src: '' },
-  { id: 2,  event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2024', caption: 'Snowball Gala 2024',    src: '' },
-  { id: 3,  event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2024', caption: 'Snowball Gala 2024',    src: '' },
-  { id: 4,  event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2024', caption: 'Snowball Gala 2024',    src: '' },
-  { id: 5,  event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2023', caption: 'Snowball Gala 2023',    src: '' },
-  { id: 6,  event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2023', caption: 'Snowball Gala 2023',    src: '' },
-  { id: 7,  event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2023', caption: 'Snowball Gala 2023',    src: '' },
+  // Snowball Gala — The Gala
+  { id: 41, event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2026', caption: 'Snowball Gala 2026',    src: '/images/gallery/snowball-gala/snowball-2026-01.jpg' },
+  { id: 42, event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2026', caption: 'Snowball Gala 2026',    src: '/images/gallery/snowball-gala/snowball-2026-02.jpg' },
+  { id: 43, event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2026', caption: 'Snowball Gala 2026',    src: '/images/gallery/snowball-gala/snowball-2026-03.jpg' },
+  { id: 44, event: 'snowball-gala', subEvent: 'the-gala',          eventLabel: 'Snowball Gala', subEventLabel: 'The Gala',          year: '2025', caption: 'Snowball Gala 2025',    src: '/images/gallery/snowball-gala/snowball-2025-01.jpg' },
   // Snowball Gala — 2025 Kickoff
   { id: 32, event: 'snowball-gala', subEvent: 'snowball-kickoff',   eventLabel: 'Snowball Gala', subEventLabel: 'Snowball Kickoff',  year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/img_5680--1-.jpg' },
   { id: 33, event: 'snowball-gala', subEvent: 'snowball-kickoff',   eventLabel: 'Snowball Gala', subEventLabel: 'Snowball Kickoff',  year: '2025', caption: '2025 Snowball Kickoff', src: '/images/gallery/life-in-jc/kickoff/jc-kickoff-25-001.jpg' },
@@ -49,11 +46,8 @@ const photos = [
   { id: 25, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09801.JPG' },
   { id: 26, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09821.JPG' },
   { id: 27, event: 'life-in-jc', subEvent: 'derby-party', eventLabel: 'Life in JC', subEventLabel: 'Derby Party', year: '2025', caption: '2025 Derby Party', src: '/images/gallery/life-in-jc/DSC09826.JPG' },
-  // Volunteer Days — placeholder slots
-  { id: 28, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024', src: '' },
-  { id: 29, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024', src: '' },
-  { id: 30, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2024', caption: 'Volunteer Day 2024', src: '' },
-  { id: 31, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2023', caption: 'Volunteer Day 2023', src: '' },
+  // Volunteer Days
+  { id: 45, event: 'volunteer', eventLabel: 'Volunteer Days', year: '2026', caption: "Walk for Lurie Children's 2026", src: '/images/gallery/volunteer/walk-for-lurie-2026.jpeg' },
 ]
 
 type Photo = typeof photos[0]

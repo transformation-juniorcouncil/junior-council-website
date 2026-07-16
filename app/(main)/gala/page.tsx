@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Annual Snowball Gala | Junior Council',
@@ -107,8 +108,16 @@ export default function GalaPage() {
     <div className="pt-16">
       {/* Page Header */}
       <section className="bg-jc-black py-24 relative overflow-hidden">
-        
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+          <Image
+            src="/images/gala-hero.jpg"
+            alt=""
+            fill
+            priority
+            className="object-cover object-[50%_30%]"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-jc-black/70" />
           <div className="absolute -left-24 top-0 w-2/5 h-full bg-jc-red/5 transform skew-x-[-8deg]" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -352,27 +361,34 @@ export default function GalaPage() {
         </div>
       </section>
 
-      {/* Photo Gallery placeholder */}
+      {/* Photo Gallery */}
       <section id="gallery" className="bg-jc-gray py-20 scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-jc-black font-black text-3xl sm:text-4xl mb-12 tracking-tight">
             Photo <span className="text-jc-red">Gallery</span>
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div
-                key={i}
-                className="bg-jc-gray-mid aspect-square flex items-center justify-center"
-                aria-label="Event photo placeholder"
-              >
-                <svg className="w-10 h-10 text-jc-gray-dark/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
+            {[
+              { src: '/images/gallery/snowball-gala/snowball-2026-01.jpg', caption: 'Snowball Gala 2026' },
+              { src: '/images/gallery/snowball-gala/snowball-2026-02.jpg', caption: 'Snowball Gala 2026' },
+              { src: '/images/gallery/snowball-gala/snowball-2026-03.jpg', caption: 'Snowball Gala 2026' },
+              { src: '/images/gallery/snowball-gala/snowball-2025-01.jpg', caption: 'Snowball Gala 2025' },
+            ].map((photo, i) => (
+              <div key={i} className="relative aspect-square overflow-hidden bg-jc-gray-mid">
+                <Image
+                  src={photo.src}
+                  alt={photo.caption}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                />
               </div>
             ))}
           </div>
           <p className="text-jc-gray-dark text-sm mt-6 text-center">
-            Event photos will be added here after each gala.
+            <Link href="/gallery" className="text-jc-red font-bold hover:underline">
+              View the full photo gallery
+            </Link>
           </p>
         </div>
       </section>
