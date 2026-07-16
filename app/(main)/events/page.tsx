@@ -29,7 +29,7 @@ const upcomingEvents: Event[] = [
   },
   {
     title: 'Northalsted Market Days',
-    date: 'Summer 2026',
+    date: 'August 7 – 8, 2026',
     location: 'Halsted Street, Chicago',
     type: 'Volunteer',
     description: 'One of the Midwest\'s largest street festivals. Stay tuned for details on how to join us.',
