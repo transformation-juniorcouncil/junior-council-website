@@ -178,7 +178,7 @@ export default function BoardPage() {
             alt=""
             fill
             priority
-            className="object-cover object-[35%_65%]"
+            className="object-cover object-[35%_18%]"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-jc-black/70" />
