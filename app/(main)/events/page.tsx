@@ -20,15 +20,6 @@ type Event = {
 
 const upcomingEvents: Event[] = [
   {
-    title: "Junior Council's 2nd Annual Pickleball Tournament",
-    date: 'July 9, 2026',
-    time: '6:00 PM CDT',
-    location: 'Clark Street Pickleball, 2354 N Clark St, Chicago, IL',
-    type: 'Fundraiser',
-    description: 'Grab your paddle and join us for Junior Council\'s 2nd Annual Pickleball Tournament at Clark Street Pickleball! Whether you\'re a seasoned player or a first-timer, this event is all about fun, friendly competition, and raising funds for adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
-    cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:04d163db-51d6-40b4-96d5-357a7287faa7/home/story', external: true },
-  },
-  {
     title: 'JC Palooza',
     date: 'August 14, 2026',
     location: "Joe's on Weed Street, Chicago, IL",
@@ -63,6 +54,15 @@ const upcomingEvents: Event[] = [
 ]
 
 const pastEvents: Event[] = [
+  {
+    title: "Junior Council's 2nd Annual Pickleball Tournament",
+    date: 'July 9, 2026',
+    time: '6:00 PM CDT',
+    location: 'Clark Street Pickleball, 2354 N Clark St, Chicago, IL',
+    type: 'Fundraiser',
+    description: 'Grab your paddle and join us for Junior Council\'s 2nd Annual Pickleball Tournament at Clark Street Pickleball! Whether you\'re a seasoned player or a first-timer, this event is all about fun, friendly competition, and raising funds for adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
+    cta: null,
+  },
   {
     title: 'Wellness for a Cause: Barre3',
     date: 'June 29, 2026',
