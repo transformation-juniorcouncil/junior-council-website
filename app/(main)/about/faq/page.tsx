@@ -42,7 +42,7 @@ const faqs = [
   },
   {
     q: 'Where is Junior Council based?',
-    a: "Junior Council is based in Chicago, IL. Our monthly meetings are held at Lurie Children's Hospital, and our events are hosted at venues throughout the city.",
+    a: "Junior Council is based in Chicago, IL. Our monthly meetings are held at Two Thirty (230 W Superior St, Chicago, IL 60654), and our events are hosted at venues throughout the city.",
   },
   {
     q: 'Can other nonprofits collaborate with Junior Council?',
