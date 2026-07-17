@@ -31,4 +31,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env.local
-.claude/
+
+# claude code — track commands/ (skills) and launch.json; keep local-only files out
+.claude/settings.local.json
+.claude/worktrees/

@@ -116,7 +116,7 @@ const pastEvents: Event[] = [
     location: 'Chicago, IL',
     type: 'Fundraiser',
     description: 'JC members walked alongside hundreds of Chicagoans raising funds and awareness for Lurie Children\'s Hospital.',
-    photo: '/IMG_CE3D86AFEEE2-1.jpeg',
+    photo: '/walk-for-kids.jpeg',
     photoPosition: 'center 35%',
     cta: { label: 'Learn More', href: 'https://events.luriechildrens.org/walk-for-luriechildrens', external: true },
   },
