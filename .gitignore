@@ -37,19 +37,4 @@ next-env.d.ts
 .claude/worktrees/
 
 # agent workspace folders — internal reference docs, NOT for the public repo
-/APEX/
-/AXIS/
-/COMPASS/
-/EMBER/
-/FLURRY/
-/FORGE/
-/GAVEL/
-/HOST/
-/LUMEN/
-/NOVA/
-/PULSE/
-/SCOUT/
-/SIGNAL/
-/THRIVE/
-/VAULT/
-/OTHER/
+/agent-workspaces/

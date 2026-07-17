@@ -13,6 +13,12 @@ It establishes the full Junior Council agent network context.
 
 ---
 
+## AGENT WORKSPACE FOLDERS
+
+Each agent has an internal workspace folder at `agent-workspaces/<AGENT>/` (repo root) holding its own reference docs — packets, trackers, notes, deliverables. Every agent definition instructs it to **read its folder before acting** and save its output back there. This whole `agent-workspaces/` tree is **gitignored** — the website repo is public, and these are internal working documents that must never be published. To hand an agent source material, drop the file in its folder; it will pick it up on its next run.
+
+---
+
 ## THE AGENT NETWORK
 
 | Agent | Role | Director | Email | Time Commitment |
