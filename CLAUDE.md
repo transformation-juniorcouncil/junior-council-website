@@ -451,7 +451,7 @@ git push origin main
 | ⏳ | Custom domain — point `juniorcouncil.org` → Vercel once GoDaddy resolved |
 | ⏳ | Resend domain verification — add DNS records once GoDaddy accessible |
 | ⏳ | Google OAuth → Production — submit before full public launch |
-| ⏳ | Test file cleanup — delete `test-win-auction.mjs` from project root |
+| ✅ | Test file cleanup — deleted `test-win-auction.mjs` (2026-07-17) |
 | ⏳ | Gala recap page — update year + content post-event |
 
 ---
