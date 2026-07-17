@@ -93,7 +93,30 @@ export default function DonorsPage() {
               Become a Hospitality Partner →
             </Link>
           </div>
-          <YourBrandGrid count={4} ctaHref="/support#hospitality" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
+              { name: 'Happy Camper', category: 'Restaurant Partner', website: 'https://happycamper.pizza/old-town/', logo: '/happy-camper-logo.png' },
+              { name: 'Two Thirty',   category: 'Venue Partner',      website: 'https://www.twothirty.space/',       logo: '/two-thirty-logo.png' },
+            ].map((partner, i) => (
+              <a
+                key={i}
+                href={partner.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-jc-gray-mid hover:border-jc-red transition-colors p-5 flex flex-col items-center text-center group cursor-pointer"
+              >
+                <div className="w-16 h-16 bg-white rounded-sm mb-3 flex items-center justify-center group-hover:bg-jc-red/10 transition-colors flex-shrink-0 overflow-hidden">
+                  <Image src={partner.logo} alt={partner.name} width={56} height={56} className="object-contain" />
+                </div>
+                <div className="text-jc-black font-black text-sm leading-tight mb-1 group-hover:text-jc-red transition-colors">
+                  {partner.name}
+                </div>
+                <div className="text-jc-red text-xs font-semibold uppercase tracking-wide">
+                  {partner.category}
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
