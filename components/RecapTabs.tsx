@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const tabs = ['Photos', 'Corporate Sponsors', 'Hospitality Sponsors'] as const
 type Tab = typeof tabs[number]
@@ -78,11 +79,11 @@ const hospitalitySponsors = [
   'Whiskey Acres Distilling',
 ]
 
-const photos = Array.from({ length: 12 }, (_, i) => ({
-  id: i + 1,
-  alt: `Snowball 2026 photo ${i + 1}`,
-  aspect: i % 5 === 0 ? 'aspect-video' : 'aspect-square',
-}))
+const photos = [
+  { id: 1, src: '/images/gallery/snowball-gala/snowball-2026-01.jpg', alt: 'Snowball Gala 2026' },
+  { id: 2, src: '/images/gallery/snowball-gala/snowball-2026-02.jpg', alt: 'Snowball Gala 2026' },
+  { id: 3, src: '/images/gallery/snowball-gala/snowball-2026-03.jpg', alt: 'Snowball Gala 2026' },
+]
 
 export default function RecapTabs() {
   const [active, setActive] = useState<Tab>('Photos')
@@ -115,13 +116,15 @@ export default function RecapTabs() {
             {photos.map((photo) => (
               <div
                 key={photo.id}
-                className={`bg-jc-gray overflow-hidden group relative ${photo.aspect} ${photo.id === 1 || photo.id === 7 ? 'col-span-2' : ''}`}
+                className="bg-jc-gray overflow-hidden group relative aspect-square"
               >
-                <div className="absolute inset-0 flex items-center justify-center bg-jc-gray group-hover:bg-jc-gray-mid transition-colors">
-                  <svg className="w-8 h-8 text-jc-gray-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                />
                 <div className="absolute inset-0 bg-jc-red/0 group-hover:bg-jc-red/10 transition-colors" />
               </div>
             ))}
