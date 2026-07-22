@@ -44,7 +44,7 @@ const hospitalitySponsors = [
   'Crafthouse Cocktails',
   'Do-Rite Donuts',
   'Doc Brown Farm and Distillers',
-  'Dr. Yvonne Smith Canegan (bar fruit)',
+  'Dr. Yvonne Smith Canegan',
   'Gene & Georgetti',
   'Go Brewing',
   'Goose Island',
