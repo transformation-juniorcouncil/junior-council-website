@@ -97,6 +97,48 @@ export default function DonorsPage() {
             {[
               { name: 'Happy Camper', category: 'Restaurant Partner', website: 'https://happycamper.pizza/old-town/', logo: '/happy-camper-logo.png' },
               { name: 'Two Thirty',   category: 'Venue Partner',      website: 'https://www.twothirty.space/',       logo: '/two-thirty-logo.png' },
+            ].map((partner, i) => (
+              <a
+                key={i}
+                href={partner.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-jc-gray-mid hover:border-jc-red transition-colors p-5 flex flex-col items-center text-center group cursor-pointer"
+              >
+                <div className="w-16 h-16 bg-white rounded-sm mb-3 flex items-center justify-center group-hover:bg-jc-red/10 transition-colors flex-shrink-0 overflow-hidden">
+                  <Image src={partner.logo} alt={partner.name} width={56} height={56} className="object-contain" />
+                </div>
+                <div className="text-jc-black font-black text-sm leading-tight mb-1 group-hover:text-jc-red transition-colors">
+                  {partner.name}
+                </div>
+                <div className="text-jc-red text-xs font-semibold uppercase tracking-wide">
+                  {partner.category}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Silent Auction */}
+      <section id="silent-auction" className="bg-white py-20 scroll-mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+            <div>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
+                <span className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase">2026–27</span>
+              </div>
+              <h2 className="text-jc-black font-black text-3xl sm:text-4xl tracking-tight">
+                Silent <span className="text-jc-red">Auction</span>
+              </h2>
+            </div>
+            <Link href="/support#inkind" className="flex-shrink-0 text-xs font-bold uppercase tracking-widest text-jc-gray-dark hover:text-jc-red transition-colors border-b border-jc-gray-mid hover:border-jc-red pb-1">
+              Donate an Auction Item →
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
               { name: '312 Cruises', category: 'Cruise Partner', website: 'https://312cruises.weebly.com/', logo: '/312-cruises.png' },
               { name: 'Barcocina', category: 'Restaurant Partner', website: 'https://www.barcocinachicago.com/', logo: '/barcocina.jpg' },
               { name: 'Basecamp Fitness', category: 'Fitness Partner', website: 'https://www.basecampfitness.com/studio/chicago', logo: '/basecamp-fitness.svg' },
@@ -143,27 +185,6 @@ export default function DonorsPage() {
               </a>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Silent Auction */}
-      <section id="silent-auction" className="bg-white py-20 scroll-mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
-            <div>
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-8 h-0.5 bg-jc-red" aria-hidden="true" />
-                <span className="text-jc-red text-xs font-bold tracking-[0.25em] uppercase">2026–27</span>
-              </div>
-              <h2 className="text-jc-black font-black text-3xl sm:text-4xl tracking-tight">
-                Silent <span className="text-jc-red">Auction</span>
-              </h2>
-            </div>
-            <Link href="/support#inkind" className="flex-shrink-0 text-xs font-bold uppercase tracking-widest text-jc-gray-dark hover:text-jc-red transition-colors border-b border-jc-gray-mid hover:border-jc-red pb-1">
-              Donate an Auction Item →
-            </Link>
-          </div>
-          <YourBrandGrid count={4} ctaHref="/support#inkind" />
         </div>
       </section>
 
