@@ -296,7 +296,7 @@ export default function HomePage() {
                 {[
                   { label: 'Format', value: 'Gala & Silent Auction' },
                   { label: 'Location', value: 'Chicago, IL' },
-                  { label: 'Date', value: 'Winter 2027 — Announcing Soon' },
+                  { label: 'Date', value: 'February 27, 2027' },
                   { label: 'Dress Code', value: 'Black Tie' },
                 ].map((detail, i) => (
                   <div key={i} className="border-l-2 border-jc-red/40 pl-4">

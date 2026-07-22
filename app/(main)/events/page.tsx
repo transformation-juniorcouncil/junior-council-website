@@ -20,6 +20,14 @@ type Event = {
 
 const upcomingEvents: Event[] = [
   {
+    title: 'Northalsted Market Days',
+    date: 'August 7 – 8, 2026',
+    location: 'Halsted Street, Chicago',
+    type: 'Volunteer',
+    description: 'One of the Midwest\'s largest street festivals. Stay tuned for details on how to join us.',
+    cta: { label: 'Festival Info', href: 'https://northalsted.com/main-events/northalsted-market-days/', external: true },
+  },
+  {
     title: 'JC-Palooza 2026',
     date: 'August 14, 2026',
     time: '7:30 PM – 11:59 PM',
@@ -27,14 +35,6 @@ const upcomingEvents: Event[] = [
     type: 'Fundraiser',
     description: "Couldn't snag a Lollapalooza ticket in time? Join Junior Council for an evening of live music! Our first ever JC-Palooza will be a night to remember — local bands and DJs playing live, fun raffles, and a chance to win tickets to upcoming events! Open to everyone, so bring your friends, family, and co-workers. Early Bird Tickets on sale through 7/22. A limited quantity of tickets will be available at the door via cash, Venmo, or Zelle.",
     cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:53a548a2-744d-48b1-9045-0b114349a64e/home/story', external: true },
-  },
-  {
-    title: 'Northalsted Market Days',
-    date: 'August 7 – 8, 2026',
-    location: 'Halsted Street, Chicago',
-    type: 'Volunteer',
-    description: 'One of the Midwest\'s largest street festivals. Stay tuned for details on how to join us.',
-    cta: { label: 'Festival Info', href: 'https://northalsted.com/main-events/northalsted-market-days/', external: true },
   },
   {
     title: 'Annual Golf Outing',
@@ -47,7 +47,7 @@ const upcomingEvents: Event[] = [
   },
   {
     title: 'Annual Snowball Gala 2027',
-    date: 'Winter 2027',
+    date: 'February 27, 2027',
     location: 'Chicago, IL',
     type: 'Signature',
     description: 'Our flagship black-tie fundraiser. Live entertainment, silent auction, 900+ guests — one shared mission.',

@@ -134,11 +134,11 @@ export default function GalaPage() {
             Chicago&apos;s premier fundraising event for youth with HIV and AIDS.
             An unforgettable evening of community, generosity, and impact.
           </p>
-          {/* Coming Soon announcement bar */}
+          {/* Save the Date announcement bar */}
           <div className="mt-8 inline-flex items-center gap-3 bg-jc-red px-5 py-3">
             <span className="w-2 h-2 bg-white rounded-full animate-pulse flex-shrink-0" aria-hidden="true" />
             <span className="text-white font-bold text-sm tracking-wide">
-              Date &amp; venue announcement coming soon — stay tuned!
+              Save the date: February 27, 2027 — venue announcement coming soon!
             </span>
           </div>
         </div>
@@ -171,7 +171,7 @@ export default function GalaPage() {
               </p>
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { label: 'Date', value: 'Winter 2027 — Announcing Soon' },
+                  { label: 'Date', value: 'February 27, 2027' },
                   { label: 'Location', value: 'Chicago, IL' },
                   { label: 'Dress Code', value: 'Black Tie' },
                   { label: 'Tickets', value: 'Contact us to get notified' },
