@@ -43,7 +43,7 @@ const upcomingEvents: Event[] = [
     location: 'Indian Boundary Golf Course',
     type: 'Fundraiser',
     description: 'Join Junior Council and our corporate sponsors for a day on the green for the kids.',
-    cta: null,
+    cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:be73acf8-0588-46b2-bd08-d8e4b6b9152f/home/story', external: true },
   },
   {
     title: 'Annual Snowball Gala 2027',
