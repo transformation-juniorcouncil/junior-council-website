@@ -106,12 +106,22 @@ export default function MembershipPage() {
                   </li>
                 ))}
               </ul>
-              <Link
-                href="/contact"
-                className="inline-flex items-center bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-8 py-4 transition-colors"
-              >
-                Join the Team
-              </Link>
+              <div className="flex flex-col sm:flex-row items-start gap-4">
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSf3WOwS-ego24GFPT4ujl1Ado_JD5cBcj-StwhLW7umwwTeTQ/viewform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-8 py-4 transition-colors"
+                >
+                  Apply Now
+                </a>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center border border-jc-gray-mid hover:border-jc-red text-jc-gray-dark hover:text-jc-red font-black text-sm tracking-widest uppercase px-8 py-4 transition-colors"
+                >
+                  Have a Question?
+                </Link>
+              </div>
             </div>
             <div className="bg-jc-black p-10">
               <h3 className="text-white font-black text-2xl mb-6">
