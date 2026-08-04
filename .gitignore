@@ -38,3 +38,8 @@ next-env.d.ts
 
 # agent workspace folders — internal reference docs, NOT for the public repo
 /agent-workspaces/
+
+# google service account keys — NEVER commit (real key lives in ~/.jc-secrets/)
+*-service-account*.json
+jc-website-*.json
+*.serviceaccount.json
