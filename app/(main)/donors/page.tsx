@@ -95,9 +95,13 @@ export default function DonorsPage() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {[
-              { name: 'Happy Camper', category: 'Restaurant Partner', website: 'https://happycamper.pizza/old-town/', logo: '/happy-camper-logo.png' },
-              { name: 'Two Thirty',   category: 'Venue Partner',      website: 'https://www.twothirty.space/',       logo: '/two-thirty-logo.png' },
-            ].map((partner, i) => (
+              { name: 'Happy Camper',   category: 'Restaurant Partner', website: 'https://happycamper.pizza/old-town/', logo: '/happy-camper-logo.png' },
+              { name: 'Two Thirty',     category: 'Venue Partner',      website: 'https://www.twothirty.space/',       logo: '/two-thirty-logo.png' },
+              { name: 'Tapas Valencia', category: 'Restaurant Partner', website: 'https://www.tapasvalencia.com/',      logo: '/tapas-valencia.png', wide: true },
+              { name: "Osito's Tap",    category: 'Bar Partner',        website: 'https://www.ositostap.com/',          logo: '/ositos-tap.png' },
+              { name: "Joe's on Weed St.", category: 'Bar Partner',     website: 'https://www.joesbar.com/',            logo: '/joes-on-weed.webp' },
+              { name: '8 Hospitality',  category: 'Hospitality Group',  website: 'https://8hospitality.com/',           logo: '/8-hospitality.png' },
+            ].map((partner: { name: string; category: string; website: string; logo: string; wide?: boolean }, i) => (
               <a
                 key={i}
                 href={partner.website}
@@ -105,8 +109,8 @@ export default function DonorsPage() {
                 rel="noopener noreferrer"
                 className="border border-jc-gray-mid hover:border-jc-red transition-colors p-5 flex flex-col items-center text-center group cursor-pointer"
               >
-                <div className="w-16 h-16 bg-white rounded-sm mb-3 flex items-center justify-center group-hover:bg-jc-red/10 transition-colors flex-shrink-0 overflow-hidden">
-                  <Image src={partner.logo} alt={partner.name} width={56} height={56} className="object-contain" />
+                <div className={`${partner.wide ? 'w-full h-16 px-3' : 'w-16 h-16'} bg-white rounded-sm mb-3 flex items-center justify-center group-hover:bg-jc-red/10 transition-colors flex-shrink-0 overflow-hidden`}>
+                  <Image src={partner.logo} alt={partner.name} width={partner.wide ? 160 : 56} height={56} className="object-contain max-h-full w-auto" />
                 </div>
                 <div className="text-jc-black font-black text-sm leading-tight mb-1 group-hover:text-jc-red transition-colors">
                   {partner.name}
