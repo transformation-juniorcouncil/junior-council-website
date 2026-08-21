@@ -20,21 +20,13 @@ type Event = {
 
 const upcomingEvents: Event[] = [
   {
-    title: 'Northalsted Market Days',
-    date: 'August 7 – 8, 2026',
-    location: 'Halsted Street, Chicago',
-    type: 'Volunteer',
-    description: 'One of the Midwest\'s largest street festivals. Stay tuned for details on how to join us.',
-    cta: { label: 'Festival Info', href: 'https://northalsted.com/main-events/northalsted-market-days/', external: true },
-  },
-  {
-    title: 'JC-Palooza 2026',
-    date: 'August 14, 2026',
-    time: '7:30 PM – 11:59 PM',
-    location: "Joe's on Weed, Chicago",
-    type: 'Fundraiser',
-    description: "Couldn't snag a Lollapalooza ticket in time? Join Junior Council for an evening of live music! Our first ever JC-Palooza will be a night to remember — local bands and DJs playing live, fun raffles, and a chance to win tickets to upcoming events! Open to everyone, so bring your friends, family, and co-workers. Early Bird Tickets on sale through 7/22. A limited quantity of tickets will be available at the door via cash, Venmo, or Zelle.",
-    cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:53a548a2-744d-48b1-9045-0b114349a64e/home/story', external: true },
+    title: 'Wellness for a Cause: Cycling at Equinox',
+    date: 'August 30, 2026',
+    time: '9:00 AM',
+    location: 'Equinox Lincoln Common, Chicago',
+    type: 'Wellness for a Cause',
+    description: 'Ride for the kids. Join Junior Council for a cycling class at Equinox Lincoln Common — a portion of proceeds supports adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
+    cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:7173eef4-d91d-4037-ab45-c91acaea19f5/home/story', external: true },
   },
   {
     title: 'JC Cubs Game',
@@ -74,6 +66,23 @@ const upcomingEvents: Event[] = [
 ]
 
 const pastEvents: Event[] = [
+  {
+    title: 'JC-Palooza 2026',
+    date: 'August 14, 2026',
+    time: '7:30 PM – 11:59 PM',
+    location: "Joe's on Weed, Chicago",
+    type: 'Fundraiser',
+    description: "Junior Council's first-ever JC-Palooza brought an evening of live music to Joe's on Weed — local bands and DJs playing live, raffles, and prizes. A night to remember, raising funds for adolescents living with HIV and AIDS at Lurie Children's Hospital.",
+    cta: null,
+  },
+  {
+    title: 'Northalsted Market Days',
+    date: 'August 7 – 8, 2026',
+    location: 'Halsted Street, Chicago',
+    type: 'Volunteer',
+    description: "Junior Council joined one of the Midwest's largest street festivals for a weekend on Halsted Street, celebrating the season with the JC community.",
+    cta: { label: 'Festival Info', href: 'https://northalsted.com/main-events/northalsted-market-days/', external: true },
+  },
   {
     title: "Junior Council's 2nd Annual Pickleball Tournament",
     date: 'July 9, 2026',
