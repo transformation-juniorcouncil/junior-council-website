@@ -20,15 +20,6 @@ type Event = {
 
 const upcomingEvents: Event[] = [
   {
-    title: 'Wellness for a Cause: Cycling at Equinox',
-    date: 'August 30, 2026',
-    time: '9:00 AM',
-    location: 'Equinox Lincoln Common, Chicago',
-    type: 'Wellness for a Cause',
-    description: 'Ride for the kids. Join Junior Council for a cycling class at Equinox Lincoln Common — a portion of proceeds supports adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
-    cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:7173eef4-d91d-4037-ab45-c91acaea19f5/home/story', external: true },
-  },
-  {
     title: 'JC Cubs Game',
     date: 'September 3, 2026',
     time: '6:15 PM',
@@ -56,6 +47,15 @@ const upcomingEvents: Event[] = [
     cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:be73acf8-0588-46b2-bd08-d8e4b6b9152f/home/story', external: true },
   },
   {
+    title: 'Wellness for a Cause: Ethos Strength Class',
+    date: 'September 14, 2026',
+    time: '6:30 PM',
+    location: 'Ethos, Chicago',
+    type: 'Wellness for a Cause',
+    description: 'Total Body Strength at Ethos — a mobility warm-up, an activation series, and a full-body lifting workout scalable to every fitness level. Whether the barbell is new to you or an old friend, this class is for you. A portion of proceeds supports adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
+    cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:20ae2fb6-8941-4e7f-a787-8d060b69bda1/home/story', external: true },
+  },
+  {
     title: 'Annual Snowball Gala 2027',
     date: 'February 27, 2027',
     location: 'Chicago, IL',
@@ -66,6 +66,15 @@ const upcomingEvents: Event[] = [
 ]
 
 const pastEvents: Event[] = [
+  {
+    title: 'Wellness for a Cause: Cycling at Equinox',
+    date: 'August 30, 2026',
+    time: '9:00 AM',
+    location: 'Equinox Lincoln Common, Chicago',
+    type: 'Wellness for a Cause',
+    description: 'Junior Council rode for the kids at Equinox Lincoln Common — a cycling class with a portion of proceeds supporting adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
+    cta: null,
+  },
   {
     title: 'JC-Palooza 2026',
     date: 'August 14, 2026',
@@ -89,7 +98,7 @@ const pastEvents: Event[] = [
     time: '6:00 PM CDT',
     location: 'Clark Street Pickleball, 2354 N Clark St, Chicago, IL',
     type: 'Fundraiser',
-    description: 'Grab your paddle and join us for Junior Council\'s 2nd Annual Pickleball Tournament at Clark Street Pickleball! Whether you\'re a seasoned player or a first-timer, this event is all about fun, friendly competition, and raising funds for adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
+    description: 'Junior Council\'s 2nd Annual Pickleball Tournament took over Clark Street Pickleball — seasoned players and first-timers alike, friendly competition all night, raising funds for adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
     cta: null,
   },
   {
@@ -102,6 +111,14 @@ const pastEvents: Event[] = [
     cta: null,
   },
   {
+    title: 'Chicago Pride Fest',
+    date: 'June 20 – 21, 2026',
+    location: 'Halsted Street, Chicago',
+    type: 'Volunteer',
+    description: 'Celebrated Pride with the JC community at one of Chicago\'s most vibrant summer traditions. JC members joined a Post-Pride event on Saturday, June 20 at 9:30 PM at Dad\'s Place.',
+    cta: { label: 'Event Info', href: 'https://northalsted.com/main-events/chicago-pride-fest/', external: true },
+  },
+  {
     title: 'World Cup Watch Party',
     date: 'June 13, 2026',
     time: '1:30 PM',
@@ -111,31 +128,13 @@ const pastEvents: Event[] = [
     cta: null,
   },
   {
-    title: 'Chicago Pride Fest',
-    date: 'June 20 – 21, 2026',
-    location: 'Halsted Street, Chicago',
-    type: 'Volunteer',
-    description: 'Celebrated Pride with the JC community at one of Chicago\'s most vibrant summer traditions. JC members joined a Post-Pride event on Saturday, June 20 at 9:30 PM at Dad\'s Place.',
-    cta: { label: 'Event Info', href: 'https://northalsted.com/main-events/chicago-pride-fest/', external: true },
-  },
-  {
     title: 'VinHausa at Soldier Field',
     date: 'June 11, 2026',
     time: '6:30 PM',
     location: 'Soldier Field, Chicago',
     type: 'Wellness for a Cause',
-    description: 'Where yoga meets house music. Join Junior Council members at this outdoor yoga event at Soldier Field — a percentage of proceeds will benefit Junior Council.',
+    description: 'Where yoga met house music. JC members took over Soldier Field for an outdoor yoga night, with a percentage of proceeds benefiting Junior Council.',
     cta: { label: 'Event Info', href: 'https://www.vinhausa.us/events/vinhausa-soldier-field', external: true },
-  },
-  {
-    title: 'BOD Transition Party',
-    date: 'May 30, 2026',
-    location: 'Chicago Trolley',
-    type: 'Member Event',
-    description: 'A wig-themed trolley ride through Chicago celebrating the transition from the 2025/26 board to the 2026/27 board.',
-    photo: '/IMG_2494.JPG',
-    photoPosition: 'center 35%',
-    cta: null,
   },
   {
     title: 'Walk for Lurie\'s',
@@ -146,6 +145,16 @@ const pastEvents: Event[] = [
     photo: '/walk-for-kids.jpeg',
     photoPosition: 'center 35%',
     cta: { label: 'Learn More', href: 'https://events.luriechildrens.org/walk-for-luriechildrens', external: true },
+  },
+  {
+    title: 'BOD Transition Party',
+    date: 'May 30, 2026',
+    location: 'Chicago Trolley',
+    type: 'Member Event',
+    description: 'A wig-themed trolley ride through Chicago celebrating the transition from the 2025/26 board to the 2026/27 board.',
+    photo: '/IMG_2494.JPG',
+    photoPosition: 'center 35%',
+    cta: null,
   },
 ]
 
