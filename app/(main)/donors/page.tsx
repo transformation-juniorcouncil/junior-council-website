@@ -8,6 +8,18 @@ export const metadata: Metadata = {
     'Junior Council is grateful to our corporate donors, hospitality partners, silent auction contributors, and Wellness for a Cause sponsors.',
 }
 
+// Monogram shown in place of a partner logo until the real asset is supplied.
+const SKIP_WORDS = new Set(['the', 'of', 'for', 'and', 'a', '&'])
+
+function initials(name: string) {
+  return name
+    .split(/[\s/]+/)
+    .filter((w) => w && !SKIP_WORDS.has(w.toLowerCase()))
+    .slice(0, 2)
+    .map((w) => w[0].toUpperCase())
+    .join('')
+}
+
 function YourBrandGrid({ count, ctaHref }: { count: number; ctaHref: string }) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -144,32 +156,44 @@ export default function DonorsPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {[
               { name: '312 Cruises', category: 'Cruise Partner', website: 'https://312cruises.weebly.com/', logo: '/312-cruises.png' },
+              { name: 'Four Corners Tavern Group', category: 'Restaurant Partner', website: 'https://www.4cbars.com/', logo: '/four-corners.png' },
               { name: 'Barcocina', category: 'Restaurant Partner', website: 'https://www.barcocinachicago.com/', logo: '/barcocina.jpg' },
               { name: 'Basecamp Fitness', category: 'Fitness Partner', website: 'https://www.basecampfitness.com/studio/chicago', logo: '/basecamp-fitness.svg' },
               { name: 'Batsu', category: 'Entertainment Partner', website: 'https://batsulive.com/chicago/', logo: '/batsu.png' },
               { name: 'Cards Against Humanity', category: 'Game Partner', website: 'https://www.cardsagainsthumanity.com/', logo: '/cards-against-humanity.svg' },
               { name: "Carol's Pub", category: 'Bar Partner', website: 'https://www.carolspub.com/', logo: '/carols-pub.png' },
               { name: 'Chicago 20Something', category: 'Events Partner', website: 'https://chicago20something.weebly.com/', logo: '/chicago-20something.png' },
+              { name: 'Chicago Architecture Center', category: 'Attraction Partner', website: 'https://www.architecture.org/', logo: '/chicago-architecture-center.png' },
               { name: 'Chicago Bears', category: 'Team Partner', website: 'https://www.chicagobears.com/', logo: '/chicago-bears.svg' },
               { name: 'Criquet Shirts', category: 'Apparel Partner', website: 'https://criquetshirts.com/', logo: '/criquet-shirts.png' },
+              { name: 'The Cubby Bear', category: 'Bar Partner', website: 'https://www.cubbybear.com/', logo: '/cubby-bear.png' },
               { name: 'Fitness Formula Clubs South Loop', category: 'Fitness Partner', website: 'https://ffc.com/club-locations/south-loop/', logo: '/fitness-formula-clubs-south-loop.png' },
+              { name: 'First Lady Cruises', category: 'Cruise Partner', website: 'https://cruisechicago.com/', logo: '/first-lady-cruises.png' },
               { name: 'Five Iron Golf', category: 'Golf Partner', website: 'https://fiveirongolf.com/locations/chicago-river-north', logo: '/five-iron-golf.png' },
               { name: "Formento's", category: 'Restaurant Partner', website: 'https://www.formentos.com', logo: '/formentos.png' },
               { name: 'Gibsons Restaurant Group', category: 'Restaurant Partner', website: 'https://gibsonssteakhouse.com', logo: '/gibsons-restaurant-group.svg' },
               { name: 'Knockaround Sunglasses', category: 'Apparel Partner', website: 'https://knockaround.com', logo: '/knockaround-sunglasses-mark.png' },
               { name: 'Laugh Factory', category: 'Comedy Partner', website: 'https://www.laughfactory.com/chicago', logo: '/laugh-factory.png' },
               { name: 'Legendary Spa', category: 'Spa Partner', website: 'https://legendaryspa.com', logo: '/legendary-spa.png' },
+              { name: 'Lettuce Entertain You', category: 'Restaurant Partner', website: 'https://www.lettuce.com/', logo: '/lettuce-entertain-you.png' },
+              { name: 'Lincoln Hall & Schubas', category: 'Music Venue Partner', website: 'https://www.lh-st.com/', logo: '/lincoln-hall-schubas.jpg' },
+              { name: "Lou Malnati's", category: 'Restaurant Partner', website: 'https://www.loumalnatis.com/', logo: '/lou-malnatis.svg', wide: true },
+              { name: 'Movement Lincoln Park', category: 'Fitness Partner', website: 'https://movementgyms.com/lincoln-park/', logo: '/movement-lincoln-park.svg' },
+              { name: 'Museum of Ice Cream', category: 'Attraction Partner', website: 'https://www.museumoficecream.com/', logo: '/museum-of-ice-cream.png' },
               { name: 'PGA Tour Superstore', category: 'Golf Partner', website: 'https://www.pgatoursuperstore.com/', logo: '/pga-tour-superstore.svg' },
               { name: 'Picnic Wine and Provisions', category: 'Wine Partner', website: 'https://www.picnicwineandprovisions.com/', logo: '/picnic-wine-and-provisions.png' },
               { name: 'Pure Barre', category: 'Fitness Partner', website: 'https://www.purebarre.com/', logo: '/pure-barre.png' },
               { name: 'Raygun', category: 'Retail Partner', website: 'https://www.raygunsite.com/', logo: '/raygun.png' },
+              { name: 'Steppenwolf Theatre Company', category: 'Theatre Partner', website: 'https://www.steppenwolf.org/', logo: '/steppenwolf.svg' },
               { name: 'Summer House', category: 'Restaurant Partner', website: 'https://www.summerhouserestaurants.com/lincoln-park/', logo: '/summer-house.png' },
               { name: 'Skydeck Chicago', category: 'Attraction Partner', website: 'https://theskydeck.com/', logo: '/skydeck-chicago.png' },
               { name: 'Tailgreeter', category: 'Events Partner', website: 'https://tailgreeter.com/', logo: '/tailgreeter.png' },
               { name: 'Train Moment River North', category: 'Fitness Partner', website: 'https://www.trainmoment.com/river-north', logo: '/train-moment-river-north.jpg' },
+              { name: 'United Center', category: 'Venue Partner', website: 'https://www.unitedcenter.com/', logo: '/united-center.png', wide: true },
               { name: "Will's Northwoods Inn", category: 'Bar Partner', website: 'https://willsnorthwoodsinn.com/', logo: '/wills-northwoods-inn.png' },
+              { name: 'Wines for Humanity', category: 'Wine Partner', website: 'https://www.winesforhumanity.com/', logo: '/wines-for-humanity.png' },
               { name: "Zanie's Rosemont", category: 'Comedy Partner', website: 'https://rosemont.zanies.com/', logo: '/zanies-rosemont.jpg' },
-            ].map((partner, i) => (
+            ].map((partner: { name: string; category: string; website: string; logo?: string; wide?: boolean }, i) => (
               <a
                 key={i}
                 href={partner.website}
@@ -177,8 +201,14 @@ export default function DonorsPage() {
                 rel="noopener noreferrer"
                 className="border border-jc-gray-mid hover:border-jc-red transition-colors p-5 flex flex-col items-center text-center group cursor-pointer"
               >
-                <div className="w-16 h-16 bg-white rounded-sm mb-3 flex items-center justify-center group-hover:bg-jc-red/10 transition-colors flex-shrink-0 overflow-hidden">
-                  <Image src={partner.logo} alt={partner.name} width={56} height={56} className="object-contain" />
+                <div className={`${partner.wide ? 'w-full h-16 px-3' : 'w-16 h-16'} ${partner.logo ? 'bg-white' : 'bg-jc-gray'} rounded-sm mb-3 flex items-center justify-center group-hover:bg-jc-red/10 transition-colors flex-shrink-0 overflow-hidden`}>
+                  {partner.logo ? (
+                    <Image src={partner.logo} alt={partner.name} width={partner.wide ? 160 : 56} height={56} className="object-contain max-h-full w-auto" />
+                  ) : (
+                    <span className="text-jc-red font-black text-xl tracking-tight" aria-hidden="true">
+                      {initials(partner.name)}
+                    </span>
+                  )}
                 </div>
                 <div className="text-jc-black font-black text-sm leading-tight mb-1 group-hover:text-jc-red transition-colors">
                   {partner.name}
