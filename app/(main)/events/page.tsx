@@ -18,6 +18,8 @@ type Event = {
   featured?: boolean
 }
 
+type Tab = 'upcoming' | 'past'
+
 const upcomingEvents: Event[] = [
   {
     title: 'JC Cubs Game',
@@ -167,26 +169,19 @@ const typeStyles: Record<string, { pill: string; accent: string }> = {
 }
 
 export default function EventsPage() {
-  return <Suspense fallback={null}><EventsPageInner /></Suspense>
-}
+  const [tab, setTab] = useState<Tab>('upcoming')
 
-function EventsPageInner() {
-  const searchParams = useSearchParams()
-  const [tab, setTab] = useState<'upcoming' | 'past'>(() => {
-    const t = searchParams.get('tab')
-    return t === 'past' ? 'past' : 'upcoming'
-  })
-
-  useEffect(() => {
-    const t = searchParams.get('tab')
-    setTab(t === 'past' ? 'past' : 'upcoming')
-  }, [searchParams])
-
-  const featured = null
   const rest = upcomingEvents
 
   return (
     <div className="pt-16">
+      {/* Keeps ?tab= deep links working. Isolated in its own Suspense boundary
+          so useSearchParams() opts only this empty subtree out of static
+          prerendering — the page content below stays in the server HTML. */}
+      <Suspense fallback={null}>
+        <TabSync onChange={setTab} />
+      </Suspense>
+
       {/* Page Header */}
       <section className="bg-jc-black py-20 relative overflow-hidden">
         
@@ -235,140 +230,139 @@ function EventsPageInner() {
         </div>
       </div>
 
-      {/* ── UPCOMING TAB ── */}
-      {tab === 'upcoming' && (
-        <section className="bg-white py-12 lg:py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      {/* ── UPCOMING TAB ──
+          Both panels always render so their content ships in the server-rendered
+          HTML for crawlers and link previews; the inactive one is hidden with CSS,
+          which keeps tab switching instant and client-side. */}
+      <section className={`bg-white py-12 lg:py-16 ${tab === 'upcoming' ? '' : 'hidden'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
 
-            {/* Upcoming grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-5">
-              {rest.map((event, i) => {
-                const style = typeStyles[event.type] ?? typeStyles['Community']
-                return (
-                  <div
-                    key={i}
-                    className={`border-t-4 bg-jc-gray border-jc-gray-mid p-6 flex flex-col ${style.accent}`}
-                  >
-                    <span className={`inline-block text-xs font-bold uppercase tracking-widest px-2 py-0.5 mb-4 self-start ${style.pill}`}>
-                      {event.type}
-                    </span>
-                    <h3 className="text-jc-black font-black text-lg leading-tight mb-3">{event.title}</h3>
-                    <div className="space-y-1.5 mb-4">
+          {/* Upcoming grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-5">
+            {rest.map((event, i) => {
+              const style = typeStyles[event.type] ?? typeStyles['Community']
+              return (
+                <div
+                  key={i}
+                  className={`border-t-4 bg-jc-gray border-jc-gray-mid p-6 flex flex-col ${style.accent}`}
+                >
+                  <span className={`inline-block text-xs font-bold uppercase tracking-widest px-2 py-0.5 mb-4 self-start ${style.pill}`}>
+                    {event.type}
+                  </span>
+                  <h3 className="text-jc-black font-black text-lg leading-tight mb-3">{event.title}</h3>
+                  <div className="space-y-1.5 mb-4">
+                    <div className="flex items-center gap-2">
+                      <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      <span className="text-jc-gray-dark text-xs font-bold">{event.date}</span>
+                    </div>
+                    {event.time && (
                       <div className="flex items-center gap-2">
                         <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span className="text-jc-gray-dark text-xs font-bold">{event.date}</span>
+                        <span className="text-jc-gray-dark text-xs font-bold">{event.time}</span>
                       </div>
-                      {event.time && (
-                        <div className="flex items-center gap-2">
-                          <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          <span className="text-jc-gray-dark text-xs font-bold">{event.time}</span>
-                        </div>
-                      )}
-                      {event.location && (
-                        <div className="flex items-center gap-2">
-                          <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                          <span className="text-jc-gray-dark text-xs font-bold">{event.location}</span>
-                        </div>
-                      )}
-                    </div>
-                    <p className="text-jc-gray-dark text-sm leading-relaxed flex-grow mb-5">{event.description}</p>
-                    {event.cta ? (
-                      <Link
-                        href={event.cta.href}
-                        {...(event.cta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                        className="inline-flex items-center gap-1 text-jc-black hover:text-jc-red font-black text-xs uppercase tracking-widest border-b border-jc-red pb-0.5 transition-colors self-start mt-auto"
-                      >
-                        {event.cta.label}
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    )}
+                    {event.location && (
+                      <div className="flex items-center gap-2">
+                        <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                      </Link>
-                    ) : (
-                      <span className="text-jc-gray-dark text-xs uppercase tracking-widest font-bold mt-auto">
-                        Details coming soon
-                      </span>
+                        <span className="text-jc-gray-dark text-xs font-bold">{event.location}</span>
+                      </div>
                     )}
                   </div>
-                )
-              })}
-            </div>
-
+                  <p className="text-jc-gray-dark text-sm leading-relaxed flex-grow mb-5">{event.description}</p>
+                  {event.cta ? (
+                    <Link
+                      href={event.cta.href}
+                      {...(event.cta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                      className="inline-flex items-center gap-1 text-jc-black hover:text-jc-red font-black text-xs uppercase tracking-widest border-b border-jc-red pb-0.5 transition-colors self-start mt-auto"
+                    >
+                      {event.cta.label}
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </Link>
+                  ) : (
+                    <span className="text-jc-gray-dark text-xs uppercase tracking-widest font-bold mt-auto">
+                      Details coming soon
+                    </span>
+                  )}
+                </div>
+              )
+            })}
           </div>
-        </section>
-      )}
+
+        </div>
+      </section>
 
       {/* ── PAST TAB ── */}
-      {tab === 'past' && (
-        <section className="bg-white py-12 lg:py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
-              {pastEvents.map((event, i) => {
-                const style = typeStyles[event.type] ?? typeStyles['Member Event']
-                return (
-                  <div
-                    key={i}
-                    className={`border-t-4 bg-jc-gray border-jc-gray-mid p-6 flex flex-col ${style.accent}`}
-                  >
-                    <span className={`inline-block text-xs font-bold uppercase tracking-widest px-2 py-0.5 mb-4 self-start ${style.pill}`}>
-                      {event.type}
-                    </span>
-                    <h3 className="text-jc-black font-black text-lg leading-tight mb-3">{event.title}</h3>
-                    <div className="space-y-1.5 mb-4">
+      <section className={`bg-white py-12 lg:py-16 ${tab === 'past' ? '' : 'hidden'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+            {pastEvents.map((event, i) => {
+              const style = typeStyles[event.type] ?? typeStyles['Member Event']
+              return (
+                <div
+                  key={i}
+                  className={`border-t-4 bg-jc-gray border-jc-gray-mid p-6 flex flex-col ${style.accent}`}
+                >
+                  <span className={`inline-block text-xs font-bold uppercase tracking-widest px-2 py-0.5 mb-4 self-start ${style.pill}`}>
+                    {event.type}
+                  </span>
+                  <h3 className="text-jc-black font-black text-lg leading-tight mb-3">{event.title}</h3>
+                  <div className="space-y-1.5 mb-4">
+                    <div className="flex items-center gap-2">
+                      <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      <span className="text-jc-gray-dark text-xs font-bold">{event.date}</span>
+                    </div>
+                    {event.time && (
                       <div className="flex items-center gap-2">
                         <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span className="text-jc-gray-dark text-xs font-bold">{event.date}</span>
+                        <span className="text-jc-gray-dark text-xs font-bold">{event.time}</span>
                       </div>
-                      {event.time && (
-                        <div className="flex items-center gap-2">
-                          <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          <span className="text-jc-gray-dark text-xs font-bold">{event.time}</span>
-                        </div>
-                      )}
-                      {event.location && (
-                        <div className="flex items-center gap-2">
-                          <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                          <span className="text-jc-gray-dark text-xs font-bold">{event.location}</span>
-                        </div>
-                      )}
-                    </div>
-                    <p className="text-jc-gray-dark text-sm leading-relaxed flex-grow mb-5">{event.description}</p>
-                    {event.cta ? (
-                      <Link
-                        href={event.cta.href}
-                        {...(event.cta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                        className="inline-flex items-center gap-1 text-jc-black hover:text-jc-red font-black text-xs uppercase tracking-widest border-b border-jc-red pb-0.5 transition-colors self-start mt-auto"
-                      >
-                        {event.cta.label}
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    )}
+                    {event.location && (
+                      <div className="flex items-center gap-2">
+                        <svg className="w-3.5 h-3.5 text-jc-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                      </Link>
-                    ) : (
-                      <span className="text-jc-gray-dark text-xs uppercase tracking-widest font-bold mt-auto">
-                        Member Event
-                      </span>
+                        <span className="text-jc-gray-dark text-xs font-bold">{event.location}</span>
+                      </div>
                     )}
                   </div>
-                )
-              })}
-            </div>
+                  <p className="text-jc-gray-dark text-sm leading-relaxed flex-grow mb-5">{event.description}</p>
+                  {event.cta ? (
+                    <Link
+                      href={event.cta.href}
+                      {...(event.cta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                      className="inline-flex items-center gap-1 text-jc-black hover:text-jc-red font-black text-xs uppercase tracking-widest border-b border-jc-red pb-0.5 transition-colors self-start mt-auto"
+                    >
+                      {event.cta.label}
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </Link>
+                  ) : (
+                    <span className="text-jc-gray-dark text-xs uppercase tracking-widest font-bold mt-auto">
+                      Member Event
+                    </span>
+                  )}
+                </div>
+              )
+            })}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* Stay in the Loop */}
       <section className="bg-jc-charcoal py-16">
@@ -397,4 +391,20 @@ function EventsPageInner() {
       </section>
     </div>
   )
+}
+
+/**
+ * Reads the ?tab= query param and reports it up. Rendered inside its own
+ * Suspense boundary and returns null, so the useSearchParams() static-render
+ * bailout costs us nothing in the prerendered HTML.
+ */
+function TabSync({ onChange }: { onChange: (tab: Tab) => void }) {
+  const searchParams = useSearchParams()
+  const tabParam = searchParams.get('tab')
+
+  useEffect(() => {
+    onChange(tabParam === 'past' ? 'past' : 'upcoming')
+  }, [tabParam, onChange])
+
+  return null
 }
