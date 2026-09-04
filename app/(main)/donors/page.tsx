@@ -130,6 +130,7 @@ export default function DonorsPage() {
               { name: "Osito's Tap",    category: 'Bar Partner',        website: 'https://www.ositostap.com/',          logo: '/ositos-tap.png' },
               { name: "Joe's on Weed St.", category: 'Bar Partner',     website: 'https://www.joesbar.com/',            logo: '/joes-on-weed.webp' },
               { name: '8 Hospitality',  category: 'Hospitality Group',  website: 'https://8hospitality.com/',           logo: '/8-hospitality.png' },
+              { name: 'Navy Pier Event Center', category: 'Venue Partner', website: 'https://navypier.org/event-center/', logo: '/navy-pier-event-center.svg', wide: true },
             ].map((partner: { name: string; category: string; website: string; logo: string; wide?: boolean }, i) => (
               <a
                 key={i}
