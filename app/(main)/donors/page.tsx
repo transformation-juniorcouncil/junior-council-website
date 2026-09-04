@@ -67,13 +67,6 @@ export default function DonorsPage() {
               { name: 'Collaborate Health', category: 'Golf Outing Hole Sponsor', website: 'https://www.collaborate.health/', logo: '/collaborate-health-logo.webp', wide: true },
               { name: 'Deslauriers, Inc.', category: 'Golf Outing Hole Sponsor', website: 'https://www.deslinc.com/', logo: '/deslauriers-logo.png', large: true },
               { name: 'Vrdolyak Law Group', category: 'Golf Outing Hole Sponsor', website: 'https://www.vlglaw.com/', logo: '/vrdolyak-law-logo.png' },
-              { name: 'Vochi Family', category: 'Golf Outing Hole Sponsor', logo: '/jc-logo-color.jpg', large: true },
-              { name: 'JC BOD 2025-2026', category: 'Golf Outing Hole Sponsor', logo: '/jc-logo-color.jpg', large: true },
-              { name: 'Wendy Smith', category: 'Golf Outing Hole Sponsor', logo: '/jc-logo-color.jpg', large: true },
-              { name: 'JC BOD 2023-2024', category: 'Golf Outing Hole Sponsor', logo: '/jc-logo-color.jpg', large: true },
-              { name: 'Gracious JC Donor', category: 'Golf Outing Hole Sponsor', logo: '/jc-logo-color.jpg', large: true },
-              { name: 'JC Alumni 2019-2022', category: 'Golf Outing Hole Sponsor', logo: '/jc-logo-color.jpg', large: true },
-              { name: 'Spach Family', category: 'Golf Outing Hole Sponsor', logo: '/jc-logo-color.jpg', large: true },
             ].map((partner: { name: string; category: string; website?: string; logo: string; wide?: boolean; large?: boolean; xlarge?: boolean }, i) => {
               const cardClasses = `border border-jc-gray-mid transition-colors p-5 flex flex-col items-center text-center group ${partner.website ? 'hover:border-jc-red cursor-pointer' : ''}`
               const inner = (
