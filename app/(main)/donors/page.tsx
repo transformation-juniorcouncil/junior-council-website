@@ -20,29 +20,6 @@ function initials(name: string) {
     .join('')
 }
 
-function YourBrandGrid({ count, ctaHref }: { count: number; ctaHref: string }) {
-  return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-      {Array.from({ length: count }).map((_, i) => (
-        <a
-          key={i}
-          href={ctaHref}
-          className="border-2 border-dashed border-jc-red/30 hover:border-jc-red p-5 flex flex-col items-center text-center min-h-[120px] justify-center group transition-colors cursor-pointer"
-        >
-          <div className="w-14 h-14 border-2 border-dashed border-jc-red/30 group-hover:border-jc-red rounded-sm mb-3 flex items-center justify-center transition-colors">
-            <svg className="w-5 h-5 text-jc-red/30 group-hover:text-jc-red transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
-            </svg>
-          </div>
-          <div className="text-jc-gray-dark group-hover:text-jc-red font-black text-xs uppercase tracking-widest transition-colors">
-            Your Brand Here
-          </div>
-        </a>
-      ))}
-    </div>
-  )
-}
-
 export default function DonorsPage() {
   return (
     <div className="pt-16">
@@ -84,7 +61,47 @@ export default function DonorsPage() {
               Become a Corporate Partner →
             </Link>
           </div>
-          <YourBrandGrid count={4} ctaHref="/support#corporate" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
+              { name: 'Baker Tilly', category: 'Longest Drive', website: 'https://www.bakertilly.com/', logo: '/baker-tilly-logo.png', xlarge: true },
+              { name: 'Collaborate Health', category: 'Golf Outing Hole Sponsor', website: 'https://www.collaborate.health/', logo: '/collaborate-health-logo.webp', wide: true },
+              { name: 'Deslauriers, Inc.', category: 'Golf Outing Hole Sponsor', website: 'https://www.deslinc.com/', logo: '/deslauriers-logo.png', large: true },
+              { name: 'Vrdolyak Law Group', category: 'Golf Outing Hole Sponsor', website: 'https://www.vlglaw.com/', logo: '/vrdolyak-law-logo.png' },
+              { name: 'Vochi Family', category: 'Golf Outing Hole Sponsor', logo: '/jc-logo-color.jpg', large: true },
+              { name: 'JC BOD 2025-2026', category: 'Golf Outing Hole Sponsor', logo: '/jc-logo-color.jpg', large: true },
+              { name: 'Wendy Smith', category: 'Golf Outing Hole Sponsor', logo: '/jc-logo-color.jpg', large: true },
+              { name: 'JC BOD 2023-2024', category: 'Golf Outing Hole Sponsor', logo: '/jc-logo-color.jpg', large: true },
+              { name: 'Gracious JC Donor', category: 'Golf Outing Hole Sponsor', logo: '/jc-logo-color.jpg', large: true },
+              { name: 'JC Alumni 2019-2022', category: 'Golf Outing Hole Sponsor', logo: '/jc-logo-color.jpg', large: true },
+              { name: 'Spach Family', category: 'Golf Outing Hole Sponsor', logo: '/jc-logo-color.jpg', large: true },
+            ].map((partner: { name: string; category: string; website?: string; logo: string; wide?: boolean; large?: boolean; xlarge?: boolean }, i) => {
+              const cardClasses = `border border-jc-gray-mid transition-colors p-5 flex flex-col items-center text-center group ${partner.website ? 'hover:border-jc-red cursor-pointer' : ''}`
+              const inner = (
+                <>
+                  <div className="h-24 w-full flex items-center justify-center mb-3">
+                    <div className={`${partner.wide ? 'w-full h-16 px-3' : partner.xlarge ? 'w-24 h-24' : partner.large ? 'w-20 h-20' : 'w-16 h-16'} bg-white rounded-sm flex items-center justify-center transition-colors flex-shrink-0 overflow-hidden ${partner.website ? 'group-hover:bg-jc-red/10' : ''}`}>
+                      <Image src={partner.logo} alt={partner.name} width={partner.wide ? 130 : partner.xlarge ? 96 : partner.large ? 80 : 56} height={partner.xlarge ? 96 : partner.large ? 80 : 56} className="object-contain max-h-full w-auto" />
+                    </div>
+                  </div>
+                  <div className={`text-jc-black font-black text-sm leading-tight mb-1 transition-colors ${partner.website ? 'group-hover:text-jc-red' : ''}`}>
+                    {partner.name}
+                  </div>
+                  <div className="text-jc-red text-xs font-semibold uppercase tracking-wide">
+                    {partner.category}
+                  </div>
+                </>
+              )
+              return partner.website ? (
+                <a key={i} href={partner.website} target="_blank" rel="noopener noreferrer" className={cardClasses}>
+                  {inner}
+                </a>
+              ) : (
+                <div key={i} className={cardClasses}>
+                  {inner}
+                </div>
+              )
+            })}
+          </div>
         </div>
       </section>
 
