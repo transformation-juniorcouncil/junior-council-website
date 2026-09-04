@@ -266,16 +266,17 @@ npm run lint     # Lint check
 - **Database:** Supabase (PostgreSQL)
 - **Email:** Resend API
 - **Hosting:** Vercel (auto-deploys from `main` branch)
-- **Domain:** GoDaddy — juniorcouncil.org (ownership issue — see blockers)
+- **Domain:** GoDaddy — **juniorcouncil.org is LIVE** and pointed at Vercel (registrar account ownership still unconfirmed — see blockers)
 
 ### Live URLs
 | Service | URL |
 |---|---|
-| Live website | https://junior-council-website-eight.vercel.app |
+| **Live website (PRODUCTION)** | **https://juniorcouncil.org** |
+| Vercel deploy URL (same build, fallback only) | https://junior-council-website-eight.vercel.app |
 | GitHub repo | https://github.com/transformation-juniorcouncil/junior-council-website |
 | Vercel | https://vercel.com — project: junior-council-website |
 | Supabase | https://supabase.com/dashboard/project/umgciwvljmxjpdiwinly |
-| Resend | https://resend.com — sender domain: juniorcouncil.org (pending DNS) |
+| Resend | https://resend.com — sender domain: juniorcouncil.org (DNS live: DKIM + SPF + DMARC) |
 | Local codebase | `/Users/dianawolf/src/JC Website/` |
 
 ### Environment Variables
@@ -283,7 +284,7 @@ npm run lint     # Lint check
 NEXT_PUBLIC_SUPABASE_URL=https://umgcwvljmxjpdiwinly.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<see .env.local>
 SUPABASE_SERVICE_ROLE_KEY=<see .env.local — server-side only>
-NEXT_PUBLIC_SITE_URL=https://junior-council-website-eight.vercel.app
+NEXT_PUBLIC_SITE_URL=https://juniorcouncil.org
 RESEND_API_KEY=<see .env.local>
 ```
 
@@ -395,13 +396,29 @@ Log a Win:
 - No nonprofit clichés — no "making a difference", "giving back", "in this together"
 - CTAs are direct — "Get Tickets", "Become a Sponsor" — never "Learn More"
 
-### Deploy
+### Deploy — what "push to prod" means
+
+**"Push to prod" = ship to https://juniorcouncil.org.** That is THE production site.
+Pipeline: `main` → Vercel auto-deploy → **juniorcouncil.org**.
+
+Never tell NOVA the site "isn't live yet" or hand anyone the `vercel.app` URL. That host
+serves the exact same build and exists only as a fallback. Sponsors, press, and members
+get **juniorcouncil.org** — always.
+
+Run `/lumen:push-to-prod` for the full flow. Bare mechanics:
+
 ```bash
+npm run build
 git add <specific files only>
 git commit -m "description"
 git push origin main
 # Never: git add -A or git add .
-# Always: npx next build locally for significant changes before pushing
+```
+
+Verify on the real domain after every push — not vercel.app:
+
+```bash
+curl -sSI https://juniorcouncil.org | grep -i "x-vercel-id"
 ```
 
 ### LUMEN Non-Negotiable Rules
@@ -426,21 +443,34 @@ git push origin main
 
 ---
 
-## ⚠️ PRE-LAUNCH CHECKLIST (before juniorcouncil.org goes live)
+## ⚠️ LAUNCH CHECKLIST — juniorcouncil.org IS LIVE (verified 2026-09-04)
 
+- [x] **DNS → Vercel:** apex `A → 216.198.79.1`, `www → 08fbba77ee9193b3.vercel-dns-017.com`,
+      www 301s to apex. Custom domain serves a byte-identical build to the vercel.app host.
+- [x] **Resend DNS:** `resend._domainkey` (DKIM), `send.juniorcouncil.org` (SPF + SES MX),
+      `_dmarc` (`p=none`) all resolve. Code sends from `noreply@juniorcouncil.org`.
 - [ ] **Supabase → URL Configuration:** Site URL + Redirect URLs → `https://juniorcouncil.org`
+      (NOT yet verified — check this before relying on invite/OAuth redirects)
 - [ ] **Supabase → Email Templates:** confirm `{{ .SiteURL }}/sign-up?email={{ .Email }}` + `{{ .Token }}`
 - [ ] **Google Cloud Console:** OAuth Testing → Production (submit for verification, ~1 week)
-- [ ] **Resend:** add DNS TXT/MX records in GoDaddy; update `from:` to `noreply@juniorcouncil.org`
-- [ ] **GoDaddy:** transfer domain from former member or complete org account claim
+- [ ] **Vercel env vars:** confirm `NEXT_PUBLIC_SITE_URL=https://juniorcouncil.org` in the
+      Vercel dashboard (repo `.env.local` is local-dev only and does NOT affect production)
+- [ ] **GoDaddy:** confirm the registrar account is owned by JC, not a former member
 
 ---
 
 ## 🚧 ACTIVE BLOCKERS
 
-1. **GoDayy domain ownership** — `juniorcouncil.org` under former member's personal account. Need transfer or 501(c)(3) claim before go-live.
-2. **Google OAuth in Test Mode** — add all board member emails as test users before full launch
-3. **Resend email domain** — unverified until GoDaddy resolved; currently sending from `onboarding@resend.dev`
+1. **GoDaddy registrar account ownership — STILL OPEN.** DNS itself works (records updated
+   2026-08-12, so someone had account access then), but it is unconfirmed whether the GoDaddy
+   account belongs to JC or still to a former member. Risk: domain renews **2027-06-05**, and
+   every future DNS change depends on that access. Verify ownership and document who holds it.
+2. **Google OAuth in Test Mode** — add all board member emails as test users before full launch.
+3. **Supabase URL config unverified** — if Site URL / Redirect URLs still point at the
+   vercel.app host, invite and OAuth links will land on the wrong domain. Check the dashboard.
+
+**Resolved 2026-09-04:** custom domain live at juniorcouncil.org · Resend DNS verified and
+sending from `noreply@juniorcouncil.org`. Do not re-report these as blockers.
 
 ---
 
@@ -454,8 +484,10 @@ git push origin main
 | ⏳ | Member Directory — rebuild with real Supabase data once board approves |
 | ⏳ | "Help Us Reach Our Goal" fundraising bar — add back later in the year |
 | ⏳ | Director-specific portal views — wire up as `board_title` roles are confirmed |
-| ⏳ | Custom domain — point `juniorcouncil.org` → Vercel once GoDaddy resolved |
-| ⏳ | Resend domain verification — add DNS records once GoDaddy accessible |
+| ✅ | Custom domain — `juniorcouncil.org` live on Vercel (verified 2026-09-04) |
+| ✅ | Resend domain verification — DKIM/SPF/DMARC live (verified 2026-09-04) |
+| ⏳ | GoDaddy registrar account ownership — confirm JC owns it, not a former member |
+| ⏳ | Supabase URL Configuration — confirm Site/Redirect URLs use `https://juniorcouncil.org` |
 | ⏳ | Google OAuth → Production — submit before full public launch |
 | ✅ | Test file cleanup — deleted `test-win-auction.mjs` (2026-07-17) |
 | ⏳ | Gala recap page — update year + content post-event |

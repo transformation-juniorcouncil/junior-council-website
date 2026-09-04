@@ -47,7 +47,7 @@ export async function POST(req: Request) {
 
   const SITE_URL =
     process.env.NEXT_PUBLIC_SITE_URL ||
-    'https://junior-council-website.vercel.app'
+    'https://juniorcouncil.org'
 
   const { data, error } = await adminSupabase.auth.admin.inviteUserByEmail(email, {
     redirectTo: `${SITE_URL}/sign-up`,
