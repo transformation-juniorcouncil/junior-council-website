@@ -22,42 +22,6 @@ type Tab = 'upcoming' | 'past'
 
 const upcomingEvents: Event[] = [
   {
-    title: 'JC Cubs Game',
-    date: 'September 3, 2026',
-    time: '6:15 PM',
-    location: 'Wrigley Field, Chicago',
-    type: 'Member Event',
-    description: 'Take us out to the ball game. Join Junior Council for a night at Wrigley — grab your seat with us and cheer on the Cubs.',
-    cta: { label: 'RSVP', href: 'https://partiful.com/e/w5i7vqiLzkiyxeGB20fw', external: true },
-  },
-  {
-    title: 'Happy Camper Bingo',
-    date: 'September 6, 2026',
-    time: '1:30 PM',
-    location: 'Happy Camper, Chicago',
-    type: 'Member Event',
-    description: 'Bingo, pizza, and good company. Join Junior Council for an afternoon of bingo at Happy Camper — bring your friends and play for the kids.',
-    cta: { label: 'RSVP', href: 'https://partiful.com/e/cW6BR0NakH5T1fIjjCYT', external: true },
-  },
-  {
-    title: 'Annual Golf Outing',
-    date: 'September 13, 2026',
-    time: '1:00 PM',
-    location: 'Indian Boundary Golf Course',
-    type: 'Fundraiser',
-    description: 'Join Junior Council and our corporate sponsors for a day on the green for the kids.',
-    cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:be73acf8-0588-46b2-bd08-d8e4b6b9152f/home/story', external: true },
-  },
-  {
-    title: 'Wellness for a Cause: Ethos Strength Class',
-    date: 'September 14, 2026',
-    time: '6:30 PM',
-    location: 'Ethos, Chicago',
-    type: 'Wellness for a Cause',
-    description: 'Total Body Strength at Ethos — a mobility warm-up, an activation series, and a full-body lifting workout scalable to every fitness level. Whether the barbell is new to you or an old friend, this class is for you. A portion of proceeds supports adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
-    cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:20ae2fb6-8941-4e7f-a787-8d060b69bda1/home/story', external: true },
-  },
-  {
     title: 'Annual Snowball Gala 2027',
     date: 'February 27, 2027',
     location: 'Chicago, IL',
@@ -68,6 +32,42 @@ const upcomingEvents: Event[] = [
 ]
 
 const pastEvents: Event[] = [
+  {
+    title: 'Wellness for a Cause: Ethos Strength Class',
+    date: 'September 14, 2026',
+    time: '6:30 PM',
+    location: 'Ethos, Chicago',
+    type: 'Wellness for a Cause',
+    description: 'Junior Council hosted Total Body Strength at Ethos — a mobility warm-up, an activation series, and a full-body lifting workout scalable to every fitness level. A portion of proceeds supports adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
+    cta: null,
+  },
+  {
+    title: 'Annual Golf Outing',
+    date: 'September 13, 2026',
+    time: '1:00 PM',
+    location: 'Indian Boundary Golf Course',
+    type: 'Fundraiser',
+    description: 'Junior Council and our corporate sponsors spent a day on the green at Indian Boundary, raising funds for adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
+    cta: null,
+  },
+  {
+    title: 'Happy Camper Bingo',
+    date: 'September 6, 2026',
+    time: '1:30 PM',
+    location: 'Happy Camper, Chicago',
+    type: 'Member Event',
+    description: 'Bingo, pizza, and good company. JC members and friends spent an afternoon at Happy Camper playing bingo for the kids.',
+    cta: null,
+  },
+  {
+    title: 'JC Cubs Game',
+    date: 'September 3, 2026',
+    time: '6:15 PM',
+    location: 'Wrigley Field, Chicago',
+    type: 'Member Event',
+    description: 'Junior Council took a night out at Wrigley Field, cheering on the Cubs together.',
+    cta: null,
+  },
   {
     title: 'Wellness for a Cause: Cycling at Equinox',
     date: 'August 30, 2026',
