@@ -183,8 +183,8 @@ shared/   ← cross-agent skills any agent can use
 
 **Outreach workflow dependencies — not yet configured:**
 - Google Drive folder shared with all agents (NOVA to provide link)
-- Outreach templates uploaded to Google Drive (one per domain: Corporate, Hospitality, Silent Auction, Wellness)
-- Gmail/Google Workspace access configured so agents can place drafts in correct inboxes
+- ~~Outreach templates~~ ✅ done 2026-10-16: stored as Google Docs in NOVA's Drive folder "JC Outreach Templates 2026–27" (see Outreach Templates below)
+- ~~Gmail/Google Workspace access~~ ✅ done 2026-08-04: `scripts/gmail-draft.mjs` places drafts in director inboxes
 - Each outreach agent should verify inbox access before its first campaign run
 
 The tracking spreadsheets themselves are already live — see the table under Outreach Automation Workflow below.
@@ -226,8 +226,20 @@ GAVEL (Silent Auction) → silentauction@juniorcouncil.org
 THRIVE (Wellness)      → w4ac@juniorcouncil.org
 ```
 
-### Outreach Templates (Google Drive)
-*Templates folder: TBD — NOVA will provide link when templates are uploaded.*
+### Outreach Templates (2026–27)
+Master copies live as Google Docs in NOVA's Google Drive (transformation@juniorcouncil.org), in the folder **JC Outreach Templates 2026–27**:
+https://drive.google.com/drive/folders/1k2WcEsBKnPmPv-hYVAvhmsKYoQODvG4q
+
+Edit the Drive Docs first, then copy the change into the local markdown file. Agents read the local copies in their workspace, and they copy the text into a new draft in the director's inbox using `scripts/gmail-draft.mjs`.
+
+| Agent | Templates | Drive Doc | Local copy |
+|---|---|---|---|
+| FORGE | A: Snowball sponsorship (director-sent) · B: Member warm intro · Day-14 follow-up | [Doc](https://docs.google.com/document/d/1Ze14p2DwdF3_Ayey2LZf2RQJfN5QRgKFWmJ0Wp_bMoY/edit) | `agent-workspaces/FORGE/Templates/2026-27-corporate-outreach-templates.md` |
+| HOST | Snowball food & beverage partner · Day-14 follow-up | [Doc](https://docs.google.com/document/d/1zAOHJkh7BrtjIWcRaA8kStztzxNsnNZ0eXz0iF1dDlg/edit) | `agent-workspaces/HOST/Templates/2026-27-hospitality-outreach-template.md` |
+| GAVEL | A: Silent auction (director-sent) · B: Member-sent · Day-14 follow-up | [Doc](https://docs.google.com/document/d/17andy5D5ItKWRgBKj_1gn0ZkvUg7dpx6ESMXTC9yK2g/edit) | `agent-workspaces/GAVEL/Template/2026-27-silent-auction-donation-template.md` |
+| THRIVE | Wellness for a Cause partner class · Day-14 follow-up | [Doc](https://docs.google.com/document/d/1uzUcMho8JnSLk5arf5NDLt1FD6F0vtNFDer6y9i58lc/edit) | `agent-workspaces/THRIVE/Templates/2026-27-wellness-for-a-cause-template.md` |
+
+The older PDF templates (2021 auction, 2023 hospitality, 2025–26 corporate) are retired. Use them for reference only. Facts in the new templates come from the 2026–27 Corporate Packet ($3.3M+ raised, Snowball 2027 on Feb 27, 2027). Update the venue line once Snowball 2027 is booked.
 
 ### Workflow Steps
 1. **Research** — agent researches Chicago/Chicagoland businesses using web search. Log immediately to tracker — no company researched twice.
