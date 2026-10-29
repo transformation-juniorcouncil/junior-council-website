@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     locale: 'en_US',
     siteName: 'Junior Council',
   },
+  verification: {
+    google: 'bLYQl5MiaLRh-9KbZc7Q2PZrgs2_QkCNNcs1VJszin8',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
