@@ -6,11 +6,11 @@ import Link from 'next/link'
 const faqs = [
   {
     q: 'What is the mission of Junior Council?',
-    a: 'Our mission is to help provide financial support to the Adolescent HIV/AIDS Program at Ann & Robert H. Lurie Children\'s Hospital of Chicago, ensuring all children with HIV/AIDS have access to high-quality pediatric care regardless of their ability to pay.',
+    a: 'Our mission is to help provide financial support to the Special Infectious Diseases Clinic at Ann & Robert H. Lurie Children\'s Hospital of Chicago, ensuring all children with HIV/AIDS have access to high-quality pediatric care regardless of their ability to pay.',
   },
   {
     q: 'How does Junior Council use donated funds?',
-    a: 'Funds raised by Junior Council go directly to support the Adolescent HIV/AIDS Program at Ann & Robert H. Lurie Children\'s Hospital of Chicago, covering medical care, mental health services, social support, and educational assistance for patients.',
+    a: 'Funds raised by Junior Council go directly to support the Special Infectious Diseases Clinic at Ann & Robert H. Lurie Children\'s Hospital of Chicago, covering medical care, mental health services, social support, and educational assistance for patients.',
   },
   {
     q: 'Is Junior Council a registered nonprofit?',

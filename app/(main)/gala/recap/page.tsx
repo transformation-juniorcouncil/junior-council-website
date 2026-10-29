@@ -18,7 +18,7 @@ const stats2026 = [
 const highlights2026 = [
   'Surpassed our $250,000 fundraising goal with the most successful Thermometer Raise in Junior Council history',
   'Welcomed over 900 guests to a stunning sold-out venue in the heart of Chicago',
-  'Provided direct patient support to deserving recipients of the Lurie Children\'s Adolescent HIV/AIDS Program',
+  'Provided direct patient support to deserving recipients of the Lurie Children\'s Special Infectious Diseases Clinic',
   'Featured 30+ corporate sponsors representing some of Chicago\'s most prominent companies',
   'Raised over $40,000 through a record-breaking silent auction with 50+ items',
   'Hosted a Kick-Off Party the night before, bringing together sponsors and board members for an exclusive preview evening',
@@ -93,8 +93,8 @@ export default function RecapPage() {
               </p>
               <p className="text-jc-gray-dark leading-relaxed">
                 Every dollar raised goes directly to supporting adolescents
-                living with HIV and AIDS through the Pediatric &amp; Adolescent
-                HIV/AIDS Program at Ann &amp; Robert H. Lurie Children&apos;s Hospital
+                living with HIV and AIDS through the Special Infectious
+                Diseases Clinic at Ann &amp; Robert H. Lurie Children&apos;s Hospital
                 of Chicago. Snowball 2026 proved once again that when Chicago
                 shows up, it shows up in a big way.
               </p>
