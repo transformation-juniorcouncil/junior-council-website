@@ -11,10 +11,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: {
-    default: 'Junior Council | Fighting for Youth with HIV/AIDS in Chicago',
-    template: '%s | Junior Council',
-  },
+  title: 'Junior Council | Fighting for Youth with HIV/AIDS in Chicago',
   description:
     'Junior Council is a Chicago-based nonprofit dedicated to raising money for adolescents living with HIV and AIDS, in partnership with Ann & Robert H. Lurie Children\'s Hospital of Chicago.',
   keywords: [
