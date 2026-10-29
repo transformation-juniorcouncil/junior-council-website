@@ -97,7 +97,7 @@ export default function HomePage() {
 
             {/* Headline */}
             <h1 className="text-white font-black text-3xl sm:text-4xl lg:text-5xl leading-[1.15] tracking-tight mb-10 max-w-5xl">
-              Where Chicago professionals come together to support the Pediatric HIV/AIDS Program at{' '}
+              Where Chicago professionals come together to support the Special Infectious Diseases Clinic at{' '}
               <span className="text-jc-red">Ann &amp; Robert H. Lurie Children&apos;s Hospital</span>.
             </h1>
 
