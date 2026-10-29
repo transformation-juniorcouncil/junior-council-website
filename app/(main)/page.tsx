@@ -3,7 +3,7 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Junior Council | Fighting for Youth with HIV/AIDS in Chicago',
+  title: 'Junior Council | Supporting Lurie Children\'s SID Clinic',
 }
 
 const stats = [
@@ -200,7 +200,7 @@ export default function HomePage() {
               <p className="text-jc-gray-dark text-base leading-relaxed mb-8">
                 Through fundraising events, corporate partnerships, and community
                 engagement, we channel 100% of resources directly to the Special
-                Infectious Diseases Program (Lurie Children&apos;s SID Program) at{' '}
+                Infectious Diseases Clinic (Lurie Children&apos;s SID Clinic) at{' '}
                 <a
                   href="https://www.luriechildrens.org"
                   target="_blank"
@@ -238,7 +238,7 @@ export default function HomePage() {
               <div className="bg-jc-black p-8">
                 <p className="text-jc-red text-xs font-bold uppercase tracking-widest mb-3">Our Partner</p>
                 <p className="text-white/70 text-sm leading-relaxed mb-5">
-                  The Ann &amp; Robert H. Lurie Children&apos;s Hospital of Chicago&apos;s Special Infectious Diseases Program (Lurie Children&apos;s SID Program) is dedicated to improving the quality of life for pregnant, postpartum, and non-pregnant women, infants, children, adolescents, and young adults living with, affected by, or at risk for HIV/AIDS.
+                  The Ann &amp; Robert H. Lurie Children&apos;s Hospital of Chicago&apos;s Special Infectious Diseases Clinic (Lurie Children&apos;s SID Clinic) is dedicated to improving the quality of life for pregnant, postpartum, and non-pregnant women, infants, children, adolescents, and young adults living with, affected by, or at risk for HIV/AIDS.
                 </p>
                 <div className="space-y-4">
                   {[

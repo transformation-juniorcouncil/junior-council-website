@@ -169,7 +169,7 @@ export default function OurCausePage() {
             </p>
             <footer className="border-t border-white/10 pt-6">
               <p className="text-jc-red font-black text-sm uppercase tracking-widest">Jennifer Jao, MD, MPH</p>
-              <p className="text-white/40 text-xs mt-1 uppercase tracking-wide">Lurie Children&apos;s SID Program</p>
+              <p className="text-white/40 text-xs mt-1 uppercase tracking-wide">Lurie Children&apos;s SID Clinic</p>
             </footer>
           </blockquote>
 
