@@ -22,15 +22,6 @@ type Tab = 'upcoming' | 'past'
 
 const upcomingEvents: Event[] = [
   {
-    title: 'Wellness for a Cause: Barry\'s Bootcamp',
-    date: 'November 5, 2026',
-    time: '6:40 PM',
-    location: 'Barry\'s River North, 11 W Erie St, Chicago, IL',
-    type: 'Wellness for a Cause',
-    description: 'A 60-minute strength and cardio interval class at Barry\'s that alternates weights and treadmill runs. This session focuses on the lower body. Arrive 10–15 minutes early, and create a Barry\'s account beforehand — it\'s required for check-in. Your $20 donation secures your spot, and proceeds support adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
-    cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:de7920e5-ea0c-4077-8e3a-8ad69d4e8739/home/story', external: true },
-  },
-  {
     title: 'Snowball Kickoff 2026',
     date: 'November 13, 2026',
     time: '7:00 PM – 10:00 PM',
@@ -50,6 +41,15 @@ const upcomingEvents: Event[] = [
 ]
 
 const pastEvents: Event[] = [
+  {
+    title: 'Wellness for a Cause: Barry\'s Bootcamp',
+    date: 'November 5, 2026',
+    time: '6:40 PM',
+    location: 'Barry\'s River North, 11 W Erie St, Chicago, IL',
+    type: 'Wellness for a Cause',
+    description: 'Junior Council hosted a 60-minute strength and cardio interval class at Barry\'s, alternating weights and treadmill runs with a lower-body focus. Proceeds support adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
+    cta: null,
+  },
   {
     title: 'Wellness for a Cause: Ethos Strength Class',
     date: 'September 14, 2026',
