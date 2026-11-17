@@ -36,7 +36,7 @@ const upcomingEvents: Event[] = [
     location: 'Chicago, IL',
     type: 'Signature',
     description: 'Our flagship black-tie fundraiser. Live entertainment, silent auction, 900+ guests — one shared mission.',
-    cta: { label: 'Gala Details', href: '/gala' },
+    cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:52102b78-99ce-45b4-9c32-d8383c1291a9/home/story', external: true },
   },
 ]
 
