@@ -33,7 +33,8 @@ const upcomingEvents: Event[] = [
   {
     title: 'Annual Snowball Gala 2027',
     date: 'February 27, 2027',
-    location: 'Chicago, IL',
+    time: '8:00 PM – 12:00 AM',
+    location: 'The Old Post Office, Chicago, IL',
     type: 'Signature',
     description: 'Our flagship black-tie fundraiser. Live entertainment, silent auction, 900+ guests — one shared mission.',
     cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:52102b78-99ce-45b4-9c32-d8383c1291a9/home/story', external: true },

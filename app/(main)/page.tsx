@@ -295,7 +295,7 @@ export default function HomePage() {
               <div className="grid grid-cols-2 gap-4 mb-8">
                 {[
                   { label: 'Format', value: 'Gala & Silent Auction' },
-                  { label: 'Location', value: 'Chicago, IL' },
+                  { label: 'Location', value: 'The Old Post Office, Chicago, IL' },
                   { label: 'Date', value: 'February 27, 2027' },
                   { label: 'Dress Code', value: 'Black Tie' },
                 ].map((detail, i) => (

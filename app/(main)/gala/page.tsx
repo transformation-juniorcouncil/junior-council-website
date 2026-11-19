@@ -138,7 +138,7 @@ export default function GalaPage() {
           <div className="mt-8 inline-flex items-center gap-3 bg-jc-red px-5 py-3">
             <span className="w-2 h-2 bg-white rounded-full animate-pulse flex-shrink-0" aria-hidden="true" />
             <span className="text-white font-bold text-sm tracking-wide">
-              Save the date: February 27, 2027 — venue announcement coming soon!
+              Save the date: February 27, 2027 at The Old Post Office.
             </span>
           </div>
         </div>
@@ -172,7 +172,7 @@ export default function GalaPage() {
               <div className="grid grid-cols-2 gap-4">
                 {[
                   { label: 'Date', value: 'February 27, 2027' },
-                  { label: 'Location', value: 'Chicago, IL' },
+                  { label: 'Location', value: 'The Old Post Office, Chicago, IL' },
                   { label: 'Dress Code', value: 'Black Tie' },
                   { label: 'Tickets', value: 'Contact us to get notified' },
                 ].map((detail, i) => (
