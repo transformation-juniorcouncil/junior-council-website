@@ -174,7 +174,7 @@ export default function GalaPage() {
                   { label: 'Date', value: 'February 27, 2027' },
                   { label: 'Location', value: 'The Old Post Office, Chicago, IL' },
                   { label: 'Dress Code', value: 'Black Tie' },
-                  { label: 'Tickets', value: 'Contact us to get notified' },
+                  { label: 'Tickets', value: 'On sale now' },
                 ].map((detail, i) => (
                   <div key={i} className="border-l-2 border-jc-red pl-4">
                     <div className="text-jc-gray-dark text-xs uppercase tracking-wide mb-1">

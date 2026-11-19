@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import TicketNotifyForm from '@/components/TicketNotifyForm'
 
 export const metadata: Metadata = {
   title: 'Get Your Tickets | Snowball 2027 | Junior Council',
@@ -28,14 +27,13 @@ export default function TicketsPage() {
             Get Your <span className="text-jc-red">Tickets</span>
           </h1>
           <p className="text-white/60 text-lg mt-4 max-w-2xl">
-            Join us for the most anticipated night of the year. Tickets go on
-            sale soon — check back here or follow us on social media for the
-            announcement.
+            Join us for the most anticipated night of the year, February 27,
+            2027 at The Old Post Office. Tickets are on sale now.
           </p>
         </div>
       </section>
 
-      {/* Tickets not yet on sale */}
+      {/* Tickets on sale */}
       <section className="bg-white py-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="w-20 h-20 bg-jc-red/10 flex items-center justify-center mx-auto mb-8">
@@ -44,14 +42,21 @@ export default function TicketsPage() {
             </svg>
           </div>
           <h2 className="text-jc-black font-black text-3xl sm:text-4xl mb-4 tracking-tight">
-            Tickets Coming <span className="text-jc-red">Soon</span>
+            Tickets On <span className="text-jc-red">Sale Now</span>
           </h2>
           <p className="text-jc-gray-dark text-lg mb-8 max-w-xl mx-auto">
-            Snowball 2027 tickets are not yet on sale. Sign up below to be
-            notified the moment they drop — they sell out fast.
+            Snowball 2027 is Saturday, February 27, from 8:00 PM to 12:00 AM
+            CT. This is a 21+ event, and tickets sell out fast.
           </p>
 
-          <TicketNotifyForm />
+          <a
+            href="https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:52102b78-99ce-45b4-9c32-d8383c1291a9/home/story"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center bg-jc-red hover:bg-jc-red-dark text-white font-black text-sm tracking-widest uppercase px-10 py-4 transition-colors"
+          >
+            Get Tickets
+          </a>
         </div>
       </section>
 
@@ -97,7 +102,7 @@ export default function TicketsPage() {
           </h2>
           <p className="text-jc-gray-dark mb-8">
             Corporate sponsorships are available now. Reach out to secure your
-            spot before tickets go on sale.
+            spot at Snowball 2027.
           </p>
           <Link
             href="/support"

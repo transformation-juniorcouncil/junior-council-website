@@ -134,7 +134,7 @@ export default function RecapPage() {
             Be Part of <span className="text-jc-red">Snowball 2027</span>
           </h2>
           <p className="text-jc-gray-dark mb-8">
-            Tickets and sponsorships for Snowball 2027 will be available soon.
+            Tickets and sponsorships for Snowball 2027 are available now.
             Don&apos;t miss your chance to be part of the next chapter.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

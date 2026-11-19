@@ -22,15 +22,6 @@ type Tab = 'upcoming' | 'past'
 
 const upcomingEvents: Event[] = [
   {
-    title: 'Snowball Kickoff 2026',
-    date: 'November 13, 2026',
-    time: '7:00 PM – 10:00 PM',
-    location: 'Mosaic Events, 355 N Clark St, Chicago, IL',
-    type: 'Fundraiser',
-    description: 'Kick off the 38th Annual Snowball Gala the night tickets go on sale. Open bar, passed appetizers, a live DJ, the Snowball theme reveal, exclusive Snowball discount codes, and a chance to win Snowball 2027 tickets. Cocktail attire, 21+, and open to everyone — members or not. Proceeds support adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
-    cta: { label: 'Get Tickets', href: 'https://my.onecause.com/event/organizations/sf-001C0000018LfpcIAC/events/vevt:17e7b850-5ce2-45df-9c28-d5ca15ab9171/home/story', external: true },
-  },
-  {
     title: 'Annual Snowball Gala 2027',
     date: 'February 27, 2027',
     time: '8:00 PM – 12:00 AM',
@@ -42,6 +33,15 @@ const upcomingEvents: Event[] = [
 ]
 
 const pastEvents: Event[] = [
+  {
+    title: 'Snowball Kickoff 2026',
+    date: 'November 13, 2026',
+    time: '7:00 PM – 10:00 PM',
+    location: 'Mosaic Events, 355 N Clark St, Chicago, IL',
+    type: 'Fundraiser',
+    description: 'Junior Council kicked off the 38th Annual Snowball Gala the night tickets went on sale, with an open bar, passed appetizers, a live DJ, and the Snowball theme reveal. Proceeds support adolescents living with HIV and AIDS at Lurie Children\'s Hospital.',
+    cta: null,
+  },
   {
     title: 'Wellness for a Cause: Barry\'s Bootcamp',
     date: 'November 5, 2026',
